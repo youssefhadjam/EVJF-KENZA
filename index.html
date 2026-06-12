@@ -31,24 +31,65 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden;background-image:radial-gradient(ellipse at 50% 0%,rgba(123,47,190,0.15) 0%,transparent 60%),radial-gradient(ellipse at 100% 100%,rgba(232,23,74,0.08) 0%,transparent 50%);padding-bottom:env(safe-area-inset-bottom);-webkit-tap-highlight-color:transparent}
 
 /* ========== PASSWORD ========== */
-#password-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0D0010 0%,#1a0025 40%,#0D0010 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .8s ease,transform .8s ease;padding:max(2rem,env(safe-area-inset-top)) max(1.5rem,env(safe-area-inset-right)) max(2rem,env(safe-area-inset-bottom)) max(1.5rem,env(safe-area-inset-left))}
+#password-screen{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 30%,#1a0a00 0%,#0d0500 40%,#080300 100%);display:flex;align-items:center;justify-content:center;transition:opacity .8s ease,transform .8s ease;overflow:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 #password-screen.hidden{opacity:0;pointer-events:none;transform:scale(1.05)}
-.pw-logo{font-family:var(--font-accent);font-size:clamp(3rem,8vw,5rem);letter-spacing:.15em;color:var(--white);text-align:center;line-height:1}
-.pw-logo span{color:var(--gold-light)}
-.pw-subtitle{font-family:var(--font-body);font-style:italic;font-size:1.1rem;color:var(--gray-mid);letter-spacing:.05em}
-.pw-card-icon{font-size:5rem;animation:pulse-heart 1.5s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(232,23,74,0.8))}
-@keyframes pulse-heart{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-.pw-form{display:flex;flex-direction:column;align-items:center;gap:1rem;width:min(90%,400px)}
-.pw-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(247,37,133,0.3);border-bottom:2px solid var(--rose);color:var(--white);font-family:var(--font-body);font-size:1.1rem;letter-spacing:.1em;padding:.8rem 1.2rem;outline:none;text-align:center;transition:border-color .3s}
-.pw-input::placeholder{color:var(--gray-mid);font-style:italic}
-.pw-input:focus{border-color:var(--gold-light);background:rgba(255,215,0,0.04)}
-.pw-btn{background:linear-gradient(135deg,var(--rose) 0%,var(--gold) 100%);color:var(--white);border:none;font-family:var(--font-accent);font-size:1.1rem;letter-spacing:.2em;padding:.9rem 2.5rem;cursor:pointer;transition:all .3s,transform .1s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);box-shadow:0 4px 20px rgba(247,37,133,0.4)}
-.pw-btn:hover{background:linear-gradient(135deg,var(--gold) 0%,var(--rose) 100%);box-shadow:0 6px 30px rgba(247,37,133,0.6)}
-.pw-btn:active{transform:scale(.97)}
-.pw-error{color:var(--red-light);font-family:var(--font-fine);font-style:italic;font-size:.9rem;opacity:0;transition:opacity .3s}
+
+/* Déco cartes */
+.pw-deco{position:absolute;pointer-events:none;user-select:none}
+.pw-deco-card{width:clamp(55px,10vw,80px);height:clamp(80px,14vw,112px);background:linear-gradient(145deg,#fff 0%,#f0e8d8 100%);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,3vw,1.6rem);box-shadow:0 8px 24px rgba(0,0,0,.6),0 2px 6px rgba(0,0,0,.4)}
+.pw-deco-card.red{color:#C8102E}
+.pw-deco-card.black{color:#111}
+.pw-deco-card.c1{top:6%;left:-2%;transform:rotate(-25deg)}
+.pw-deco-card.c2{top:3%;left:12%;transform:rotate(-10deg)}
+.pw-deco-card.c3{top:8%;right:-2%;transform:rotate(22deg)}
+.pw-deco-card.c4{top:4%;right:12%;transform:rotate(8deg)}
+.pw-deco-card.c5{bottom:8%;left:-1%;transform:rotate(18deg)}
+.pw-deco-card.c6{bottom:4%;left:14%;transform:rotate(-8deg)}
+.pw-deco-card.c7{bottom:10%;right:0%;transform:rotate(-20deg)}
+.pw-deco-card.c8{bottom:5%;right:14%;transform:rotate(12deg)}
+
+/* Jetons */
+.pw-deco-chip{width:clamp(28px,5vw,42px);height:clamp(28px,5vw,42px);border-radius:50%;border:3px solid;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.pw-deco-chip.ch1{top:28%;left:4%;background:radial-gradient(circle,#8B0000,#C8102E);border-color:#ff6b6b}
+.pw-deco-chip.ch2{top:35%;left:8%;background:radial-gradient(circle,#1a3a1a,#2d5a2d);border-color:#4CAF50}
+.pw-deco-chip.ch3{top:55%;left:5%;background:radial-gradient(circle,#1a1a3a,#2d2d7a);border-color:#6666ff}
+.pw-deco-chip.ch4{top:22%;right:5%;background:radial-gradient(circle,#3a1a00,#7a3a00);border-color:var(--gold-light)}
+.pw-deco-chip.ch5{top:42%;right:4%;background:radial-gradient(circle,#8B0000,#C8102E);border-color:#ff6b6b}
+.pw-deco-chip.ch6{bottom:25%;right:7%;background:radial-gradient(circle,#1a3a1a,#2d5a2d);border-color:#4CAF50}
+
+/* Ribbon */
+.pw-ribbon{position:absolute;width:180px;height:8px;background:linear-gradient(90deg,transparent,var(--red),var(--red-dark),var(--red),transparent);border-radius:4px;opacity:.7}
+.pw-ribbon.r1{top:22%;left:-20px;transform:rotate(-15deg);width:200px}
+.pw-ribbon.r2{bottom:20%;right:-20px;transform:rotate(-10deg);width:220px}
+
+/* Contenu central */
+.pw-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;width:min(90%,420px)}
+.pw-brand-line{font-family:var(--font-fine);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.8rem;opacity:.8}
+.pw-brand-line span{color:var(--red)}
+.pw-kenza{font-family:var(--font-festive);font-size:clamp(3.5rem,12vw,5.5rem);color:var(--white);line-height:1;text-shadow:0 0 40px rgba(200,16,46,.4),0 2px 4px rgba(0,0,0,.8);margin-bottom:.2rem}
+.pw-line1{font-family:var(--font-fine);font-size:clamp(.85rem,2.5vw,1rem);letter-spacing:.35em;text-transform:uppercase;color:var(--champagne);margin-bottom:.3rem}
+.pw-jackpot{font-family:var(--font-accent);font-size:clamp(4rem,16vw,7rem);letter-spacing:.06em;line-height:.9;background:linear-gradient(180deg,var(--gold-shine) 0%,var(--gold-light) 40%,var(--gold) 70%,var(--champagne-dark) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 8px rgba(212,160,23,.3));margin-bottom:1.6rem}
+
+/* Slot machine input */
+.pw-slot{width:100%;background:linear-gradient(180deg,#0a0a0a,#111);border:2px solid var(--gold);border-radius:12px;padding:1rem 1.2rem 1.2rem;box-shadow:0 0 0 1px rgba(212,160,23,.2),0 8px 32px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05)}
+.pw-slot-label{font-family:var(--font-fine);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.7rem;opacity:.8}
+.pw-slot-reels{display:flex;align-items:center;gap:.5rem;background:#000;border:1px solid rgba(212,160,23,.3);border-radius:6px;padding:.5rem .8rem;margin-bottom:.9rem}
+.pw-slot-input{flex:1;background:transparent;border:none;color:var(--gold-light);font-family:var(--font-accent);font-size:1.6rem;letter-spacing:.3em;text-align:center;outline:none;min-width:0}
+.pw-slot-input::placeholder{color:rgba(212,160,23,.3);letter-spacing:.2em}
+.pw-slot-spin{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;color:#000;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,box-shadow .2s;flex-shrink:0;box-shadow:0 2px 8px rgba(212,160,23,.4)}
+.pw-slot-spin:hover{transform:scale(1.1);box-shadow:0 4px 16px rgba(212,160,23,.6)}
+.pw-slot-spin:active{transform:scale(.95)}
+.pw-slot-btn{width:100%;padding:.8rem;background:linear-gradient(135deg,#8B0000,var(--red),#8B0000);color:var(--white);border:none;font-family:var(--font-accent);font-size:1rem;letter-spacing:.25em;cursor:pointer;border-radius:4px;transition:all .2s;box-shadow:0 4px 16px rgba(200,16,46,.4)}
+.pw-slot-btn:hover{background:linear-gradient(135deg,var(--red),#ff2255,var(--red));box-shadow:0 6px 24px rgba(200,16,46,.6)}
+.pw-slot-btn:active{transform:scale(.98)}
+
+.pw-tagline{font-family:var(--font-fine);font-style:italic;font-size:clamp(.8rem,2.5vw,.95rem);letter-spacing:.2em;color:var(--gray-mid);margin-top:1rem}
+.pw-error{color:var(--red-light);font-family:var(--font-fine);font-style:italic;font-size:.85rem;opacity:0;transition:opacity .3s;margin-top:.3rem}
 .pw-error.show{opacity:1}
-.pw-suits{display:flex;gap:1.5rem;font-size:1.8rem;color:rgba(255,255,255,.15)}
-.pw-suits span:nth-child(1),.pw-suits span:nth-child(4){color:rgba(247,37,133,.5)}.pw-suits span:nth-child(2){color:rgba(212,160,23,.4)}.pw-suits span:nth-child(3){color:rgba(168,85,247,.4)}
+
+/* Password screen subtle stars */
+#password-screen::before{content:'✦ ★ ✦ ★ ✦';position:absolute;top:max(1.5rem,env(safe-area-inset-top));left:50%;transform:translateX(-50%);font-size:.65rem;letter-spacing:1.5em;color:rgba(255,215,0,.25);white-space:nowrap}
+@keyframes pulse-heart{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 
 /* ========== NAV ========== */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:max(1rem,env(safe-area-inset-top)) max(1.2rem,env(safe-area-inset-right)) 1rem max(1.2rem,env(safe-area-inset-left));background:linear-gradient(to bottom,rgba(13,0,16,.97),transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(247,37,133,.25)}
@@ -344,16 +385,42 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 <!-- PASSWORD -->
 <div id="password-screen">
-  <div class="pw-suits"><span>♥</span><span>♠</span><span>♦</span><span>♣</span></div>
-  <div class="pw-card-icon">♥</div>
-  <div class="pw-logo">THE <span>JACKPOT</span><br>SQUAD</div>
-  <div class="pw-subtitle">Accès réservé aux élues ❖</div>
-  <div class="pw-form">
-    <input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe secret…" autocomplete="off">
-    <button class="pw-btn" onclick="checkPassword()">ENTRER</button>
+  <!-- Cartes déco -->
+  <div class="pw-deco pw-deco-card red c1">A<br>♥</div>
+  <div class="pw-deco pw-deco-card black c2">K<br>♠</div>
+  <div class="pw-deco pw-deco-card red c3">Q<br>♦</div>
+  <div class="pw-deco pw-deco-card black c4">J<br>♣</div>
+  <div class="pw-deco pw-deco-card black c5">10<br>♠</div>
+  <div class="pw-deco pw-deco-card red c6">9<br>♥</div>
+  <div class="pw-deco pw-deco-card red c7">A<br>♦</div>
+  <div class="pw-deco pw-deco-card black c8">K<br>♣</div>
+  <!-- Jetons déco -->
+  <div class="pw-deco pw-deco-chip ch1"></div>
+  <div class="pw-deco pw-deco-chip ch2"></div>
+  <div class="pw-deco pw-deco-chip ch3"></div>
+  <div class="pw-deco pw-deco-chip ch4"></div>
+  <div class="pw-deco pw-deco-chip ch5"></div>
+  <div class="pw-deco pw-deco-chip ch6"></div>
+  <!-- Ribbons -->
+  <div class="pw-deco pw-ribbon r1"></div>
+  <div class="pw-deco pw-ribbon r2"></div>
+
+  <div class="pw-inner">
+    <div class="pw-brand-line">Kenza's <span>♥</span> Love Jackpot</div>
+    <div class="pw-kenza">Kenza</div>
+    <div class="pw-line1">A décroché le</div>
+    <div class="pw-jackpot">JACKPOT</div>
+    <div class="pw-slot">
+      <div class="pw-slot-label">Mot de passe :</div>
+      <div class="pw-slot-reels">
+        <input type="password" class="pw-slot-input" id="pw-input" placeholder="• • • • • •" autocomplete="off">
+        <button class="pw-slot-spin" onclick="checkPassword()">▶</button>
+      </div>
+      <button class="pw-slot-btn" onclick="checkPassword()">ENTRER DANS LE JEU</button>
+    </div>
+    <div class="pw-tagline">Les paris sont ouverts…</div>
     <div class="pw-error" id="pw-error">Mauvaise pioche, chérie 🃏</div>
   </div>
-  <div class="pw-suits"><span>♣</span><span>♦</span><span>♠</span><span>♥</span></div>
 </div>
 
 <!-- NAV -->
