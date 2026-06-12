@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0D0010">
 <title>The Jackpot Squad 🃏</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Dancing+Script:wght@600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Bebas+Neue&amp;family=Dancing+Script:wght@600;700&amp;family=Crimson+Pro:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet">
 <style>
 /* ========== VARIABLES ========== */
 :root {
@@ -380,602 +380,424 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .add-item-btn:hover{border-color:var(--rose);color:var(--rose-light)}
 .valise-item-del:hover{color:var(--rose)}
 </style>
-</head>
+<script type='text/javascript' nonce='VnQdIIygR2LXy/Ak1oG7tg==' src='https://claude.ai/cp03NVg74XRhFfZ3yAG6me4ZDeVUevVFnapZwrwdQ01gcR2wrejrmbDZGldaJ8ixoxtMQE5Nw8S2ZlfX96ZDU1pqps3BkiHMAIyi-TaQeUYrNVX15NzUfSryd0mk1IBX57qhNXYFzx6GYEBNc5oZsxz3XShvAplb5Bak7PW6xILchUQ2QXamMFOEkE839wCE0iH07Rjn99mmscq8DlHrGvBNzEOvJhMFTCCjjNaQQ1FtzJCKeKMbIvbwoGAjDbTZShddZkTsfad-_bbF85s-Xk3s99Chln-MvWGet0b8_iEjMV7XWBqFSyErJHMzf7VyQ6KeDNA4TABMc2IzR_6CKg_sf-6dA5N71e4Ilyfi6r1XF8qCC7rFePbWaaqfJohmPax17ZI6h7SJ_LreO4YGxHeDB-rXYqLzcEbdDhOucW1Sc0Yt-bb-NbSga3hhSqao84lAyrROfs6Md9TgseSRAUM3Y6Tj77B9m-TDnNAXLlBQhVlfRehHYdfniVz6XqGFYmAiEplT_WKp-dq2Z6q9S1eYywa2ILaYlIjuqGfI2C6VD3c'></script></head>
 <body>
 
 <!-- PASSWORD -->
 <div id="password-screen">
-  <!-- Cartes déco -->
-  <div class="pw-deco pw-deco-card red c1">A<br>♥</div>
-  <div class="pw-deco pw-deco-card black c2">K<br>♠</div>
-  <div class="pw-deco pw-deco-card red c3">Q<br>♦</div>
-  <div class="pw-deco pw-deco-card black c4">J<br>♣</div>
-  <div class="pw-deco pw-deco-card black c5">10<br>♠</div>
-  <div class="pw-deco pw-deco-card red c6">9<br>♥</div>
-  <div class="pw-deco pw-deco-card red c7">A<br>♦</div>
-  <div class="pw-deco pw-deco-card black c8">K<br>♣</div>
-  <!-- Jetons déco -->
-  <div class="pw-deco pw-deco-chip ch1"></div>
-  <div class="pw-deco pw-deco-chip ch2"></div>
-  <div class="pw-deco pw-deco-chip ch3"></div>
-  <div class="pw-deco pw-deco-chip ch4"></div>
-  <div class="pw-deco pw-deco-chip ch5"></div>
-  <div class="pw-deco pw-deco-chip ch6"></div>
-  <!-- Ribbons -->
-  <div class="pw-deco pw-ribbon r1"></div>
-  <div class="pw-deco pw-ribbon r2"></div>
+  <style>
+    @keyframes jp-twinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1) rotate(90deg)}}
+    @keyframes jp-float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+    @keyframes jp-glow{0%,100%{filter:drop-shadow(0 0 14px rgba(232,198,106,.35))}50%{filter:drop-shadow(0 0 28px rgba(232,198,106,.6))}}
+    @keyframes jp-reel{0%{transform:translateY(0)}68%{transform:translateY(-656px)}100%{transform:translateY(-656px)}}
+    #password-screen .jp-input::placeholder{color:rgba(232,198,106,.32);letter-spacing:.35em}
+    #password-screen .jp-input:focus{outline:none}
+    #password-screen #pw-error{margin-top:14px;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#ff6f86;opacity:0;transition:opacity .25s}
+    #password-screen #pw-error.show{opacity:1}
+  </style>
+  <div style="position:absolute;inset:0;overflow-y:auto;font-family:&#39;Cormorant Garamond&#39;,serif;background:radial-gradient(ellipse 80% 60% at 50% 32%, #1a0505 0%, #0d0202 38%, #060101 68%, #000000 100%);">
 
-  <div class="pw-inner">
-    <div class="pw-brand-line">Kenza's <span>♥</span> Love Jackpot</div>
-    <div class="pw-kenza">Kenza</div>
-    <div class="pw-line1">A décroché le</div>
-    <div class="pw-jackpot">JACKPOT</div>
-    <div class="pw-slot">
-      <div class="pw-slot-label">Mot de passe :</div>
-      <div class="pw-slot-reels">
-        <input type="password" class="pw-slot-input" id="pw-input" placeholder="• • • • • •" autocomplete="off">
-        <button class="pw-slot-spin" onclick="checkPassword()">▶</button>
-      </div>
-      <button class="pw-slot-btn" onclick="checkPassword()">ENTRER DANS LE JEU</button>
+    <!-- vignette -->
+    <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 38% at 50% 30%, rgba(180,30,30,.10) 0%, transparent 62%);"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 340px 130px rgba(0,0,0,.97);"></div>
+
+    <!-- ribbons -->
+    <div style="position:absolute;top:11%;left:-60px;width:300px;height:150px;border:20px solid transparent;border-top-color:#7a0a16;border-radius:50%;transform:rotate(-24deg);opacity:.8;"></div>
+    <div style="position:absolute;bottom:6%;right:-70px;width:340px;height:170px;border:22px solid transparent;border-bottom-color:#7a0a16;border-radius:50%;transform:rotate(-12deg);opacity:.78;"></div>
+    <div style="position:absolute;top:38%;right:-90px;width:300px;height:160px;border:18px solid transparent;border-top-color:#640912;border-radius:50%;transform:rotate(18deg);opacity:.62;"></div>
+    <div style="position:absolute;bottom:30%;left:-90px;width:320px;height:150px;border:18px solid transparent;border-bottom-color:#640912;border-radius:50%;transform:rotate(20deg);opacity:.6;"></div>
+    <div style="position:absolute;top:62%;left:24%;width:260px;height:120px;border:14px solid transparent;border-top-color:#560810;border-radius:50%;transform:rotate(-8deg);opacity:.45;"></div>
+    <div style="position:absolute;top:2%;left:34%;width:300px;height:140px;border:16px solid transparent;border-bottom-color:#6e0a14;border-radius:50%;transform:rotate(10deg);opacity:.5;"></div>
+    <div style="position:absolute;bottom:2%;left:32%;width:280px;height:130px;border:15px solid transparent;border-top-color:#6e0a14;border-radius:50%;transform:rotate(-14deg);opacity:.5;"></div>
+    <div style="position:absolute;top:30%;left:-110px;width:300px;height:150px;border:16px solid transparent;border-bottom-color:#560810;border-radius:50%;transform:rotate(-30deg);opacity:.4;"></div>
+    <div style="position:absolute;top:50%;right:-110px;width:320px;height:150px;border:16px solid transparent;border-top-color:#560810;border-radius:50%;transform:rotate(28deg);opacity:.42;"></div>
+
+    <!-- scattered cards -->
+    <div style="position:absolute;top:7%;left:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(-23deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">Q<br>♥</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#d80c1c;">♥</div>
     </div>
-    <div class="pw-tagline">Les paris sont ouverts…</div>
-    <div class="pw-error" id="pw-error">Mauvaise pioche, chérie 🃏</div>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav id="main-nav" style="display:none">
-  <a href="#accueil" class="nav-logo">THE <span>JACKPOT</span> SQUAD</a>
-  <ul class="nav-links">
-    <li><a href="#accueil">Accueil</a></li><li><a href="#squad">La Squad</a></li>
-    <li><a href="#valise">La Valise</a></li><li><a href="#mindset">Le Mindset</a></li>
-    <li><a href="#surprise">La Surprise</a></li><li><a href="#bonus">Bonus</a></li>
-  </ul>
-  <button class="nav-hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
-  <a href="#accueil" onclick="toggleMobileMenu()">Accueil</a>
-  <a href="#squad" onclick="toggleMobileMenu()">La Squad</a>
-  <a href="#valise" onclick="toggleMobileMenu()">La Valise</a>
-  <a href="#mindset" onclick="toggleMobileMenu()">Le Mindset</a>
-  <a href="#surprise" onclick="toggleMobileMenu()">La Surprise</a>
-  <a href="#bonus" onclick="toggleMobileMenu()">Bonus</a>
-</div>
-
-<!-- HERO -->
-<section id="accueil">
-  <div class="hero-bg"></div>
-  <div class="card-rain" id="card-rain"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow" id="hero-eyebrow">❖ Elle a eu le jackpot en amour ❖</div>
-    <div class="hero-title"><div class="the">THE</div><div class="shine-text">JACKPOT</div><div>SQUAD</div></div>
-    <div class="hero-subtitle" id="hero-subtitle">EVJF de Kenza &nbsp;·&nbsp; Mariée le 4 septembre 2026</div>
-    <div class="hero-mascot-area">
-      <div class="mascot-corner tl">Q<br>♥</div>
-      <div class="mascot-placeholder">👸🏻</div>
-      <div class="mascot-label">Dame de Cœur</div>
-      <div class="mascot-corner br">Q<br>♥</div>
+    <div style="position:absolute;top:3%;left:13%;width:64px;height:90px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.6);transform:rotate(-9deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#161616;text-align:center;">K<br>♠</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#161616;">♠</div>
     </div>
-    <div class="hero-date-badge" id="hero-badge">❖ DESTINATION SURPRISE ❖ RÉVÉLÉE LE JOUR J ❖</div>
-    <div id="countdown-section">
-      <div class="countdown-label">♥ Le grand départ dans ♥</div>
-      <div class="countdown-grid">
-        <div class="countdown-block"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit">Jours</div></div>
-        <div class="countdown-block"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-unit">Heures</div></div>
-        <div class="countdown-block"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-unit">Minutes</div></div>
-        <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">Secondes</div></div>
-      </div>
+    <div style="position:absolute;top:8%;right:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(21deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#161616;text-align:center;">A<br>♠</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:#161616;">♠</div>
     </div>
-  </div>
-  <div class="hero-scroll-hint"><div class="scroll-line"></div><div class="scroll-text">Défiler</div></div>
-</section>
-
-<!-- SQUAD -->
-<section id="squad">
-  <div class="section-inner">
-    <div class="section-label reveal">♥ Les Élues</div>
-    <div class="section-title reveal">La <em>Squad</em></div>
-    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);max-width:500px;line-height:1.7;">Neuf filles. Neuf cartes. Une seule mission : offrir à la Dame de Cœur le week-end dont elle se souviendra toute sa vie.</p>
-    <div class="deco-line reveal"><span class="deco-line-icon">♥</span></div>
-    <div class="squad-grid">
-      <div class="squad-card bride reveal">
-        <div class="bride-badge">LA MARIÉE</div>
-        <div class="card-corner tl">Q<br>♥</div>
-        <div><div class="card-suit-big">♥</div><div class="card-name">Kenza</div><div class="card-alias">Dame de Cœur</div><div class="card-role">La Future Mme Abouyoub 💍</div></div>
-        <div class="card-corner br">Q<br>♥</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-1" id="card-ghita">
-        <div class="card-corner tl black" id="ghita-corner-tl">?<br>♠</div>
-        <div><div class="card-suit-big" id="ghita-suit">♠</div><div class="card-name" id="ghita-name">Ghita</div><div class="card-alias" id="ghita-alias">Ghitouch</div><div class="card-role" id="ghita-role">Carte à compléter</div></div>
-        <div class="card-corner br black" id="ghita-corner-br">?<br>♠</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-2" id="card-yasminec">
-        <div class="card-corner tl" id="yasminec-corner-tl">?<br>♥</div>
-        <div><div class="card-suit-big" style="color:var(--red)" id="yasminec-suit">♥</div><div class="card-name" id="yasminec-name">Yasmine</div><div class="card-alias" id="yasminec-alias">Yass Couz</div><div class="card-role" id="yasminec-role">Carte à compléter</div></div>
-        <div class="card-corner br" id="yasminec-corner-br">?<br>♥</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-3" id="card-zineb">
-        <div class="card-corner tl black" id="zineb-corner-tl">?<br>♣</div>
-        <div><div class="card-suit-big" id="zineb-suit">♣</div><div class="card-name" id="zineb-name">Zineb</div><div class="card-alias" id="zineb-alias">Zizi</div><div class="card-role" id="zineb-role">Carte à compléter</div></div>
-        <div class="card-corner br black" id="zineb-corner-br">?<br>♣</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-1" id="card-yasminea">
-        <div class="card-corner tl" id="yasminea-corner-tl">?<br>♦</div>
-        <div><div class="card-suit-big" style="color:var(--red)" id="yasminea-suit">♦</div><div class="card-name" id="yasminea-name">Yasmine</div><div class="card-alias" id="yasminea-alias">Yassou.A</div><div class="card-role" id="yasminea-role">Carte à compléter</div></div>
-        <div class="card-corner br" id="yasminea-corner-br">?<br>♦</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-2" id="card-yassinel">
-        <div class="card-corner tl black" id="yassinel-corner-tl">?<br>♠</div>
-        <div><div class="card-suit-big" id="yassinel-suit">♠</div><div class="card-name" id="yassinel-name">Yasmine</div><div class="card-alias" id="yassinel-alias">Yass.El</div><div class="card-role" id="yassinel-role">Carte à compléter</div></div>
-        <div class="card-corner br black" id="yassinel-corner-br">?<br>♠</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-3" id="card-sarah">
-        <div class="card-corner tl" id="sarah-corner-tl">?<br>♥</div>
-        <div><div class="card-suit-big" style="color:var(--red)" id="sarah-suit">♥</div><div class="card-name" id="sarah-name">Sarah</div><div class="card-alias" id="sarah-alias">Sarouch</div><div class="card-role" id="sarah-role">Carte à compléter</div></div>
-        <div class="card-corner br" id="sarah-corner-br">?<br>♥</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-1" id="card-nour">
-        <div class="card-corner tl black" id="nour-corner-tl">?<br>♣</div>
-        <div><div class="card-suit-big" id="nour-suit">♣</div><div class="card-name" id="nour-name">Nour</div><div class="card-alias" id="nour-alias">Nourette</div><div class="card-role" id="nour-role">Carte à compléter</div></div>
-        <div class="card-corner br black" id="nour-corner-br">?<br>♣</div>
-      </div>
-      <div class="squad-card reveal reveal-delay-2" id="card-aya">
-        <div class="card-corner tl" id="aya-corner-tl">?<br>♦</div>
-        <div><div class="card-suit-big" style="color:var(--red)" id="aya-suit">♦</div><div class="card-name" id="aya-name">Aya</div><div class="card-alias" id="aya-alias">Ayou</div><div class="card-role" id="aya-role">Carte à compléter</div></div>
-        <div class="card-corner br" id="aya-corner-br">?<br>♦</div>
-      </div>
+    <div style="position:absolute;bottom:9%;left:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(17deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">A<br>♥</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:#d80c1c;">♥</div>
     </div>
-  </div>
-</section>
-
-<!-- VALISE -->
-<section id="valise">
-  <div class="section-inner">
-    <div class="section-label reveal">♠ Préparatifs</div>
-    <div class="section-title reveal">La <em>Valise</em></div>
-    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);line-height:1.7;">“Je savais pas quoi mettre” n’est pas une option.</p>
-    <div class="deco-line reveal"><span class="deco-line-icon">♠</span></div>
-    <div class="valise-split">
-      <div class="valise-col bride-col reveal">
-        <div class="valise-col-title"><span>♥</span> Kenza</div>
-        <div class="valise-col-subtitle">Dress code : blanc intégral, de la tête aux pieds</div>
-        <ul class="valise-list" id="kenza-valise-list">
-          <li>Maillots de bain blancs (minimum 2)</li>
-          <li>Robes de plage blanches / cover-up</li>
-          <li>Tenue de soirée blanche (LA robe)</li>
-          <li>Talons blancs ou dorés</li>
-          <li>Accessoires blancs / dorés</li>
-          <li>Lunettes de soleil glamour</li>
-          <li>Trousse de beauté complète</li>
-          <li>Votre plus beau sourire de future mariée 💍</li>
-        </ul>
-        <div class="valise-note">❖ La Dame de Cœur doit briller. Aucun compromis sur la blancheur.</div>
-      </div>
-      <div class="valise-col reveal reveal-delay-1">
-        <div class="valise-col-title"><span>♠</span> La Squad</div>
-        <div class="valise-col-subtitle" id="squad-valise-subtitle">À compléter par les organisatrices</div>
-        <div id="squad-valise-content">
-          <div class="valise-placeholder">🃏 Contenu à venir…<br><br><small>Ajoutez ici les consignes via le panneau admin.</small></div>
-        </div>
-      </div>
+    <div style="position:absolute;bottom:11%;right:3%;width:64px;height:90px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.62);transform:rotate(-17deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:12px;line-height:.9;color:#161616;text-align:center;">10<br>♠</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#161616;">♠</div>
     </div>
-  </div>
-</section>
-
-<!-- MINDSET -->
-<section id="mindset">
-  <div class="section-inner">
-    <div class="section-label reveal">♦ Règles d’or</div>
-    <div class="section-title reveal">Le Bon <em>Mindset</em></div>
-    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);line-height:1.7;max-width:500px;">Quelques règles non négociables pour arriver dans l’état d’esprit parfait.</p>
-    <div class="deco-line reveal"><span class="deco-line-icon">♦</span></div>
-    <div class="mindset-grid">
-      <div class="mindset-card reveal"><div class="mindset-number">01</div><div class="mindset-icon">📵</div><div class="mindset-rule">Le téléphone, c’est pour les photos</div><div class="mindset-desc">Pas de travail, pas de mails, pas de drama externe. On est full présentes pour Kenza et c’est tout.</div></div>
-      <div class="mindset-card reveal reveal-delay-1"><div class="mindset-number">02</div><div class="mindset-icon">🥂</div><div class="mindset-rule">On célèbre le jackpot</div><div class="mindset-desc">Kenza a trouvé l’homme parfait. Notre rôle, c’est de fêter ça avec classe, style et beaucoup d’humour.</div></div>
-      <div class="mindset-card reveal reveal-delay-2"><div class="mindset-number">03</div><div class="mindset-icon">💃</div><div class="mindset-rule">On laisse l’ego au vestiaire</div><div class="mindset-desc">Ce week-end, il n’y a qu’une star : la Dame de Cœur. On est ses as, ses valets, ses reines de scène.</div></div>
-      <div class="mindset-card reveal reveal-delay-3"><div class="mindset-number">04</div><div class="mindset-icon">🤫</div><div class="mindset-rule">La surprise, c’est sacré</div><div class="mindset-desc">On ne vend pas la mèche. Ni à Kenza, ni à Saad, ni à personne. Ce qui se passe dans le squad reste dans le squad.</div></div>
-      <div class="mindset-card reveal reveal-delay-1"><div class="mindset-number">05</div><div class="mindset-icon">📸</div><div class="mindset-rule">On documente TOUT</div><div class="mindset-desc">Chaque moment mérite d’être immortalisé. On repart toutes avec des souvenirs plein la mémoire (et le téléphone).</div></div>
-      <div class="mindset-card reveal reveal-delay-2"><div class="mindset-number">06</div><div class="mindset-icon">♥</div><div class="mindset-rule">On la chouchoute royalement</div><div class="mindset-desc">La Dame de Cœur ne porte rien, ne décide rien, ne paye rien. Elle règne, point final.</div></div>
+    <div style="position:absolute;top:1%;right:24%;width:60px;height:86px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.58);transform:rotate(11deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:12px;line-height:.9;color:#d80c1c;text-align:center;">Q<br>♥</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#d80c1c;">♥</div>
     </div>
-  </div>
-</section>
-
-<!-- SURPRISE -->
-<section id="surprise">
-  <div class="section-inner">
-    <div class="surprise-inner">
-      <div><div class="section-label reveal" style="text-align:center">♣ Le moment attendu</div><div class="section-title reveal" style="text-align:center">La <em>Surprise</em></div></div>
-      <div class="deco-line reveal" style="width:100%;max-width:400px"><span class="deco-line-icon">♣</span></div>
-      <div id="video-area" class="reveal">
-        <div class="surprise-video-placeholder">
-          <div class="surprise-play">▶</div>
-          <div class="surprise-video-label">Vidéo à intégrer via le panneau admin</div>
-          <div style="font-family:var(--font-fine);font-size:.8rem;color:rgba(255,255,255,.2);margin-top:.5rem;">YouTube · MP4 · Vimeo</div>
-        </div>
-      </div>
-      <p class="reveal" style="font-family:var(--font-display);font-style:italic;font-size:1.2rem;color:var(--gray-mid);text-align:center;max-width:500px;line-height:1.6;">“Le meilleur est toujours à venir — surtout quand c’est nous qui organisons.”</p>
+    <div style="position:absolute;bottom:2%;left:22%;width:60px;height:86px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.58);transform:rotate(-12deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:12px;line-height:.9;color:#161616;text-align:center;">9<br>♠</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#161616;">♠</div>
     </div>
-  </div>
-</section>
-
-<!-- BONUS -->
-<section id="bonus">
-  <div class="section-inner">
-    <div class="section-label reveal">❖ Coming soon</div>
-    <div class="section-title reveal">Section <em>Bonus</em></div>
-    <div class="bonus-placeholder reveal">
-      <div class="bonus-icon">🃏</div>
-      <div class="bonus-text">Cette section est réservée pour du contenu futur.</div>
-      <div style="margin-top:1rem;font-family:var(--font-fine);font-size:.85rem;color:rgba(255,255,255,.2);letter-spacing:.1em">Programme · Règles du jeu · Anecdotes · Photos</div>
+    <div style="position:absolute;bottom:3%;right:26%;width:60px;height:86px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.58);transform:rotate(15deg);">
+      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:12px;line-height:.9;color:#d80c1c;text-align:center;">A<br>♦</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#d80c1c;">♦</div>
     </div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-suits"><span class="red">♥</span><span>♠</span><span class="red">♦</span><span>♣</span></div>
-  <div class="footer-names"><span>Kenza</span> &amp; <span>Saad</span></div>
-  <div class="footer-text">4 septembre 2026 · Avec amour, par la Jackpot Squad</div>
-  <div class="footer-suits"><span>♣</span><span class="red">♦</span><span>♠</span><span class="red">♥</span></div>
-</footer>
-
-<!-- ADMIN FAB -->
-<div id="admin-fab">
-  <button class="fab-btn" onclick="openDrawer()" title="Panneau Admin">⚙️</button>
-</div>
-
-<!-- ADMIN DRAWER -->
-<div id="admin-drawer">
-  <div class="drawer-overlay" onclick="closeDrawer()"></div>
-  <div class="drawer-panel">
-    <div class="drawer-header">
-      <div class="drawer-title">PANNEAU <span>ADMIN</span></div>
-      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    <!-- poker chips -->
+    <div style="position:absolute;top:25%;left:5%;width:72px;height:72px;border-radius:50%;background:conic-gradient(#b01030 0 7.5%,#fbeede 7.5% 12.5%,#b01030 12.5% 20%,#fbeede 20% 25%,#b01030 25% 32.5%,#fbeede 32.5% 37.5%,#b01030 37.5% 45%,#fbeede 45% 50%,#b01030 50% 57.5%,#fbeede 57.5% 62.5%,#b01030 62.5% 70%,#fbeede 70% 75%,#b01030 75% 82.5%,#fbeede 82.5% 87.5%,#b01030 87.5% 95%,#fbeede 95% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(8deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:17px;">♥</div>
     </div>
-    <div class="drawer-tabs">
-      <button class="dtab active" onclick="switchTab(event,'tab-squad'">🃏 La Squad</button>
-      <button class="dtab" onclick="switchTab(event,'tab-valise'">🧳 La Valise</button>
-      <button class="dtab" onclick="switchTab(event,'tab-video'">🎬 La Vidéo</button>
-      <button class="dtab" onclick="switchTab(event,'tab-countdown'">⏱ Compte à rebours</button>
-      <button class="dtab" onclick="switchTab(event,'tab-accueil'">✨ Accueil</button>
+    <div style="position:absolute;bottom:24%;right:8%;width:66px;height:66px;border-radius:50%;background:conic-gradient(#b01030 0 8%,#fbeede 8% 12.5%,#b01030 12.5% 21%,#fbeede 21% 25%,#b01030 25% 33%,#fbeede 33% 37.5%,#b01030 37.5% 46%,#fbeede 46% 50%,#b01030 50% 58%,#fbeede 58% 62.5%,#b01030 62.5% 71%,#fbeede 71% 75%,#b01030 75% 83%,#fbeede 83% 87.5%,#b01030 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-6deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:45px;height:45px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:15px;">♠</div>
     </div>
-    <div class="drawer-body">
-
-      <!-- TAB SQUAD -->
-      <div class="tab-panel active" id="tab-squad">
-        <div class="dsection-title">Cartes des membres</div>
-        <p style="font-family:var(--font-fine);font-size:.85rem;color:var(--gray-mid);margin-bottom:1rem;">Clé pour déplier chaque carte. La carte de Kenza est fixe.</p>
-        <div id="members-admin"></div>
-        <button class="apply-btn" onclick="applySquad()">❖ Appliquer les cartes</button>
-      </div>
-
-      <!-- TAB VALISE -->
-      <div class="tab-panel" id="tab-valise">
-        <div class="dsection-title">Liste Kenza</div>
-        <div class="valise-squad-items" id="kenza-items-admin"></div>
-        <button class="add-item-btn" onclick="addKenzaItem()">+ Ajouter un item</button>
-        <div class="dsection-title">Liste La Squad</div>
-        <div class="form-group">
-          <label class="form-label">Sous-titre de la colonne</label>
-          <input type="text" class="form-input" id="squad-valise-sub" value="À compléter par les organisatrices">
-        </div>
-        <div class="valise-squad-items" id="squad-items-admin"></div>
-        <button class="add-item-btn" onclick="addSquadItem()">+ Ajouter un item</button>
-        <button class="apply-btn" onclick="applyValise()" style="margin-top:1.5rem">❖ Appliquer la valise</button>
-      </div>
-
-      <!-- TAB VIDEO -->
-      <div class="tab-panel" id="tab-video">
-        <div class="dsection-title">Intégrer une vidéo</div>
-        <div class="form-group">
-          <label class="form-label">Type</label>
-          <select class="form-select" id="video-type">
-            <option value="youtube">YouTube</option>
-            <option value="mp4">Lien MP4 direct</option>
-            <option value="vimeo">Vimeo</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">URL / Lien</label>
-          <input type="text" class="form-input" id="video-url" placeholder="https://www.youtube.com/watch?v=XXXX">
-          <div class="form-hint">YouTube : colle le lien complet. MP4 : URL directe du fichier.</div>
-        </div>
-        <button class="apply-btn" onclick="applyVideo()">❖ Intégrer la vidéo</button>
-        <button class="apply-btn secondary" onclick="removeVideo()" style="margin-top:.5rem">✕ Supprimer la vidéo</button>
-      </div>
-
-      <!-- TAB COUNTDOWN -->
-      <div class="tab-panel" id="tab-countdown">
-        <div class="dsection-title">Compte à rebours</div>
-        <div class="toggle-row">
-          <span class="toggle-label">Afficher le compte à rebours</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="countdown-toggle" onchange="toggleCountdownAdmin()">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-        <div class="form-group">
-          <label class="form-label">📅 Date de l’EVJF</label>
-          <input type="datetime-local" class="form-input" id="evjf-date-input" value="2026-08-15T08:00">
-          <div class="form-hint">Modifie cette date pour pointer le compte à rebours vers le bon jour.</div>
-        </div>
-        <button class="apply-btn" onclick="applyCountdown()">❖ Appliquer la date</button>
-      </div>
-
-      <!-- TAB ACCUEIL -->
-      <div class="tab-panel" id="tab-accueil">
-        <div class="dsection-title">Textes de l’accueil</div>
-        <div class="form-group">
-          <label class="form-label">Accroche (au-dessus du titre)</label>
-          <input type="text" class="form-input" id="edit-eyebrow" value="❖ Elle a eu le jackpot en amour ❖">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Sous-titre</label>
-          <input type="text" class="form-input" id="edit-subtitle" value="EVJF de Kenza · Mariée le 4 septembre 2026">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Bandeau destination</label>
-          <input type="text" class="form-input" id="edit-badge" value="❖ DESTINATION SURPRISE ❖ RÉVÉLÉE LE JOUR J ❖">
-        </div>
-        <button class="apply-btn" onclick="applyAccueil()">❖ Appliquer l’accueil</button>
-      </div>
-
+    <div style="position:absolute;top:48%;left:9%;width:56px;height:56px;border-radius:50%;background:conic-gradient(#1c1c1c 0 8%,#fbeede 8% 12.5%,#1c1c1c 12.5% 21%,#fbeede 21% 25%,#1c1c1c 25% 33%,#fbeede 33% 37.5%,#1c1c1c 37.5% 46%,#fbeede 46% 50%,#1c1c1c 50% 58%,#fbeede 58% 62.5%,#1c1c1c 62.5% 71%,#fbeede 71% 75%,#1c1c1c 75% 83%,#fbeede 83% 87.5%,#1c1c1c 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(14deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#3a3a3a,#0c0c0c);border:2px dashed rgba(255,240,220,.45);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:13px;">♠</div>
     </div>
-  </div>
-</div>
+    <div style="position:absolute;top:14%;right:15%;width:58px;height:58px;border-radius:50%;background:conic-gradient(#c79a44 0 8%,#fbeede 8% 12.5%,#c79a44 12.5% 21%,#fbeede 21% 25%,#c79a44 25% 33%,#fbeede 33% 37.5%,#c79a44 37.5% 46%,#fbeede 46% 50%,#c79a44 50% 58%,#fbeede 58% 62.5%,#c79a44 62.5% 71%,#fbeede 71% 75%,#c79a44 75% 83%,#fbeede 83% 87.5%,#c79a44 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-10deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e8c66a,#a9802f);border:2px dashed rgba(80,50,10,.4);display:flex;align-items:center;justify-content:center;color:#3a2606;font-size:14px;">♦</div>
+    </div>
+    <div style="position:absolute;bottom:14%;left:14%;width:60px;height:60px;border-radius:50%;background:conic-gradient(#b01030 0 8%,#fbeede 8% 12.5%,#b01030 12.5% 21%,#fbeede 21% 25%,#b01030 25% 33%,#fbeede 33% 37.5%,#b01030 37.5% 46%,#fbeede 46% 50%,#b01030 50% 58%,#fbeede 58% 62.5%,#b01030 62.5% 71%,#fbeede 71% 75%,#b01030 75% 83%,#fbeede 83% 87.5%,#b01030 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(6deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:14px;">♥</div>
+    </div>
+    <div style="position:absolute;top:58%;right:6%;width:52px;height:52px;border-radius:50%;background:conic-gradient(#1c1c1c 0 8%,#fbeede 8% 12.5%,#1c1c1c 12.5% 21%,#fbeede 21% 25%,#1c1c1c 25% 33%,#fbeede 33% 37.5%,#1c1c1c 37.5% 46%,#fbeede 46% 50%,#1c1c1c 50% 58%,#fbeede 58% 62.5%,#1c1c1c 62.5% 71%,#fbeede 71% 75%,#1c1c1c 75% 83%,#fbeede 83% 87.5%,#1c1c1c 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-16deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#3a3a3a,#0c0c0c);border:2px dashed rgba(255,240,220,.45);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:12px;">♣</div>
+    </div>
+    <div style="position:absolute;top:6%;left:46%;width:50px;height:50px;border-radius:50%;background:conic-gradient(#b01030 0 8%,#fbeede 8% 12.5%,#b01030 12.5% 21%,#fbeede 21% 25%,#b01030 25% 33%,#fbeede 33% 37.5%,#b01030 37.5% 46%,#fbeede 46% 50%,#b01030 50% 58%,#fbeede 58% 62.5%,#b01030 62.5% 71%,#fbeede 71% 75%,#b01030 75% 83%,#fbeede 83% 87.5%,#b01030 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(12deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:12px;">♥</div>
+    </div>
+    <div style="position:absolute;bottom:7%;left:42%;width:54px;height:54px;border-radius:50%;background:conic-gradient(#c79a44 0 8%,#fbeede 8% 12.5%,#c79a44 12.5% 21%,#fbeede 21% 25%,#c79a44 25% 33%,#fbeede 33% 37.5%,#c79a44 37.5% 46%,#fbeede 46% 50%,#c79a44 50% 58%,#fbeede 58% 62.5%,#c79a44 62.5% 71%,#fbeede 71% 75%,#c79a44 75% 83%,#fbeede 83% 87.5%,#c79a44 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-9deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e8c66a,#a9802f);border:2px dashed rgba(80,50,10,.4);display:flex;align-items:center;justify-content:center;color:#3a2606;font-size:13px;">♦</div>
+    </div>
+    <div style="position:absolute;top:70%;left:18%;width:50px;height:50px;border-radius:50%;background:conic-gradient(#b01030 0 8%,#fbeede 8% 12.5%,#b01030 12.5% 21%,#fbeede 21% 25%,#b01030 25% 33%,#fbeede 33% 37.5%,#b01030 37.5% 46%,#fbeede 46% 50%,#b01030 50% 58%,#fbeede 58% 62.5%,#b01030 62.5% 71%,#fbeede 71% 75%,#b01030 75% 83%,#fbeede 83% 87.5%,#b01030 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(18deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:12px;">♠</div>
+    </div>
+    <div style="position:absolute;top:36%;left:20%;width:46px;height:46px;border-radius:50%;background:conic-gradient(#1c1c1c 0 8%,#fbeede 8% 12.5%,#1c1c1c 12.5% 21%,#fbeede 21% 25%,#1c1c1c 25% 33%,#fbeede 33% 37.5%,#1c1c1c 37.5% 46%,#fbeede 46% 50%,#1c1c1c 50% 58%,#fbeede 58% 62.5%,#1c1c1c 62.5% 71%,#fbeede 71% 75%,#1c1c1c 75% 83%,#fbeede 83% 87.5%,#1c1c1c 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-20deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#3a3a3a,#0c0c0c);border:2px dashed rgba(255,240,220,.45);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:11px;">♣</div>
+    </div>
 
-<div id="toast">❖ Modifications appliquées !</div>
+    <!-- sparkles -->
+    <div style="position:absolute;top:18%;left:40%;color:#f4dd8e;font-size:13px;animation:jp-twinkle 3.4s ease-in-out infinite;">✦</div>
+    <div style="position:absolute;top:24%;right:33%;color:#f4dd8e;font-size:10px;animation:jp-twinkle 2.8s ease-in-out .6s infinite;">✦</div>
+    <div style="position:absolute;top:54%;right:28%;color:#f4dd8e;font-size:12px;animation:jp-twinkle 3.6s ease-in-out .3s infinite;">✦</div>
 
-<script>
-const PASSWORD_USER  = "jackpotSK26";
-const PASSWORD_ADMIN = "admin26";
-const PASSWORD_REVEAL = "revealrebours";
-let EVJF_DATE = new Date("2026-08-15T08:00:00");
-let countdownActive = false;
-let countdownInterval = null;
+    <!-- logo -->
+    <div style="position:absolute;top:18px;left:clamp(16px,4vw,46px);z-index:6;display:flex;flex-direction:column;line-height:1;">
+      <span style="font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:clamp(13px,1.7vw,17px);letter-spacing:.12em;color:#f4ecd8;">KENZA'S <span style="color:#d80c1c;">♥</span></span>
+      <span style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:clamp(9px,1.2vw,11px);letter-spacing:.34em;color:#c79a44;margin-top:3px;">LAUGH JACKPOT</span>
+    </div>
 
-const MEMBERS = [
-  {id:"ghita",    name:"Ghita",   alias:"Ghitouch",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2660", value:"?", color:"black"},
-  {id:"yasminec", name:"Yasmine", alias:"Yass Couz", role:"Carte \u00e0 compl\u00e9ter", suit:"\u2665", value:"?", color:"red"},
-  {id:"zineb",    name:"Zineb",   alias:"Zizi",      role:"Carte \u00e0 compl\u00e9ter", suit:"\u2663", value:"?", color:"black"},
-  {id:"yasminea", name:"Yasmine", alias:"Yassou.A",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2666", value:"?", color:"red"},
-  {id:"yassinel", name:"Yasmine", alias:"Yass.El",   role:"Carte \u00e0 compl\u00e9ter", suit:"\u2660", value:"?", color:"black"},
-  {id:"sarah",    name:"Sarah",   alias:"Sarouch",   role:"Carte \u00e0 compl\u00e9ter", suit:"\u2665", value:"?", color:"red"},
-  {id:"nour",     name:"Nour",    alias:"Nourette",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2663", value:"?", color:"black"},
-  {id:"aya",      name:"Aya",     alias:"Ayou",      role:"Carte \u00e0 compl\u00e9ter", suit:"\u2666", value:"?", color:"red"},
-];
-const SUITS = ["\u2665","\u2660","\u2666","\u2663"];
+    <!-- center content -->
+    <div style="position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100%;padding:clamp(86px,12vh,120px) 20px 76px;">
 
-function checkPassword(){
-  const input=document.getElementById("pw-input").value.trim();
-  const error=document.getElementById("pw-error");
-  if(input===PASSWORD_ADMIN){unlockSite(true);return;}
-  if(input===PASSWORD_REVEAL){unlockSite(false);activateCountdown();return;}
-  if(input===PASSWORD_USER){unlockSite(false);return;}
-  error.classList.add("show");
-  document.getElementById("pw-input").value="";
-  document.getElementById("pw-input").focus();
-  setTimeout(()=>error.classList.remove("show"),3000);
-}
-document.getElementById("pw-input").addEventListener("keydown",e=>{if(e.key==="Enter")checkPassword();});
+      <div style="font-family:&#39;Dancing Script&#39;,cursive;font-size:clamp(60px,11vw,128px);line-height:.9;color:#d80c1c;text-shadow:0 0 32px rgba(216,12,28,.5),0 3px 6px rgba(0,0,0,.8);">Kenza</div>
 
-function unlockSite(admin){
-  const s=document.getElementById("password-screen");
-  s.classList.add("hidden");setTimeout(()=>s.remove(),900);
-  document.getElementById("main-nav").style.display="flex";
-  if(admin){document.getElementById("admin-fab").classList.add("show");buildMembersAdmin();buildValiseAdmin();}
-  createCardRain();launchConfetti();
-}
+      <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:clamp(18px,3.1vw,34px);letter-spacing:.16em;color:#f2e8d4;margin-top:6px;">A DÉCROCHÉ LE</div>
 
-function openDrawer(){document.getElementById("admin-drawer").classList.add("open");document.body.style.overflow="hidden";}
-function closeDrawer(){document.getElementById("admin-drawer").classList.remove("open");document.body.style.overflow="";}
-function switchTab(e,id){
-  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".dtab").forEach(t=>t.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  e.target.classList.add("active");
-}
+      <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:clamp(58px,13vw,150px);letter-spacing:.04em;line-height:1.04;padding-bottom:.1em;margin-top:4px;background:linear-gradient(180deg,#fff4cf 0%,#f4dd8e 30%,#d9ad48 60%,#a9802f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:jp-glow 3.4s ease-in-out infinite;">JACKPOT</div>
 
-function buildMembersAdmin(){
-  const c=document.getElementById("members-admin");c.innerHTML="";
-  MEMBERS.forEach(m=>{
-    const suitColor=m.color==="red"?"var(--red)":"var(--white-off)";
-    c.innerHTML+=`<div class="member-block">
-      <div class="member-block-header" onclick="toggleBlock('${m.id}')">
-        <span class="member-block-suit" style="color:${suitColor}">${m.suit}</span>
-        <span class="member-block-name" id="mblabel-${m.id}">${m.name} &mdash; <em style="font-weight:300;color:var(--gray-mid)">${m.alias}</em></span>
-        <span class="member-block-toggle" id="mtoggle-${m.id}">&#9654;</span>
-      </div>
-      <div class="member-fields" id="mfields-${m.id}">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Pr\u00e9nom</label><input type="text" class="form-input" id="mn-${m.id}" value="${m.name}"></div>
-          <div class="form-group"><label class="form-label">Alias</label><input type="text" class="form-input" id="ma-${m.id}" value="${m.alias}"></div>
+      <!-- COMPTE A REBOURS (remplace le mot de passe après déverrouillage) -->
+      <div id="pw-block" style="width:min(92vw,460px);margin-top:26px;">
+        <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:12px;letter-spacing:.36em;color:#c79a44;margin-bottom:13px;">— ENTRE LE MOT DE PASSE —</div>
+        <div style="display:flex;align-items:stretch;gap:10px;">
+          <input class="jp-input" type="password" id="pw-input" placeholder="• • • • • •" autocomplete="off" style="flex:1;min-width:0;background:linear-gradient(180deg,#150b05,#0b0603);border:1.5px solid rgba(232,198,106,.55);border-radius:8px;color:#f4dd8e;font-family:&#39;Playfair Display&#39;,serif;font-size:18px;letter-spacing:.25em;text-align:center;padding:14px 12px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6);">
+          <button onclick="checkPassword()" style="flex-shrink:0;padding:0 24px;border:none;border-radius:8px;cursor:pointer;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;letter-spacing:.14em;box-shadow:0 6px 18px rgba(216,12,28,.45),inset 0 1px 0 rgba(255,255,255,.25);">ENTRER</button>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Valeur (A, K, Q, J, 7&#x2026;)</label><input type="text" class="form-input" id="mv-${m.id}" value="${m.value}" placeholder="ex: A, K, 7"></div>
-          <div class="form-group"><label class="form-label">Symbole</label>
-            <select class="form-select" id="ms-${m.id}">
-              ${SUITS.map(s=>`<option value="${s}"${s===m.suit?" selected":""}>${s}</option>`).join("")}
-            </select>
+        <div id="pw-error">Mauvaise pioche, chérie 🃏</div>
+      </div>
+
+      <!-- slot machine -->
+      <div style="position:relative;margin-top:28px;padding:16px 20px;border-radius:16px;background:linear-gradient(180deg,#7a5a1f,#3c2a0e);box-shadow:0 0 0 2px #e8c66a,0 14px 40px rgba(0,0,0,.6),inset 0 2px 4px rgba(255,255,255,.18);">
+        <div style="display:flex;gap:10px;padding:10px;border-radius:10px;background:linear-gradient(180deg,#1a0f06,#0c0703);box-shadow:inset 0 3px 10px rgba(0,0,0,.7);">
+          <!-- reel K -->
+          <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
+            <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:0s;">
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#1c1c1c;">♠</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♦</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♥</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+            </div>
+            <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
+          </div>
+          <!-- reel HEART -->
+          <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
+            <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:.12s;">
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">7</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#1c1c1c;">♠</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
+            </div>
+            <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
+          </div>
+          <!-- reel S -->
+          <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
+            <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:.24s;">
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♦</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:40px;color:#1c1c1c;">10</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+            </div>
+            <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
           </div>
         </div>
-        <div class="form-group"><label class="form-label">R\u00f4le / Description</label><input type="text" class="form-input" id="mr-${m.id}" value="${m.role}" placeholder="ex: La photographe \U0001f4f8"></div>
+        <div style="position:absolute;top:-14px;right:-26px;width:12px;height:74px;background:linear-gradient(90deg,#8a6a26,#e8c66a,#8a6a26);border-radius:6px;box-shadow:0 4px 10px rgba(0,0,0,.5);"></div>
+        <div style="position:absolute;top:-30px;right:-36px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 36% 32%,#e0203f,#8b0017);box-shadow:0 5px 12px rgba(0,0,0,.55),inset 0 2px 4px rgba(255,255,255,.4);"></div>
       </div>
-    </div>`;
-  });
+
+      <div style="font-family:&#39;Playfair Display&#39;,serif;font-style:italic;font-size:clamp(14px,2vw,18px);letter-spacing:.18em;color:#9c8a7a;margin-top:30px;">Les paris sont ouverts…</div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .jp-serif{font-family:'Playfair Display',serif}
+  .jp-script{font-family:'Dancing Script',cursive}
+  .jp-body{font-family:'Cormorant Garamond',serif}
+  #site, #site *{box-sizing:border-box}
+  body{background:#070202 !important;background-image:none !important}
+  .jp-card{cursor:pointer;aspect-ratio:5/7}
+  .jp-inner{position:relative;width:100%;height:100%}
+  .jp-face{position:absolute;inset:0;border-radius:12px;box-shadow:0 14px 34px rgba(0,0,0,.55);overflow:hidden;transition:opacity .45s ease,transform .45s ease}
+  .jp-front{opacity:0;transform:scale(.94)}
+  .jp-card[data-flip="1"] .jp-back{opacity:0;transform:scale(.94)}
+  .jp-card[data-flip="1"] .jp-front{opacity:1;transform:scale(1)}
+  .jp-reveal{opacity:1}
+  .jp-reveal.in{opacity:1;transform:none}
+  @keyframes jpFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .jp-btn{transition:transform .2s,box-shadow .2s;cursor:pointer}
+  .jp-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(216,12,28,.5)}
+  .jp-mrow:hover{border-color:rgba(216,12,28,.9)!important;background:rgba(216,12,28,.1)!important}
+  .jp-soc{transition:transform .2s,color .2s}
+  .jp-soc:hover{transform:translateY(-2px);color:#d80c1c}
+  .jp-mrow > div:last-child{min-width:0}
+  .jp-mrow .jp-serif{line-height:1.22}
+  .jp-mrow .jp-body{line-height:1.35}
+  @keyframes jpBounce{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(7px);opacity:1}}
+  .cd-num{font-weight:700;font-size:clamp(34px,7vw,62px);line-height:1;background:linear-gradient(180deg,#fff4cf 0%,#f4dd8e 40%,#d9ad48 70%,#a9802f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+</style>
+<div id="site" style="position:relative;background:#070202;min-height:100vh;overflow:hidden;animation:jpFade .9s ease both;">
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 35% at 50% 0%, rgba(150,18,18,.18),transparent 62%),radial-gradient(ellipse 45% 30% at 12% 45%, rgba(140,16,16,.12),transparent 60%),radial-gradient(ellipse 45% 30% at 88% 75%, rgba(140,16,16,.12),transparent 60%);"></div>
+  <div style="position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:clamp(48px,8vw,90px) clamp(18px,4vw,40px) 0;">
+    <section style="text-align:center;">
+      <div class="jp-reveal" style="display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px);flex-wrap:nowrap;"><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,transparent,#c79a44);"></span><h2 class="jp-serif" style="margin:0;font-weight:700;font-size:clamp(20px,2.9vw,34px);letter-spacing:.12em;color:#f2e8d4;text-transform:uppercase;text-align:center;">Les 9 cartes du Jackpot <span style="color:#d80c1c;">&hearts;</span></h2><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,#c79a44,transparent);"></span></div>
+      <p class="jp-body jp-reveal" style="margin:14px auto 0;max-width:420px;font-size:clamp(15px,2vw,17px);color:#c2a892;line-height:1.5;">Clique sur une carte pour découvrir<br>ton rôle dans cette aventure&nbsp;!</p>
+      <div id="jp-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:680px;margin:clamp(28px,5vw,46px) auto 0;"></div>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(30px,5vw,56px);margin-top:clamp(60px,9vw,110px);align-items:start;">
+      <div style="text-align:center;">
+        <h3 class="jp-serif jp-reveal" style="margin:0 0 20px;font-weight:700;font-size:clamp(18px,2.4vw,26px);letter-spacing:.06em;color:#f2e8d4;">Prête à découvrir ton Jackpot&nbsp;?</h3>
+        <div class="jp-reveal" style="position:relative;border-radius:18px;padding:14px;background:linear-gradient(160deg,#1c0f0a,#0c0604);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 18px 44px rgba(0,0,0,.6);">
+          <div style="position:absolute;top:8px;left:10px;font-size:22px;color:rgba(216,12,28,.5);">&spades;</div>
+          <div style="position:absolute;bottom:8px;right:12px;font-size:22px;color:rgba(216,12,28,.5);">&hearts;</div>
+          <div onclick="alert(&#39;Ajoute ta vidéo surprise ici&#39;)" class="jp-btn" style="position:relative;border-radius:10px;aspect-ratio:16/10;background:radial-gradient(circle at 50% 45%, #3a1410, #120605);overflow:hidden;display:flex;align-items:center;justify-content:center;">
+            <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 60%, rgba(216,12,28,.35),transparent 40%),radial-gradient(circle at 72% 35%, rgba(232,198,106,.25),transparent 38%);"></div>
+            <div style="position:relative;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.5);"><div style="margin-left:4px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #6e0f17;"></div></div>
+            <div style="position:absolute;left:12px;right:12px;bottom:10px;height:4px;border-radius:3px;background:rgba(255,255,255,.25);"><div style="width:4%;height:100%;border-radius:3px;background:#d80c1c;"></div></div>
+            <div class="jp-body" style="position:absolute;left:14px;bottom:18px;font-size:11px;color:rgba(255,255,255,.6);">0:00 / 1:13</div>
+          </div>
+        </div>
+        <button id="video-confirm-btn" onclick="confirmVideo()" class="jp-btn jp-serif jp-reveal" style="margin-top:18px;padding:12px 24px;border:1px solid rgba(232,198,106,.5);border-radius:8px;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-weight:700;font-size:12px;letter-spacing:.1em;cursor:pointer;">✓ J'AI REGARDÉ LA VIDÉO</button>
+        <p class="jp-serif jp-reveal" style="margin:22px 0 0;font-size:13px;letter-spacing:.1em;color:#c2a892;text-transform:uppercase;">9 filles. 1 future mariée. 0 indice sur la destination.</p>
+        <p class="jp-script jp-reveal" style="margin:6px 0 0;font-size:clamp(26px,4vw,38px);color:#d80c1c;">1000 souvenirs à créer</p>
+      </div>
+      <div style="text-align:center;">
+        <div class="jp-reveal" style="display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px);flex-wrap:nowrap;"><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,transparent,#c79a44);"></span><h2 class="jp-serif" style="margin:0;font-weight:700;font-size:clamp(20px,2.9vw,34px);letter-spacing:.12em;color:#f2e8d4;text-transform:uppercase;text-align:center;">Dans ta valise <span style="color:#d80c1c;">&hearts;</span></h2><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,#c79a44,transparent);"></span></div>
+        <p class="jp-body jp-reveal" style="margin:14px auto 22px;max-width:380px;font-size:clamp(15px,2vw,17px);color:#c2a892;line-height:1.5;">Voici les indispensables pour être prête à jouer le jeu et décrocher le jackpot&nbsp;!</p>
+        <div class="jp-reveal" style="position:relative;border-radius:18px;aspect-ratio:4/3;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 18px 44px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;">
+          <img src="valise.jpeg" alt="La valise de Kenza" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <button onclick="toggleChecklist()" class="jp-btn jp-serif jp-reveal" style="margin-top:22px;padding:13px 26px;border:1px solid rgba(232,198,106,.5);border-radius:8px;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-weight:700;font-size:13px;letter-spacing:.1em;">VOIR LA CHECKLIST COMPLÈTE 🧳</button>
+        <div id="jp-checklist" class="jp-body" style="display:none;margin-top:18px;text-align:left;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:18px 22px;background:rgba(120,8,8,.14);">
+          <div class="jp-serif" style="font-weight:700;font-size:13px;letter-spacing:.1em;color:#e8c66a;text-transform:uppercase;margin-bottom:10px;">Dress code Kenza · blanc intégral</div>
+          <ul style="margin:0;padding-left:20px;color:#cbb4a4;font-size:15px;line-height:1.9;">
+            <li>Maillots de bain blancs (minimum 2)</li><li>Robes de plage blanches / cover-up</li><li>Tenue de soirée blanche (LA robe)</li><li>Talons blancs ou dorés</li><li>Accessoires blancs / dorés</li><li>Lunettes de soleil glamour</li><li>Trousse de beauté complète</li><li>Ton plus beau sourire de future mariée 💍</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(28px,4vw,46px);margin-top:clamp(60px,9vw,110px);align-items:start;">
+      <div>
+        <h3 class="jp-serif jp-reveal" style="margin:0;font-weight:700;font-size:clamp(18px,2.2vw,24px);letter-spacing:.08em;color:#f2e8d4;text-transform:uppercase;">Mindset obligatoire <span style="color:#d80c1c;">&hearts;</span></h3>
+        <p class="jp-body jp-reveal" style="margin:6px 0 20px;font-size:14px;color:#b89a8a;">Les règles d'or pour entrer dans notre casino</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(216,12,28,.4);border-radius:12px;background:rgba(120,8,8,.18);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(216,12,28,.12);">🤝</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.06em;color:#f2e8d4;text-transform:uppercase;">Venir sans jugement</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:2px;">On est là pour s'aimer et se soutenir</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(216,12,28,.4);border-radius:12px;background:rgba(120,8,8,.18);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(216,12,28,.12);">😂</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.06em;color:#f2e8d4;text-transform:uppercase;">Être prête à rire</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:2px;">Jusqu'à avoir mal au ventre</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(216,12,28,.4);border-radius:12px;background:rgba(120,8,8,.18);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(216,12,28,.12);">✨</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.06em;color:#f2e8d4;text-transform:uppercase;">Accepter de créer</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:2px;">Des souvenirs mémorables</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(216,12,28,.4);border-radius:12px;background:rgba(120,8,8,.18);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(216,12,28,.12);">🌴</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.06em;color:#f2e8d4;text-transform:uppercase;">Oublier le travail</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:2px;">Et les problèmes</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(216,12,28,.4);border-radius:12px;background:rgba(120,8,8,.18);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:19px;background:rgba(216,12,28,.12);">🎰</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.06em;color:#f2e8d4;text-transform:uppercase;">Jouer le jeu</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:2px;">Jusqu'au bout !</div></div></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="jp-serif jp-reveal" style="margin:0;font-weight:700;font-size:clamp(18px,2.2vw,24px);letter-spacing:.08em;color:#f2e8d4;text-transform:uppercase;">Défis &amp; Missions</h3>
+        <p class="jp-body jp-reveal" style="margin:6px 0 20px;font-size:14px;color:#b89a8a;">Des missions secrètes vous attendent…<br>Serez-vous prêtes à relever le défi&nbsp;?</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">😄</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Faire rire Kenza</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">en moins de 30 secondes</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">📸</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Refaire une photo</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">d'enfance</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">❤️</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Obtenir une déclaration</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">d'amour pour SAAD</div></div></div>
+          <div id="jp-more-missions" style="display:none;flex-direction:column;gap:12px;">
+            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">🍸</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Inventer un cocktail</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">au nom de la mariée</div></div></div>
+            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">💃</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Lancer le dancefloor</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">avant minuit</div></div></div>
+            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">🎤</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Karaoké imposé</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">la chanson de Kenza</div></div></div>
+          </div>
+        </div>
+        <button onclick="toggleMissions()" class="jp-btn jp-serif jp-reveal" style="margin-top:16px;width:100%;padding:11px;border:1px solid rgba(232,198,106,.4);border-radius:8px;background:rgba(216,12,28,.12);color:#e8c66a;font-weight:700;font-size:12px;letter-spacing:.12em;">TOUTES LES MISSIONS ▾</button>
+      </div>
+      <div>
+        <div class="jp-reveal" style="display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px);flex-wrap:nowrap;"><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,transparent,#c79a44);"></span><h2 class="jp-serif" style="margin:0;font-weight:700;font-size:clamp(20px,2.9vw,34px);letter-spacing:.12em;color:#f2e8d4;text-transform:uppercase;text-align:center;">Infos pratiques <span style="color:#d80c1c;">&hearts;</span></h2><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,#c79a44,transparent);"></span></div>
+        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><rect x="7" y="13" width="3" height="3" fill="#e8c66a" stroke="none"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Dates</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Du 24 au 27<br>juillet 2026</div></div>
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Destination</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">La destination<br>reste secrète…</div></div>
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L19 18l1 .5V21a1 1 0 0 1-1 1A16 16 0 0 1 3 6a1 1 0 0 1 1-1z"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Contact</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Une question&nbsp;?<br>Contactez l'organisatrice</div></div>
+        </div>
+        <div class="jp-reveal" style="margin-top:18px;border:1px solid rgba(216,12,28,.4);border-radius:14px;padding:22px;text-align:center;background:rgba(120,8,8,.16);">
+          <p class="jp-serif" style="margin:0;font-size:clamp(15px,2vw,18px);color:#f2e8d4;line-height:1.6;">Prépare-toi pour le plus beau<br>week-end de ta vie&nbsp;!</p>
+          <p class="jp-body" style="margin:10px 0 0;font-style:italic;font-size:15px;color:#d8a0a8;">Le jackpot de l'amour t'attend…</p>
+        </div>
+      </div>
+    </section>
+    <div style="height:clamp(50px,8vw,90px);"></div>
+  </div>
+  <footer style="position:relative;z-index:1;background:linear-gradient(180deg,#f3ead6,#e8dcc2);padding:clamp(28px,4vw,40px) clamp(18px,4vw,50px);">
+    <div style="max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;line-height:1.1;">
+        <span class="jp-serif" style="font-weight:700;font-size:clamp(16px,2vw,20px);letter-spacing:.08em;color:#1a1a1a;">KENZA'S <span style="color:#d80c1c;">&hearts;</span></span>
+        <span class="jp-serif" style="font-weight:700;font-size:clamp(15px,1.8vw,19px);letter-spacing:.14em;color:#1a1a1a;">LOVE JACKPOT</span>
+      </div>
+      <div style="flex:1;min-width:240px;text-align:center;">
+        <p class="jp-serif" style="margin:0;font-style:italic;font-size:clamp(13px,1.6vw,15px);color:#3a2a22;line-height:1.6;">"Après des années de jeu, de paris, de fous rires et d'amour…<br>Kenza a décroché le plus beau Jackpot&nbsp;: <span style="color:#d80c1c;font-weight:700;font-style:normal;">SAAD &hearts;</span>"</p>
+        <div style="display:flex;justify-content:center;gap:22px;margin-top:14px;">
+          <a href="#" class="jp-soc" aria-label="Instagram" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="jp-soc" aria-label="WhatsApp" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4.6A8 8 0 1 1 8 20.4L3 21z"/></svg></a>
+          <a href="#" class="jp-soc" aria-label="TikTok" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.5 3.5 3.8V9c-1.4 0-2.7-.4-3.8-1.1v6.4A5.3 5.3 0 1 1 11 9v2.4a3 3 0 1 0 2.4 2.9V3H16z"/></svg></a>
+        </div>
+      </div>
+      <div style="display:flex;gap:4px;">
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(-8deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(2deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#d80c1c;font-size:13px;">A&hearts;</div>
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(11deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+var PWS=["jackpotSK26","admin26","revealrebours"];
+function checkPassword(){
+  var v=document.getElementById("pw-input").value.trim();
+  var e=document.getElementById("pw-error");
+  if(PWS.indexOf(v)>-1){unlockSite();return;}
+  e.classList.add("show");
+  var i=document.getElementById("pw-input");i.value="";i.focus();
+  setTimeout(function(){e.classList.remove("show");},3000);
 }
-
-function toggleBlock(id){
-  const f=document.getElementById("mfields-"+id);
-  const t=document.getElementById("mtoggle-"+id);
-  const open=f.classList.toggle("open");
-  t.classList.toggle("open",open);
-}
-
-function applySquad(){
-  MEMBERS.forEach(m=>{
-    const name =document.getElementById("mn-"+m.id)?.value||m.name;
-    const alias=document.getElementById("ma-"+m.id)?.value||m.alias;
-    const val  =document.getElementById("mv-"+m.id)?.value||m.value;
-    const suit =document.getElementById("ms-"+m.id)?.value||m.suit;
-    const role =document.getElementById("mr-"+m.id)?.value||m.role;
-    const color=(suit==="\u2665"||suit==="\u2666")?"red":"black";
-    const cColor=color==="red"?"var(--red)":"var(--white-off)";
-    const cornerCls="card-corner tl"+(color==="black"?" black":"");
-    const cornerClsBr="card-corner br"+(color==="black"?" black":"");
-
-    const setT=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-    const setH=(id,v)=>{const el=document.getElementById(id);if(el)el.innerHTML=v;};
-    const setC=(id,c)=>{const el=document.getElementById(id);if(el)el.style.color=c;};
-    const setCls=(id,cls)=>{const el=document.getElementById(id);if(el)el.className=cls;};
-
-    setT(m.id+"-suit",suit); setC(m.id+"-suit",cColor);
-    setT(m.id+"-name",name); setT(m.id+"-alias",alias); setT(m.id+"-role",role);
-    setH(m.id+"-corner-tl",val+"<br>"+suit); setC(m.id+"-corner-tl",cColor); setCls(m.id+"-corner-tl",cornerCls);
-    setH(m.id+"-corner-br",val+"<br>"+suit); setC(m.id+"-corner-br",cColor); setCls(m.id+"-corner-br",cornerClsBr);
-
-    m.name=name;m.alias=alias;m.value=val;m.suit=suit;m.role=role;m.color=color;
-    const lbl=document.getElementById("mblabel-"+m.id);
-    if(lbl)lbl.innerHTML=name+' &mdash; <em style="font-weight:300;color:var(--gray-mid)">'+alias+"</em>";
-    const si=document.getElementById("mtoggle-"+m.id)?.previousElementSibling?.previousElementSibling;
-    if(si){si.textContent=suit;si.style.color=cColor;}
-  });
-  showToast("Cartes mises \u00e0 jour \u2756");
-}
-
-let kenzaItems=["Maillots de bain blancs (minimum 2)","Robes de plage blanches / cover-up","Tenue de soir\u00e9e blanche (LA robe)","Talons blancs ou dor\u00e9s","Accessoires blancs / dor\u00e9s","Lunettes de soleil glamour","Trousse de beaut\u00e9 compl\u00e8te","Votre plus beau sourire de future mari\u00e9e \U0001f48d"];
-let squadItems=[];
-
-function buildValiseAdmin(){renderKI();renderSI();}
-function renderKI(){
-  document.getElementById("kenza-items-admin").innerHTML=kenzaItems.map((it,i)=>
-    `<div class="valise-item-row"><input type="text" class="form-input" id="ki-${i}" value="${it}"><button class="valise-item-del" onclick="removeKI(${i})">\u2715</button></div>`).join("");
-}
-function renderSI(){
-  document.getElementById("squad-items-admin").innerHTML=squadItems.map((it,i)=>
-    `<div class="valise-item-row"><input type="text" class="form-input" id="si-${i}" value="${it}"><button class="valise-item-del" onclick="removeSI(${i})">\u2715</button></div>`).join("");
-}
-function addKenzaItem(){kenzaItems.push("");renderKI();setTimeout(()=>{const els=document.querySelectorAll("[id^=ki-]");if(els.length)els[els.length-1].focus();},50);}
-function removeKI(i){kenzaItems.splice(i,1);renderKI();}
-function addSquadItem(){squadItems.push("");renderSI();setTimeout(()=>{const els=document.querySelectorAll("[id^=si-]");if(els.length)els[els.length-1].focus();},50);}
-function removeSI(i){squadItems.splice(i,1);renderSI();}
-
-function applyValise(){
-  kenzaItems=kenzaItems.map((_,i)=>document.getElementById("ki-"+i)?.value||"").filter(v=>v.trim());
-  squadItems=squadItems.map((_,i)=>document.getElementById("si-"+i)?.value||"").filter(v=>v.trim());
-  document.getElementById("kenza-valise-list").innerHTML=kenzaItems.map(it=>"<li>"+it+"</li>").join("");
-  document.getElementById("squad-valise-subtitle").textContent=document.getElementById("squad-valise-sub").value;
-  const sc=document.getElementById("squad-valise-content");
-  sc.innerHTML=squadItems.length?`<ul class="valise-list">${squadItems.map(it=>"<li>"+it+"</li>").join("")}</ul>`:`<div class="valise-placeholder">\U0001f0cf Contenu \u00e0 venir\u2026<br><br><small>Ajoutez des items via le panneau admin.</small></div>`;
-  showToast("Valise mise \u00e0 jour \u2756");
-}
-
-function applyVideo(){
-  const type=document.getElementById("video-type").value;
-  const url=document.getElementById("video-url").value.trim();
-  if(!url){showToast("\u274c Colle un lien valide");return;}
-  let html="";
-  if(type==="youtube"){
-    let vid="";
-    const pats=[/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,/youtube\.com\/shorts\/([^&\n?#]+)/];
-    for(const p of pats){const m=url.match(p);if(m){vid=m[1];break;}}
-    if(!vid)vid=url;
-    html=`<div class="video-embed-container"><iframe src="https://www.youtube.com/embed/${vid}?rel=0" allowfullscreen></iframe></div>`;
-  } else if(type==="vimeo"){
-    const m=url.match(/vimeo\.com\/(\d+)/);const vid=m?m[1]:url;
-    html=`<div class="video-embed-container"><iframe src="https://player.vimeo.com/video/${vid}" allowfullscreen></iframe></div>`;
-  } else {
-    html=`<div class="video-embed-container"><video src="${url}" controls></video></div>`;
+(function(){var i=document.getElementById("pw-input");if(i)i.addEventListener("keydown",function(ev){if(ev.key==="Enter")checkPassword();});})();
+function unlockSite(){
+  var blk=document.getElementById("pw-block");
+  if(blk){ blk.innerHTML=COUNTDOWN_HTML; cdTick(); }
+  var s=document.getElementById("password-screen");
+  if(s){
+    s.style.position="static";
+    s.style.zIndex="auto";
+    var inner=s.querySelector("div");
+    if(inner){ inner.style.position="relative"; inner.style.minHeight="100vh"; inner.style.overflow="visible"; }
   }
-  document.getElementById("video-area").innerHTML=html;
-  showToast("Vid\u00e9o int\u00e9gr\u00e9e \u2756");
+  document.body.style.overflow="";window.scrollTo(0,0);
+  setTimeout(initReveal,60);
 }
-
-function removeVideo(){
-  document.getElementById("video-area").innerHTML=`<div class="surprise-video-placeholder"><div class="surprise-play">\u25b6</div><div class="surprise-video-label">Aucune vid\u00e9o \u2014 ajoutes-en une via le panneau admin</div></div>`;
-  showToast("Vid\u00e9o supprim\u00e9e");
+function flipCard(c){c.setAttribute("data-flip",c.getAttribute("data-flip")==="1"?"0":"1");}
+function toggleChecklist(){var c=document.getElementById("jp-checklist");c.style.display=(c.style.display==="none"||!c.style.display)?"block":"none";}
+function toggleMissions(){var c=document.getElementById("jp-more-missions");c.style.display=(c.style.display==="none"||!c.style.display)?"flex":"none";}
+var MEMBERS=[
+ {n:"Kenza",a:"Dame de Cœur",r:"La Mariée",v:"Q",s:"♥",red:true,bride:true},
+ {n:"Ghita",a:"Ghitouch",r:"Rôle à révéler",v:"?",s:"♠",red:false},
+ {n:"Yasmine",a:"Yass Couz",r:"Rôle à révéler",v:"?",s:"♥",red:true},
+ {n:"Zineb",a:"Zizi",r:"Rôle à révéler",v:"?",s:"♣",red:false},
+ {n:"Yasmine",a:"Yassou.A",r:"Rôle à révéler",v:"?",s:"♦",red:true},
+ {n:"Yasmine",a:"Yass.El",r:"Rôle à révéler",v:"?",s:"♠",red:false},
+ {n:"Sarah",a:"Sarouch",r:"Rôle à révéler",v:"?",s:"♥",red:true},
+ {n:"Nour",a:"Nourette",r:"Rôle à révéler",v:"?",s:"♣",red:false},
+ {n:"Aya",a:"Ayou",r:"Rôle à révéler",v:"?",s:"♦",red:true}
+];
+function cardHTML(m,i){
+  var sc=m.red?"#d80c1c":"#161616";
+  var corner='<div class="jp-serif" style="font-weight:700;font-size:12px;line-height:.8;color:'+sc+';">'+m.v+'<br>'+m.s+'</div>';
+  var badge=m.bride?'<div class="jp-serif" style="position:absolute;top:7px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7a000f,#d80c1c);color:#fff4e6;font-size:8px;font-weight:700;letter-spacing:.12em;padding:3px 9px;border-radius:20px;white-space:nowrap;z-index:2;">LA MARIEE</div>':"";
+  var back='<div class="jp-face jp-back" style="background:linear-gradient(135deg,#f5ecd6,#e6d6b6);padding:6px;display:flex;">'
+    +'<div style="flex:1;border-radius:8px;background:#5c0a11;background-image:repeating-linear-gradient(45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px),repeating-linear-gradient(-45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px);box-shadow:inset 0 0 0 2px rgba(232,198,106,.55),inset 0 0 0 5px rgba(92,10,17,.7);display:flex;align-items:center;justify-content:center;">'
+    +'<div class="jp-serif" style="width:48%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(232,198,106,.7);background:radial-gradient(circle,#6e0f17,#480810);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:clamp(15px,3.4vw,25px);color:#e8c66a;letter-spacing:.02em;">KS</div>'
+    +'</div></div>';
+  var front='<div class="jp-face jp-front" style="background:linear-gradient(160deg,#fffdf7,#efe6d4);padding:9px;display:flex;flex-direction:column;color:#1c1c1c;'+(m.bride?'box-shadow:inset 0 0 0 2px rgba(232,198,106,.7),0 14px 34px rgba(0,0,0,.55);':'')+'">'
+    +badge
+    +'<div style="text-align:left;">'+corner+'</div>'
+    +'<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">'
+    +'<div style="font-size:clamp(22px,5vw,34px);color:'+sc+';line-height:1;">'+m.s+'</div>'
+    +'<div class="jp-serif" style="font-weight:700;font-size:clamp(13px,1.7vw,17px);margin-top:5px;">'+m.n+'</div>'
+    +'<div class="jp-body" style="font-style:italic;font-size:12px;color:#7a5a2a;">'+m.a+'</div>'
+    +'<div class="jp-serif" style="font-size:8.5px;letter-spacing:.1em;color:#b8902f;margin-top:4px;text-transform:uppercase;">'+m.r+'</div>'
+    +'</div>'
+    +'<div style="text-align:right;transform:rotate(180deg);">'+corner+'</div>'
+    +'</div>';
+  return '<div class="jp-card jp-reveal" data-flip="0" onclick="flipCard(this)" style="transition-delay:'+(i*0.05).toFixed(2)+'s;"><div class="jp-inner">'+back+front+'</div></div>';
 }
-
-function toggleCountdownAdmin(){
-  if(document.getElementById("countdown-toggle").checked)activateCountdown();
-  else{document.getElementById("countdown-section").classList.remove("activated");countdownActive=false;if(countdownInterval){clearInterval(countdownInterval);countdownInterval=null;}}
+(function(){var g=document.getElementById("jp-cards");if(g){var h="";for(var k=0;k<MEMBERS.length;k++)h+=cardHTML(MEMBERS[k],k);g.innerHTML=h;}})();
+function cdBox(id,label){return '<div style="flex:1;max-width:100px;padding:13px 4px;border-radius:13px;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(232,198,106,.45),inset 0 1px 0 rgba(255,255,255,.05),0 12px 28px rgba(0,0,0,.5);">'
+  +'<div class="cd-num" id="'+id+'" style="font-family:\'Playfair Display\',serif;font-size:clamp(26px,6vw,42px);">??</div>'
+  +'<div style="font-family:\'Playfair Display\',serif;margin-top:5px;font-size:9px;letter-spacing:.16em;color:#c2a892;text-transform:uppercase;">'+label+'</div></div>';}
+var COUNTDOWN_HTML='<div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:11px;letter-spacing:.3em;color:#c79a44;margin-bottom:14px;text-transform:uppercase;">— Le grand départ —</div>'
+  +'<div style="display:flex;gap:8px;justify-content:center;">'+cdBox('cd-days','Jours')+cdBox('cd-hours','Heures')+cdBox('cd-mins','Min')+cdBox('cd-secs','Sec')+'</div>'
+  +'<div id="cd-date" style="font-family:\'Dancing Script\',cursive;margin-top:14px;font-size:28px;color:#d80c1c;">?? ?????? ????</div>'
+  +'<div id="cd-hint" style="font-family:\'Playfair Display\',serif;margin-top:8px;font-size:10px;letter-spacing:.18em;color:#9c8a7a;text-transform:uppercase;">Regarde la vidéo pour révéler le départ</div>';
+var CD_TARGET=new Date(2026,6,24,0,0,0).getTime();
+var CD_REVEALED=false;
+try{ CD_REVEALED=localStorage.getItem("cd_revealed")==="1"; }catch(e){}
+function confirmVideo(){
+  CD_REVEALED=true;
+  try{ localStorage.setItem("cd_revealed","1"); }catch(e){}
+  cdTick();
+  var b=document.getElementById("video-confirm-btn");
+  if(b){ b.innerHTML="\u2713 Vid\u00e9o regard\u00e9e \u2014 d\u00e9part r\u00e9v\u00e9l\u00e9 !"; b.style.background="linear-gradient(135deg,#1f6b3a,#2e9d56)"; b.style.cursor="default"; b.onclick=null; }
 }
-function applyCountdown(){
-  const v=document.getElementById("evjf-date-input").value;
-  if(!v){showToast("\u274c S\u00e9lectionne une date");return;}
-  EVJF_DATE=new Date(v);if(countdownActive)runCountdown();showToast("Date mise \u00e0 jour \u2756");
-}
-function activateCountdown(){
-  document.getElementById("countdown-section").classList.add("activated");
-  countdownActive=true;
-  const t=document.getElementById("countdown-toggle");if(t)t.checked=true;
-  runCountdown();if(countdownInterval)clearInterval(countdownInterval);
-  countdownInterval=setInterval(runCountdown,1000);
-}
-function runCountdown(){
-  const diff=EVJF_DATE-new Date();
-  if(diff<=0){["cd-days","cd-hours","cd-mins","cd-secs"].forEach(id=>document.getElementById(id).textContent="00");return;}
-  document.getElementById("cd-days").textContent=String(Math.floor(diff/86400000)).padStart(2,"0");
-  document.getElementById("cd-hours").textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
-  document.getElementById("cd-mins").textContent=String(Math.floor(diff%3600000/60000)).padStart(2,"0");
-  document.getElementById("cd-secs").textContent=String(Math.floor(diff%60000/1000)).padStart(2,"0");
-}
-
-function applyAccueil(){
-  document.getElementById("hero-eyebrow").textContent=document.getElementById("edit-eyebrow").value;
-  document.getElementById("hero-subtitle").textContent=document.getElementById("edit-subtitle").value;
-  document.getElementById("hero-badge").textContent=document.getElementById("edit-badge").value;
-  showToast("Accueil mis \u00e0 jour \u2756");
-}
-
-function createCardRain(){
-  const c=document.getElementById("card-rain");
-  const cards=["\u2665","\u2660","\u2666","\u2663"];
-  const n=window.innerWidth<600?12:22;
-  for(let i=0;i<n;i++){
-    const el=document.createElement("div");el.className="falling-card";
-    const s=cards[Math.floor(Math.random()*4)];el.textContent=s;
-    el.style.color=(s==="\u2665"||s==="\u2666")?"rgba(200,16,46,.25)":"rgba(255,255,255,.1)";
-    el.style.left=Math.random()*100+"vw";el.style.fontSize=(1+Math.random()*1.5)+"rem";
-    el.style.animationDuration=(6+Math.random()*10)+"s";el.style.animationDelay=(Math.random()*8)+"s";
-    el.style.setProperty("--rot-start",(Math.random()*60-30)+"deg");
-    el.style.setProperty("--rot-end",(Math.random()*360)+"deg");
-    c.appendChild(el);
+function cdPad(n){return (n<10?"0":"")+n;}
+function cdTick(){
+  var dEl=document.getElementById("cd-days"),hEl=document.getElementById("cd-hours"),mEl=document.getElementById("cd-mins"),sEl=document.getElementById("cd-secs");
+  var dateEl=document.getElementById("cd-date"),hintEl=document.getElementById("cd-hint");
+  if(!CD_REVEALED){
+    if(dEl)dEl.textContent="??";if(hEl)hEl.textContent="??";if(mEl)mEl.textContent="??";if(sEl)sEl.textContent="??";
+    if(dateEl)dateEl.textContent="?? ?????? ????";
+    if(hintEl)hintEl.style.display="";
+    return;
   }
+  var diff=CD_TARGET-Date.now();if(diff<0)diff=0;
+  var d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
+  if(dEl)dEl.textContent=cdPad(d);if(hEl)hEl.textContent=cdPad(h);if(mEl)mEl.textContent=cdPad(m);if(sEl)sEl.textContent=cdPad(s);
+  if(dateEl)dateEl.textContent="24 juillet 2026";
+  if(hintEl)hintEl.style.display="none";
 }
-
-function launchConfetti(){
-  const colors=["#C8102E","#FAFAF8","#D4AF37","#8B0A1E","#F5D76E"];
-  const shapes=["\u2665","\u2660","\u2666","\u2663","\u2756","\u2605"];
-  for(let i=0;i<60;i++){
-    setTimeout(()=>{
-      const el=document.createElement("div");el.className="confetti-piece";
-      if(Math.random()>.5){el.textContent=shapes[Math.floor(Math.random()*shapes.length)];el.style.fontSize=(0.8+Math.random()*.8)+"rem";el.style.color=colors[Math.floor(Math.random()*colors.length)];el.style.background="transparent";el.style.width="auto";el.style.height="auto";}
-      else{el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.borderRadius=Math.random()>.5?"50%":"0";el.style.opacity=".8";}
-      el.style.left=Math.random()*100+"vw";el.style.top="-20px";
-      el.style.animationDuration=(2+Math.random()*3)+"s";el.style.animationDelay=(Math.random()*.5)+"s";
-      document.body.appendChild(el);setTimeout(()=>el.remove(),5500);
-    },i*50);
-  }
+setInterval(cdTick,1000);
+if(CD_REVEALED){confirmVideo();}
+function initReveal(){
+  var els=document.querySelectorAll(".jp-reveal");
+  // reveal everything reliably (IntersectionObserver is unreliable in embedded/background frames)
+  for(var i=0;i<els.length;i++){ els[i].classList.add("in"); }
 }
-
-let toastTimer;
-function showToast(msg){
-  const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2500);
-}
-
-const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");}),{threshold:.1,rootMargin:"0px 0px -40px 0px"});
-document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
-
-function toggleMobileMenu(){document.getElementById("mobile-menu").classList.toggle("open");}
-
-let lastScroll=0;
-window.addEventListener("scroll",()=>{
-  const nav=document.getElementById("main-nav");if(!nav||nav.style.display==="none")return;
-  const curr=window.scrollY;nav.style.opacity=curr>80&&curr>lastScroll?"0.7":"1";lastScroll=curr;
-});
+try{document.body.style.overflow="hidden";}catch(e){}
 </script>
 </body>
 </html>
