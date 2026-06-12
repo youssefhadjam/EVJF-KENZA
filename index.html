@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0D0010">
+<title>The Jackpot Squad 🃏</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Dancing+Script:wght@600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ========== VARIABLES ========== */
+:root {
+  /* === PALETTE FESTIVE EVJF === */
+  --red:#E8174A;       --red-dark:#B01038;   --red-light:#FF4D75;
+  --rose:#F72585;      --rose-light:#FF69B4; --rose-dark:#C2185B;
+  --gold:#D4A017;      --gold-light:#FFD700; --gold-shine:#FFF0A0;
+  --champagne:#F7E7CE; --champagne-dark:#D4B896;
+  --purple:#7B2FBE;    --purple-light:#A855F7;
+  --black:#0D0010;     --black-card:#130018;
+  --white:#FFF8FC;     --white-off:#F5E6EE;
+  --gray-light:#E8D5E0; --gray-mid:#9A8090;
+  --font-display:'Playfair Display',serif;
+  --font-body:'Cormorant Garamond',serif;
+  --font-accent:'Bebas Neue',sans-serif;
+  --font-fine:'Crimson Pro',serif;
+  --font-festive:'Dancing Script',cursive;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden;background-image:radial-gradient(ellipse at 50% 0%,rgba(123,47,190,0.15) 0%,transparent 60%),radial-gradient(ellipse at 100% 100%,rgba(232,23,74,0.08) 0%,transparent 50%);padding-bottom:env(safe-area-inset-bottom);-webkit-tap-highlight-color:transparent}
+
+/* ========== PASSWORD ========== */
+#password-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0D0010 0%,#1a0025 40%,#0D0010 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;transition:opacity .8s ease,transform .8s ease;padding:max(2rem,env(safe-area-inset-top)) max(1.5rem,env(safe-area-inset-right)) max(2rem,env(safe-area-inset-bottom)) max(1.5rem,env(safe-area-inset-left))}
+#password-screen.hidden{opacity:0;pointer-events:none;transform:scale(1.05)}
+.pw-logo{font-family:var(--font-accent);font-size:clamp(3rem,8vw,5rem);letter-spacing:.15em;color:var(--white);text-align:center;line-height:1}
+.pw-logo span{color:var(--gold-light)}
+.pw-subtitle{font-family:var(--font-body);font-style:italic;font-size:1.1rem;color:var(--gray-mid);letter-spacing:.05em}
+.pw-card-icon{font-size:5rem;animation:pulse-heart 1.5s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(232,23,74,0.8))}
+@keyframes pulse-heart{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.pw-form{display:flex;flex-direction:column;align-items:center;gap:1rem;width:min(90%,400px)}
+.pw-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(247,37,133,0.3);border-bottom:2px solid var(--rose);color:var(--white);font-family:var(--font-body);font-size:1.1rem;letter-spacing:.1em;padding:.8rem 1.2rem;outline:none;text-align:center;transition:border-color .3s}
+.pw-input::placeholder{color:var(--gray-mid);font-style:italic}
+.pw-input:focus{border-color:var(--gold-light);background:rgba(255,215,0,0.04)}
+.pw-btn{background:linear-gradient(135deg,var(--rose) 0%,var(--gold) 100%);color:var(--white);border:none;font-family:var(--font-accent);font-size:1.1rem;letter-spacing:.2em;padding:.9rem 2.5rem;cursor:pointer;transition:all .3s,transform .1s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);box-shadow:0 4px 20px rgba(247,37,133,0.4)}
+.pw-btn:hover{background:linear-gradient(135deg,var(--gold) 0%,var(--rose) 100%);box-shadow:0 6px 30px rgba(247,37,133,0.6)}
+.pw-btn:active{transform:scale(.97)}
+.pw-error{color:var(--red-light);font-family:var(--font-fine);font-style:italic;font-size:.9rem;opacity:0;transition:opacity .3s}
+.pw-error.show{opacity:1}
+.pw-suits{display:flex;gap:1.5rem;font-size:1.8rem;color:rgba(255,255,255,.15)}
+.pw-suits span:nth-child(1),.pw-suits span:nth-child(4){color:rgba(247,37,133,.5)}.pw-suits span:nth-child(2){color:rgba(212,160,23,.4)}.pw-suits span:nth-child(3){color:rgba(168,85,247,.4)}
+
+/* ========== NAV ========== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:max(1rem,env(safe-area-inset-top)) max(1.2rem,env(safe-area-inset-right)) 1rem max(1.2rem,env(safe-area-inset-left));background:linear-gradient(to bottom,rgba(13,0,16,.97),transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(247,37,133,.25)}
+.nav-logo{font-family:var(--font-accent);font-size:1.4rem;letter-spacing:.2em;color:var(--white);text-decoration:none}
+.nav-logo span{background:linear-gradient(90deg,var(--rose),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--gray-mid);text-decoration:none;font-family:var(--font-fine);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--rose-light)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,10,10,.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--white);text-decoration:none;font-family:var(--font-accent);font-size:2rem;letter-spacing:.2em;transition:color .3s}
+.mobile-menu a:hover{color:var(--red)}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:var(--white);font-size:2rem;cursor:pointer}
+@media(max-width:768px){.nav-links{display:none}.nav-hamburger{display:flex}}
+
+/* ========== SECTIONS ========== */
+section{min-height:100vh;min-height:100dvh;position:relative;overflow:hidden}
+.section-inner{max-width:520px;margin:0 auto;padding:6rem 1.2rem 4rem}
+.section-label{font-family:var(--font-fine);font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--rose-light);margin-bottom:.5rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;line-height:1;margin-bottom:2rem}
+.deco-line{display:flex;align-items:center;gap:1rem;margin:2rem 0}
+.deco-line::before,.deco-line::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(247,37,133,.4),transparent)}
+.deco-line-icon{color:var(--rose-light);font-size:1rem}
+
+/* ========== HERO ========== */
+#accueil{background:var(--black);min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(247,37,133,.12) 0%,transparent 50%),radial-gradient(ellipse at 85% 20%,rgba(212,160,23,.1) 0%,transparent 45%),radial-gradient(ellipse at 50% 90%,rgba(123,47,190,.1) 0%,transparent 50%);pointer-events:none}
+.card-rain{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.falling-card{position:absolute;font-size:1.5rem;opacity:0;animation:fall-card linear infinite;user-select:none}
+@keyframes fall-card{0%{transform:translateY(-60px) rotate(var(--rot-start));opacity:0}10%{opacity:.3}90%{opacity:.1}100%{transform:translateY(110vh) rotate(var(--rot-end));opacity:0}}
+.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding:max(5rem,calc(env(safe-area-inset-top) + 4rem)) 1.2rem 4rem}
+.hero-eyebrow{font-family:var(--font-festive);font-size:1.1rem;letter-spacing:.1em;color:var(--gold-light);animation:fadeInUp .8s ease forwards;opacity:0;text-shadow:0 0 20px rgba(255,215,0,.5)}
+.hero-title{font-family:var(--font-accent);font-size:clamp(3.5rem,12vw,9rem);letter-spacing:.08em;line-height:.9;color:var(--white);animation:fadeInUp .8s .2s ease forwards;opacity:0}
+.hero-title .the{font-size:.5em;color:var(--rose-light)}
+.hero-subtitle{font-family:var(--font-display);font-style:italic;font-size:clamp(1rem,3vw,1.4rem);color:var(--gray-mid);animation:fadeInUp .8s .4s ease forwards;opacity:0}
+.hero-mascot-area{width:160px;height:160px;border:2px solid rgba(247,37,133,.5);border-radius:4px;display:flex;align-items:center;justify-content:center;position:relative;background:rgba(247,37,133,.05);animation:fadeInUp .8s .5s ease forwards;opacity:0;flex-direction:column;gap:.5rem;transition:all .3s;box-shadow:0 0 30px rgba(247,37,133,.15),inset 0 0 20px rgba(247,37,133,.05)}
+.hero-mascot-area:hover{border-color:var(--gold-light);box-shadow:0 0 40px rgba(255,215,0,.3),inset 0 0 20px rgba(255,215,0,.05)}
+.mascot-placeholder{font-size:4rem;line-height:1}
+.mascot-label{font-family:var(--font-fine);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid)}
+.mascot-corner{position:absolute;font-family:var(--font-display);font-weight:700;font-size:.9rem;color:var(--gold-light)}
+.mascot-corner.tl{top:6px;left:8px}
+.mascot-corner.br{bottom:6px;right:8px;transform:rotate(180deg)}
+.hero-date-badge{background:linear-gradient(135deg,rgba(247,37,133,.12),rgba(212,160,23,.12));border:1px solid rgba(255,215,0,.35);padding:.7rem 2rem;font-family:var(--font-fine);font-size:.85rem;letter-spacing:.2em;color:var(--gold-shine);animation:fadeInUp .8s .6s ease forwards;opacity:0;text-shadow:0 0 10px rgba(255,215,0,.3)}
+#countdown-section{animation:fadeInUp .8s .7s ease forwards;opacity:0;display:none;flex-direction:column;align-items:center;gap:1rem}
+#countdown-section.activated{display:flex}
+.countdown-label{font-family:var(--font-festive);font-size:1rem;letter-spacing:.1em;color:var(--gold-light);text-shadow:0 0 10px rgba(255,215,0,.4)}
+.countdown-grid{display:flex;gap:1.5rem}
+.countdown-block{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:70px}
+.countdown-num{font-family:var(--font-accent);font-size:3.5rem;line-height:1;color:var(--gold-light);background:var(--black-card);border:1px solid rgba(255,215,0,.3);padding:.3rem .8rem;min-width:80px;text-align:center;text-shadow:0 0 20px rgba(255,215,0,.5);box-shadow:0 0 15px rgba(255,215,0,.1)}
+.countdown-unit{font-family:var(--font-fine);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid)}
+.hero-scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--rose),transparent)}
+.scroll-text{font-family:var(--font-fine);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gray-mid)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.shine-text{background:linear-gradient(90deg,var(--gold-shine) 0%,var(--rose-light) 25%,var(--gold-light) 50%,var(--champagne) 75%,var(--gold-shine) 100%);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shine 2.5s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+
+/* ========== SQUAD ========== */
+#squad{background:linear-gradient(180deg,var(--black) 0%,#130018 50%,#0D0010 100%);padding:6rem 0}
+.squad-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem}
+.squad-card{background:var(--black-card);border:1px solid rgba(255,255,255,.08);padding:2rem 1.5rem;text-align:center;position:relative;overflow:hidden;cursor:default;transition:transform .3s,border-color .3s,box-shadow .3s;aspect-ratio:5/7;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.squad-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(200,16,46,.06) 100%)}
+.squad-card:hover{transform:translateY(-10px) rotate(-1deg);border-color:rgba(247,37,133,.5);box-shadow:0 20px 60px rgba(247,37,133,.2),0 0 40px rgba(212,160,23,.1)}
+.squad-card.bride{border-color:rgba(255,215,0,.6);background:linear-gradient(135deg,#1a0030,#200015,var(--black-card));box-shadow:0 0 30px rgba(255,215,0,.15),inset 0 0 30px rgba(255,215,0,.03)}
+.squad-card.bride::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(200,16,46,.1) 0%,transparent 70%);pointer-events:none}
+.card-corner{position:absolute;font-family:var(--font-display);font-weight:700;font-size:1rem;display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.card-corner.tl{top:10px;left:12px;color:var(--rose)}
+.card-corner.br{bottom:10px;right:12px;transform:rotate(180deg);color:var(--rose)}
+.card-corner.black{color:var(--white-off)}
+.card-suit-big{font-size:3.5rem;line-height:1;margin:1rem 0}
+.card-name{font-family:var(--font-display);font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:.3rem}
+.card-alias{font-family:var(--font-fine);font-style:italic;font-size:.85rem;color:var(--gray-mid)}
+.card-role{font-family:var(--font-fine);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-light);margin-top:.5rem}
+.bride-badge{position:absolute;top:-1px;right:-1px;background:linear-gradient(135deg,var(--gold),var(--rose));color:var(--white);font-family:var(--font-accent);font-size:.65rem;letter-spacing:.15em;padding:.25rem .6rem}
+
+/* ========== VALISE ========== */
+#valise{background:linear-gradient(180deg,var(--black) 0%,#100014 100%);border-top:1px solid rgba(247,37,133,.15)}
+.valise-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+@media(max-width:768px){.valise-split{grid-template-columns:1fr}}
+.valise-col{background:var(--black-card);border:1px solid rgba(255,255,255,.06);padding:2.5rem;position:relative}
+.valise-col.bride-col{border-color:rgba(255,215,0,.35);background:rgba(255,215,0,.02)}
+.valise-col-title{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.8rem}
+.valise-col-subtitle{font-family:var(--font-fine);font-style:italic;font-size:.9rem;color:var(--gray-mid);margin-bottom:2rem}
+.valise-list{list-style:none;display:flex;flex-direction:column;gap:.8rem}
+.valise-list li{display:flex;align-items:flex-start;gap:.8rem;font-family:var(--font-fine);font-size:1rem;color:var(--white-off);line-height:1.4}
+.valise-list li::before{content:'\2665';color:var(--rose);font-size:.8rem;margin-top:3px;flex-shrink:0}
+.valise-col.bride-col .valise-list li::before{content:'\2665';color:var(--rose)}
+.valise-placeholder{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.1);padding:2rem;text-align:center;font-family:var(--font-fine);font-style:italic;color:var(--gray-mid);font-size:.9rem}
+.valise-note{margin-top:1.5rem;padding:1rem;background:rgba(255,215,0,.05);border-left:3px solid var(--gold);font-family:var(--font-fine);font-size:.9rem;font-style:italic;color:var(--white-off)}
+
+/* ========== MINDSET ========== */
+#mindset{background:linear-gradient(180deg,var(--black) 0%,#100018 50%,var(--black) 100%)}
+.mindset-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:2rem}
+.mindset-card{background:transparent;border:1px solid rgba(247,37,133,.1);padding:2rem;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.mindset-card:hover{border-color:rgba(247,37,133,.35);background:rgba(247,37,133,.04)}
+.mindset-number{font-family:var(--font-accent);font-size:5rem;color:rgba(247,37,133,.15);line-height:1;position:absolute;top:1rem;right:1.5rem}
+.mindset-icon{font-size:1.8rem;margin-bottom:1rem}
+.mindset-rule{font-family:var(--font-display);font-size:1.05rem;font-weight:700;margin-bottom:.8rem;color:var(--white)}
+.mindset-desc{font-family:var(--font-fine);font-size:.95rem;color:var(--gray-mid);line-height:1.7}
+
+/* ========== SURPRISE ========== */
+#surprise{background:linear-gradient(180deg,var(--black),#0e0015);border-top:1px solid rgba(247,37,133,.15)}
+.surprise-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2rem}
+.surprise-video-placeholder{width:100%;max-width:800px;aspect-ratio:16/9;background:var(--black-card);border:2px dashed rgba(200,16,46,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;position:relative;overflow:hidden}
+.surprise-video-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(247,37,133,.07) 0%,transparent 70%)}
+.surprise-play{width:80px;height:80px;border:2px solid rgba(247,37,133,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative;box-shadow:0 0 20px rgba(247,37,133,.3);animation:pulse-heart 2s ease-in-out infinite}
+.surprise-video-label{font-family:var(--font-fine);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid)}
+.video-embed-container{width:100%;max-width:800px}
+.video-embed-container iframe,.video-embed-container video{width:100%;aspect-ratio:16/9;border:none}
+
+/* ========== BONUS ========== */
+#bonus{background:var(--black);border-top:1px solid rgba(255,255,255,.05);min-height:40vh}
+.bonus-placeholder{background:var(--black-card);border:2px dashed rgba(255,255,255,.08);padding:4rem 2rem;text-align:center;margin-top:3rem}
+.bonus-icon{font-size:3rem;margin-bottom:1rem;opacity:.4}
+.bonus-text{font-family:var(--font-display);font-style:italic;font-size:1.2rem;color:var(--gray-mid)}
+
+/* ========== FOOTER ========== */
+footer{background:linear-gradient(135deg,#130018,#0D0010);border-top:1px solid rgba(247,37,133,.25);padding:2.5rem 2rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.footer-suits{font-size:1.5rem;display:flex;gap:1rem;color:rgba(255,255,255,.2)}
+.footer-suits .red{color:rgba(247,37,133,.6)}
+.footer-text{font-family:var(--font-fine);font-style:italic;font-size:.9rem;color:var(--gray-mid)}
+.footer-names{font-family:var(--font-display);font-size:1.1rem;color:var(--white)}
+.footer-names span{background:linear-gradient(90deg,var(--rose),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ========== CONFETTI ========== */
+.confetti-piece{position:fixed;width:8px;height:8px;pointer-events:none;z-index:9998;animation:confetti-fall linear forwards}
+@keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* ========== SCROLL REVEAL ========== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+
+/* ========== ADMIN FAB ========== */
+#admin-fab{position:fixed;bottom:max(1.5rem,calc(env(safe-area-inset-bottom) + .5rem));right:max(1.5rem,env(safe-area-inset-right));z-index:500;display:none}
+#admin-fab.show{display:block}
+.fab-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--purple));border:none;color:var(--white);font-size:1.4rem;cursor:pointer;box-shadow:0 4px 20px rgba(200,16,46,.5);display:flex;align-items:center;justify-content:center;transition:transform .3s,box-shadow .3s}
+.fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(247,37,133,.7)}
+
+/* ========== ADMIN DRAWER ========== */
+#admin-drawer{position:fixed;inset:0;z-index:600;display:none}
+#admin-drawer.open{display:flex}
+.drawer-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7)}
+.drawer-panel{position:absolute;top:0;right:0;bottom:0;width:100%;background:#0F000F;border-left:none;display:flex;flex-direction:column;overflow:hidden;animation:slideInRight .35s ease;padding-bottom:env(safe-area-inset-bottom)}
+@keyframes slideInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
+.drawer-header{background:#0a000a;border-bottom:1px solid rgba(247,37,133,.3);padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.drawer-title{font-family:var(--font-accent);font-size:1.3rem;letter-spacing:.15em;color:var(--white)}
+.drawer-title span{background:linear-gradient(90deg,var(--rose),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.drawer-close{background:none;border:none;color:var(--gray-mid);font-size:1.5rem;cursor:pointer;transition:color .2s}
+.drawer-close:hover{color:var(--white)}
+.drawer-tabs{display:flex;border-bottom:1px solid rgba(247,37,133,.15);flex-shrink:0;overflow-x:auto}
+.dtab{background:none;border:none;color:var(--gray-mid);font-family:var(--font-fine);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1.2rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;flex-shrink:0}
+.dtab.active{color:var(--rose-light);border-bottom-color:var(--rose)}
+.dtab:hover{color:var(--white)}
+.drawer-body{flex:1;overflow-y:auto;padding:1.5rem}
+.drawer-body::-webkit-scrollbar{width:4px}
+.drawer-body::-webkit-scrollbar-track{background:transparent}
+.drawer-body::-webkit-scrollbar-thumb{background:rgba(247,37,133,.4);border-radius:2px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ========== FORM ========== */
+.form-group{margin-bottom:1.2rem}
+.form-label{display:block;font-family:var(--font-fine);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose-light);margin-bottom:.4rem}
+.form-input,.form-textarea,.form-select{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(247,37,133,.35);color:var(--white);font-family:var(--font-fine);font-size:1rem;padding:.6rem .8rem;outline:none;transition:border-color .2s}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--rose);background:rgba(247,37,133,.05)}
+.form-textarea{resize:vertical;min-height:80px}
+.form-select{appearance:none;cursor:pointer}
+.form-select option{background:#111}
+.form-hint{font-family:var(--font-fine);font-size:.8rem;color:var(--gray-mid);margin-top:.3rem;font-style:italic}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.dsection-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--white);margin:1.5rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.dsection-title:first-child{margin-top:0}
+
+/* ========== MEMBER BLOCKS ========== */
+.member-block{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:2px;padding:1rem;margin-bottom:1rem;transition:border-color .2s}
+.member-block:hover{border-color:rgba(200,16,46,.2)}
+.member-block-header{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;cursor:pointer}
+.member-block-suit{font-size:1.2rem}
+.member-block-name{font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--white);flex:1}
+.member-block-toggle{color:var(--gray-mid);font-size:.8rem;transition:transform .2s;flex-shrink:0}
+.member-block-toggle.open{transform:rotate(90deg)}
+.member-fields{display:none}
+.member-fields.open{display:block}
+
+/* ========== BUTTONS ========== */
+.apply-btn{width:100%;padding:.9rem;margin-top:1rem;background:linear-gradient(135deg,var(--rose),var(--purple));color:var(--white);border:none;font-family:var(--font-accent);font-size:1rem;letter-spacing:.2em;cursor:pointer;transition:background .2s,transform .1s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.apply-btn:hover{background:linear-gradient(135deg,var(--gold),var(--rose))}
+.apply-btn:active{transform:scale(.98)}
+.apply-btn.secondary{background:rgba(247,37,133,.15)}
+.apply-btn.secondary:hover{background:rgba(247,37,133,.3)}
+
+/* ========== VALISE ADMIN ========== */
+.valise-squad-items{display:flex;flex-direction:column;gap:.5rem}
+.valise-item-row{display:flex;gap:.5rem;align-items:center}
+.valise-item-row .form-input{flex:1}
+.valise-item-del{background:none;border:none;color:var(--gray-mid);cursor:pointer;font-size:1.1rem;padding:.3rem;transition:color .2s;flex-shrink:0}
+.valise-item-del:hover{color:var(--red)}
+.add-item-btn{background:none;border:1px dashed rgba(200,16,46,.3);color:var(--gray-mid);font-family:var(--font-fine);font-size:.85rem;padding:.5rem;width:100%;cursor:pointer;margin-top:.5rem;transition:all .2s}
+.add-item-btn:hover{border-color:var(--red);color:var(--white)}
+
+/* ========== TOGGLE ========== */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin:1rem 0}
+.toggle-label{font-family:var(--font-fine);font-size:.95rem;color:var(--white-off)}
+.toggle-switch{position:relative;width:48px;height:26px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:13px;cursor:pointer;transition:background .3s}
+.toggle-slider::before{content:'';position:absolute;width:20px;height:20px;left:3px;bottom:3px;background:var(--white);border-radius:50%;transition:transform .3s}
+.toggle-switch input:checked + .toggle-slider{background:linear-gradient(135deg,var(--rose),var(--purple))}
+.toggle-switch input:checked + .toggle-slider::before{transform:translateX(22px)}
+
+/* ========== TOAST ========== */
+#toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:#1a0020;border:1px solid var(--rose);color:var(--white);font-family:var(--font-fine);padding:.7rem 1.5rem;font-size:.9rem;z-index:9000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  .section-inner{padding:5.5rem 1rem 3rem}
+  .valise-split{grid-template-columns:1fr}
+  .mindset-grid{grid-template-columns:1fr}
+  .section-title{font-size:clamp(2rem,8vw,3rem)}
+  .hero-title{font-size:clamp(3rem,15vw,6rem)}
+  nav{padding:max(.8rem,env(safe-area-inset-top)) 1rem .8rem}
+  .countdown-grid{gap:.6rem}
+  .countdown-num{font-size:2.2rem;min-width:55px;padding:.25rem .6rem}
+  .countdown-block{min-width:55px}
+  .hero-mascot-area{width:130px;height:130px}
+  .form-row{grid-template-columns:1fr}
+  #toast{width:90%;white-space:normal;text-align:center}
+}
+@media(max-width:430px){
+  .squad-card{padding:1rem .6rem}
+  .card-suit-big{font-size:2.5rem}
+  .card-name{font-size:.95rem}
+  .card-alias{font-size:.75rem}
+  .card-role{font-size:.65rem}
+  .card-corner{font-size:.8rem}
+  .hero-date-badge{font-size:.75rem;padding:.6rem 1.2rem;letter-spacing:.1em}
+  .pw-logo{font-size:clamp(2.5rem,10vw,4rem)}
+}
+
+/* ========== FESTIVE EXTRAS ========== */
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 20% 30%,rgba(255,215,0,.3) 0%,transparent 100%),radial-gradient(1px 1px at 60% 70%,rgba(247,37,133,.2) 0%,transparent 100%),radial-gradient(1px 1px at 80% 20%,rgba(168,85,247,.2) 0%,transparent 100%),radial-gradient(1px 1px at 40% 80%,rgba(255,215,0,.15) 0%,transparent 100%);pointer-events:none;z-index:0}
+
+.sparkle{position:absolute;pointer-events:none;animation:sparkle-pop ease-in-out infinite}
+@keyframes sparkle-pop{0%,100%{transform:scale(0) rotate(0deg);opacity:0}50%{transform:scale(1) rotate(180deg);opacity:1}}
+
+/* Glitter overlay on hero */
+#accueil::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,215,0,.06) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;animation:glitter-drift 8s linear infinite}
+@keyframes glitter-drift{0%{background-position:0 0}100%{background-position:40px 40px}}
+
+/* Neon glow on section titles */
+.section-title{text-shadow:0 0 40px rgba(247,37,133,.1)}
+
+/* Card grid sparkle lines */
+.squad-card.bride .card-suit-big{text-shadow:0 0 20px rgba(255,215,0,.6);animation:pulse-heart 2s ease-in-out infinite}
+
+/* Festive border pulse on bride card */
+@keyframes border-glow{0%,100%{box-shadow:0 0 20px rgba(255,215,0,.15)}50%{box-shadow:0 0 40px rgba(255,215,0,.35),0 0 60px rgba(247,37,133,.15)}}
+.squad-card.bride{animation:border-glow 3s ease-in-out infinite}
+
+/* Gradient underline on section titles */
+.section-title em{background:linear-gradient(90deg,var(--rose-light),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Mindset card hover neon */
+.mindset-card:hover .mindset-rule{background:linear-gradient(90deg,var(--white),var(--gold-shine));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Bonus section */
+#bonus{background:linear-gradient(180deg,var(--black),#0e0015)}
+.bonus-placeholder{border-color:rgba(247,37,133,.15)}
+
+/* Password screen subtle stars */
+#password-screen::before{content:'✦ ★ ✦ ★ ✦';position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);font-size:.7rem;letter-spacing:1.5em;color:rgba(255,215,0,.2);white-space:nowrap}
+
+/* Hero scroll hint */
+.scroll-text{color:var(--rose-light)}
+
+/* Valise note */
+.valise-col-title{color:var(--white)}
+
+/* Active tab */
+.dtab:hover{color:var(--rose-light)}
+.member-block:hover{border-color:rgba(247,37,133,.25)}
+.add-item-btn:hover{border-color:var(--rose);color:var(--rose-light)}
+.valise-item-del:hover{color:var(--rose)}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD -->
+<div id="password-screen">
+  <div class="pw-suits"><span>♥</span><span>♠</span><span>♦</span><span>♣</span></div>
+  <div class="pw-card-icon">♥</div>
+  <div class="pw-logo">THE <span>JACKPOT</span><br>SQUAD</div>
+  <div class="pw-subtitle">Accès réservé aux élues ❖</div>
+  <div class="pw-form">
+    <input type="password" class="pw-input" id="pw-input" placeholder="Mot de passe secret…" autocomplete="off">
+    <button class="pw-btn" onclick="checkPassword()">ENTRER</button>
+    <div class="pw-error" id="pw-error">Mauvaise pioche, chérie 🃏</div>
+  </div>
+  <div class="pw-suits"><span>♣</span><span>♦</span><span>♠</span><span>♥</span></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav" style="display:none">
+  <a href="#accueil" class="nav-logo">THE <span>JACKPOT</span> SQUAD</a>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li><li><a href="#squad">La Squad</a></li>
+    <li><a href="#valise">La Valise</a></li><li><a href="#mindset">Le Mindset</a></li>
+    <li><a href="#surprise">La Surprise</a></li><li><a href="#bonus">Bonus</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
+  <a href="#accueil" onclick="toggleMobileMenu()">Accueil</a>
+  <a href="#squad" onclick="toggleMobileMenu()">La Squad</a>
+  <a href="#valise" onclick="toggleMobileMenu()">La Valise</a>
+  <a href="#mindset" onclick="toggleMobileMenu()">Le Mindset</a>
+  <a href="#surprise" onclick="toggleMobileMenu()">La Surprise</a>
+  <a href="#bonus" onclick="toggleMobileMenu()">Bonus</a>
+</div>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-bg"></div>
+  <div class="card-rain" id="card-rain"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="hero-eyebrow">❖ Elle a eu le jackpot en amour ❖</div>
+    <div class="hero-title"><div class="the">THE</div><div class="shine-text">JACKPOT</div><div>SQUAD</div></div>
+    <div class="hero-subtitle" id="hero-subtitle">EVJF de Kenza &nbsp;·&nbsp; Mariée le 4 septembre 2026</div>
+    <div class="hero-mascot-area">
+      <div class="mascot-corner tl">Q<br>♥</div>
+      <div class="mascot-placeholder">👸🏻</div>
+      <div class="mascot-label">Dame de Cœur</div>
+      <div class="mascot-corner br">Q<br>♥</div>
+    </div>
+    <div class="hero-date-badge" id="hero-badge">❖ DESTINATION SURPRISE ❖ RÉVÉLÉE LE JOUR J ❖</div>
+    <div id="countdown-section">
+      <div class="countdown-label">♥ Le grand départ dans ♥</div>
+      <div class="countdown-grid">
+        <div class="countdown-block"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit">Jours</div></div>
+        <div class="countdown-block"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-unit">Heures</div></div>
+        <div class="countdown-block"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-unit">Minutes</div></div>
+        <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">Secondes</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><div class="scroll-line"></div><div class="scroll-text">Défiler</div></div>
+</section>
+
+<!-- SQUAD -->
+<section id="squad">
+  <div class="section-inner">
+    <div class="section-label reveal">♥ Les Élues</div>
+    <div class="section-title reveal">La <em>Squad</em></div>
+    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);max-width:500px;line-height:1.7;">Neuf filles. Neuf cartes. Une seule mission : offrir à la Dame de Cœur le week-end dont elle se souviendra toute sa vie.</p>
+    <div class="deco-line reveal"><span class="deco-line-icon">♥</span></div>
+    <div class="squad-grid">
+      <div class="squad-card bride reveal">
+        <div class="bride-badge">LA MARIÉE</div>
+        <div class="card-corner tl">Q<br>♥</div>
+        <div><div class="card-suit-big">♥</div><div class="card-name">Kenza</div><div class="card-alias">Dame de Cœur</div><div class="card-role">La Future Mme Abouyoub 💍</div></div>
+        <div class="card-corner br">Q<br>♥</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-1" id="card-ghita">
+        <div class="card-corner tl black" id="ghita-corner-tl">?<br>♠</div>
+        <div><div class="card-suit-big" id="ghita-suit">♠</div><div class="card-name" id="ghita-name">Ghita</div><div class="card-alias" id="ghita-alias">Ghitouch</div><div class="card-role" id="ghita-role">Carte à compléter</div></div>
+        <div class="card-corner br black" id="ghita-corner-br">?<br>♠</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-2" id="card-yasminec">
+        <div class="card-corner tl" id="yasminec-corner-tl">?<br>♥</div>
+        <div><div class="card-suit-big" style="color:var(--red)" id="yasminec-suit">♥</div><div class="card-name" id="yasminec-name">Yasmine</div><div class="card-alias" id="yasminec-alias">Yass Couz</div><div class="card-role" id="yasminec-role">Carte à compléter</div></div>
+        <div class="card-corner br" id="yasminec-corner-br">?<br>♥</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-3" id="card-zineb">
+        <div class="card-corner tl black" id="zineb-corner-tl">?<br>♣</div>
+        <div><div class="card-suit-big" id="zineb-suit">♣</div><div class="card-name" id="zineb-name">Zineb</div><div class="card-alias" id="zineb-alias">Zizi</div><div class="card-role" id="zineb-role">Carte à compléter</div></div>
+        <div class="card-corner br black" id="zineb-corner-br">?<br>♣</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-1" id="card-yasminea">
+        <div class="card-corner tl" id="yasminea-corner-tl">?<br>♦</div>
+        <div><div class="card-suit-big" style="color:var(--red)" id="yasminea-suit">♦</div><div class="card-name" id="yasminea-name">Yasmine</div><div class="card-alias" id="yasminea-alias">Yassou.A</div><div class="card-role" id="yasminea-role">Carte à compléter</div></div>
+        <div class="card-corner br" id="yasminea-corner-br">?<br>♦</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-2" id="card-yassinel">
+        <div class="card-corner tl black" id="yassinel-corner-tl">?<br>♠</div>
+        <div><div class="card-suit-big" id="yassinel-suit">♠</div><div class="card-name" id="yassinel-name">Yasmine</div><div class="card-alias" id="yassinel-alias">Yass.El</div><div class="card-role" id="yassinel-role">Carte à compléter</div></div>
+        <div class="card-corner br black" id="yassinel-corner-br">?<br>♠</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-3" id="card-sarah">
+        <div class="card-corner tl" id="sarah-corner-tl">?<br>♥</div>
+        <div><div class="card-suit-big" style="color:var(--red)" id="sarah-suit">♥</div><div class="card-name" id="sarah-name">Sarah</div><div class="card-alias" id="sarah-alias">Sarouch</div><div class="card-role" id="sarah-role">Carte à compléter</div></div>
+        <div class="card-corner br" id="sarah-corner-br">?<br>♥</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-1" id="card-nour">
+        <div class="card-corner tl black" id="nour-corner-tl">?<br>♣</div>
+        <div><div class="card-suit-big" id="nour-suit">♣</div><div class="card-name" id="nour-name">Nour</div><div class="card-alias" id="nour-alias">Nourette</div><div class="card-role" id="nour-role">Carte à compléter</div></div>
+        <div class="card-corner br black" id="nour-corner-br">?<br>♣</div>
+      </div>
+      <div class="squad-card reveal reveal-delay-2" id="card-aya">
+        <div class="card-corner tl" id="aya-corner-tl">?<br>♦</div>
+        <div><div class="card-suit-big" style="color:var(--red)" id="aya-suit">♦</div><div class="card-name" id="aya-name">Aya</div><div class="card-alias" id="aya-alias">Ayou</div><div class="card-role" id="aya-role">Carte à compléter</div></div>
+        <div class="card-corner br" id="aya-corner-br">?<br>♦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALISE -->
+<section id="valise">
+  <div class="section-inner">
+    <div class="section-label reveal">♠ Préparatifs</div>
+    <div class="section-title reveal">La <em>Valise</em></div>
+    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);line-height:1.7;">“Je savais pas quoi mettre” n’est pas une option.</p>
+    <div class="deco-line reveal"><span class="deco-line-icon">♠</span></div>
+    <div class="valise-split">
+      <div class="valise-col bride-col reveal">
+        <div class="valise-col-title"><span>♥</span> Kenza</div>
+        <div class="valise-col-subtitle">Dress code : blanc intégral, de la tête aux pieds</div>
+        <ul class="valise-list" id="kenza-valise-list">
+          <li>Maillots de bain blancs (minimum 2)</li>
+          <li>Robes de plage blanches / cover-up</li>
+          <li>Tenue de soirée blanche (LA robe)</li>
+          <li>Talons blancs ou dorés</li>
+          <li>Accessoires blancs / dorés</li>
+          <li>Lunettes de soleil glamour</li>
+          <li>Trousse de beauté complète</li>
+          <li>Votre plus beau sourire de future mariée 💍</li>
+        </ul>
+        <div class="valise-note">❖ La Dame de Cœur doit briller. Aucun compromis sur la blancheur.</div>
+      </div>
+      <div class="valise-col reveal reveal-delay-1">
+        <div class="valise-col-title"><span>♠</span> La Squad</div>
+        <div class="valise-col-subtitle" id="squad-valise-subtitle">À compléter par les organisatrices</div>
+        <div id="squad-valise-content">
+          <div class="valise-placeholder">🃏 Contenu à venir…<br><br><small>Ajoutez ici les consignes via le panneau admin.</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINDSET -->
+<section id="mindset">
+  <div class="section-inner">
+    <div class="section-label reveal">♦ Règles d’or</div>
+    <div class="section-title reveal">Le Bon <em>Mindset</em></div>
+    <p class="reveal" style="font-family:var(--font-fine);font-size:1.05rem;color:var(--gray-mid);line-height:1.7;max-width:500px;">Quelques règles non négociables pour arriver dans l’état d’esprit parfait.</p>
+    <div class="deco-line reveal"><span class="deco-line-icon">♦</span></div>
+    <div class="mindset-grid">
+      <div class="mindset-card reveal"><div class="mindset-number">01</div><div class="mindset-icon">📵</div><div class="mindset-rule">Le téléphone, c’est pour les photos</div><div class="mindset-desc">Pas de travail, pas de mails, pas de drama externe. On est full présentes pour Kenza et c’est tout.</div></div>
+      <div class="mindset-card reveal reveal-delay-1"><div class="mindset-number">02</div><div class="mindset-icon">🥂</div><div class="mindset-rule">On célèbre le jackpot</div><div class="mindset-desc">Kenza a trouvé l’homme parfait. Notre rôle, c’est de fêter ça avec classe, style et beaucoup d’humour.</div></div>
+      <div class="mindset-card reveal reveal-delay-2"><div class="mindset-number">03</div><div class="mindset-icon">💃</div><div class="mindset-rule">On laisse l’ego au vestiaire</div><div class="mindset-desc">Ce week-end, il n’y a qu’une star : la Dame de Cœur. On est ses as, ses valets, ses reines de scène.</div></div>
+      <div class="mindset-card reveal reveal-delay-3"><div class="mindset-number">04</div><div class="mindset-icon">🤫</div><div class="mindset-rule">La surprise, c’est sacré</div><div class="mindset-desc">On ne vend pas la mèche. Ni à Kenza, ni à Saad, ni à personne. Ce qui se passe dans le squad reste dans le squad.</div></div>
+      <div class="mindset-card reveal reveal-delay-1"><div class="mindset-number">05</div><div class="mindset-icon">📸</div><div class="mindset-rule">On documente TOUT</div><div class="mindset-desc">Chaque moment mérite d’être immortalisé. On repart toutes avec des souvenirs plein la mémoire (et le téléphone).</div></div>
+      <div class="mindset-card reveal reveal-delay-2"><div class="mindset-number">06</div><div class="mindset-icon">♥</div><div class="mindset-rule">On la chouchoute royalement</div><div class="mindset-desc">La Dame de Cœur ne porte rien, ne décide rien, ne paye rien. Elle règne, point final.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SURPRISE -->
+<section id="surprise">
+  <div class="section-inner">
+    <div class="surprise-inner">
+      <div><div class="section-label reveal" style="text-align:center">♣ Le moment attendu</div><div class="section-title reveal" style="text-align:center">La <em>Surprise</em></div></div>
+      <div class="deco-line reveal" style="width:100%;max-width:400px"><span class="deco-line-icon">♣</span></div>
+      <div id="video-area" class="reveal">
+        <div class="surprise-video-placeholder">
+          <div class="surprise-play">▶</div>
+          <div class="surprise-video-label">Vidéo à intégrer via le panneau admin</div>
+          <div style="font-family:var(--font-fine);font-size:.8rem;color:rgba(255,255,255,.2);margin-top:.5rem;">YouTube · MP4 · Vimeo</div>
+        </div>
+      </div>
+      <p class="reveal" style="font-family:var(--font-display);font-style:italic;font-size:1.2rem;color:var(--gray-mid);text-align:center;max-width:500px;line-height:1.6;">“Le meilleur est toujours à venir — surtout quand c’est nous qui organisons.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS -->
+<section id="bonus">
+  <div class="section-inner">
+    <div class="section-label reveal">❖ Coming soon</div>
+    <div class="section-title reveal">Section <em>Bonus</em></div>
+    <div class="bonus-placeholder reveal">
+      <div class="bonus-icon">🃏</div>
+      <div class="bonus-text">Cette section est réservée pour du contenu futur.</div>
+      <div style="margin-top:1rem;font-family:var(--font-fine);font-size:.85rem;color:rgba(255,255,255,.2);letter-spacing:.1em">Programme · Règles du jeu · Anecdotes · Photos</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-suits"><span class="red">♥</span><span>♠</span><span class="red">♦</span><span>♣</span></div>
+  <div class="footer-names"><span>Kenza</span> &amp; <span>Saad</span></div>
+  <div class="footer-text">4 septembre 2026 · Avec amour, par la Jackpot Squad</div>
+  <div class="footer-suits"><span>♣</span><span class="red">♦</span><span>♠</span><span class="red">♥</span></div>
+</footer>
+
+<!-- ADMIN FAB -->
+<div id="admin-fab">
+  <button class="fab-btn" onclick="openDrawer()" title="Panneau Admin">⚙️</button>
+</div>
+
+<!-- ADMIN DRAWER -->
+<div id="admin-drawer">
+  <div class="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer-panel">
+    <div class="drawer-header">
+      <div class="drawer-title">PANNEAU <span>ADMIN</span></div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <div class="drawer-tabs">
+      <button class="dtab active" onclick="switchTab(event,'tab-squad'">🃏 La Squad</button>
+      <button class="dtab" onclick="switchTab(event,'tab-valise'">🧳 La Valise</button>
+      <button class="dtab" onclick="switchTab(event,'tab-video'">🎬 La Vidéo</button>
+      <button class="dtab" onclick="switchTab(event,'tab-countdown'">⏱ Compte à rebours</button>
+      <button class="dtab" onclick="switchTab(event,'tab-accueil'">✨ Accueil</button>
+    </div>
+    <div class="drawer-body">
+
+      <!-- TAB SQUAD -->
+      <div class="tab-panel active" id="tab-squad">
+        <div class="dsection-title">Cartes des membres</div>
+        <p style="font-family:var(--font-fine);font-size:.85rem;color:var(--gray-mid);margin-bottom:1rem;">Clé pour déplier chaque carte. La carte de Kenza est fixe.</p>
+        <div id="members-admin"></div>
+        <button class="apply-btn" onclick="applySquad()">❖ Appliquer les cartes</button>
+      </div>
+
+      <!-- TAB VALISE -->
+      <div class="tab-panel" id="tab-valise">
+        <div class="dsection-title">Liste Kenza</div>
+        <div class="valise-squad-items" id="kenza-items-admin"></div>
+        <button class="add-item-btn" onclick="addKenzaItem()">+ Ajouter un item</button>
+        <div class="dsection-title">Liste La Squad</div>
+        <div class="form-group">
+          <label class="form-label">Sous-titre de la colonne</label>
+          <input type="text" class="form-input" id="squad-valise-sub" value="À compléter par les organisatrices">
+        </div>
+        <div class="valise-squad-items" id="squad-items-admin"></div>
+        <button class="add-item-btn" onclick="addSquadItem()">+ Ajouter un item</button>
+        <button class="apply-btn" onclick="applyValise()" style="margin-top:1.5rem">❖ Appliquer la valise</button>
+      </div>
+
+      <!-- TAB VIDEO -->
+      <div class="tab-panel" id="tab-video">
+        <div class="dsection-title">Intégrer une vidéo</div>
+        <div class="form-group">
+          <label class="form-label">Type</label>
+          <select class="form-select" id="video-type">
+            <option value="youtube">YouTube</option>
+            <option value="mp4">Lien MP4 direct</option>
+            <option value="vimeo">Vimeo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">URL / Lien</label>
+          <input type="text" class="form-input" id="video-url" placeholder="https://www.youtube.com/watch?v=XXXX">
+          <div class="form-hint">YouTube : colle le lien complet. MP4 : URL directe du fichier.</div>
+        </div>
+        <button class="apply-btn" onclick="applyVideo()">❖ Intégrer la vidéo</button>
+        <button class="apply-btn secondary" onclick="removeVideo()" style="margin-top:.5rem">✕ Supprimer la vidéo</button>
+      </div>
+
+      <!-- TAB COUNTDOWN -->
+      <div class="tab-panel" id="tab-countdown">
+        <div class="dsection-title">Compte à rebours</div>
+        <div class="toggle-row">
+          <span class="toggle-label">Afficher le compte à rebours</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="countdown-toggle" onchange="toggleCountdownAdmin()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="form-label">📅 Date de l’EVJF</label>
+          <input type="datetime-local" class="form-input" id="evjf-date-input" value="2026-08-15T08:00">
+          <div class="form-hint">Modifie cette date pour pointer le compte à rebours vers le bon jour.</div>
+        </div>
+        <button class="apply-btn" onclick="applyCountdown()">❖ Appliquer la date</button>
+      </div>
+
+      <!-- TAB ACCUEIL -->
+      <div class="tab-panel" id="tab-accueil">
+        <div class="dsection-title">Textes de l’accueil</div>
+        <div class="form-group">
+          <label class="form-label">Accroche (au-dessus du titre)</label>
+          <input type="text" class="form-input" id="edit-eyebrow" value="❖ Elle a eu le jackpot en amour ❖">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sous-titre</label>
+          <input type="text" class="form-input" id="edit-subtitle" value="EVJF de Kenza · Mariée le 4 septembre 2026">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bandeau destination</label>
+          <input type="text" class="form-input" id="edit-badge" value="❖ DESTINATION SURPRISE ❖ RÉVÉLÉE LE JOUR J ❖">
+        </div>
+        <button class="apply-btn" onclick="applyAccueil()">❖ Appliquer l’accueil</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toast">❖ Modifications appliquées !</div>
+
+<script>
+const PASSWORD_USER  = "jackpotSK26";
+const PASSWORD_ADMIN = "admin26";
+const PASSWORD_REVEAL = "revealrebours";
+let EVJF_DATE = new Date("2026-08-15T08:00:00");
+let countdownActive = false;
+let countdownInterval = null;
+
+const MEMBERS = [
+  {id:"ghita",    name:"Ghita",   alias:"Ghitouch",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2660", value:"?", color:"black"},
+  {id:"yasminec", name:"Yasmine", alias:"Yass Couz", role:"Carte \u00e0 compl\u00e9ter", suit:"\u2665", value:"?", color:"red"},
+  {id:"zineb",    name:"Zineb",   alias:"Zizi",      role:"Carte \u00e0 compl\u00e9ter", suit:"\u2663", value:"?", color:"black"},
+  {id:"yasminea", name:"Yasmine", alias:"Yassou.A",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2666", value:"?", color:"red"},
+  {id:"yassinel", name:"Yasmine", alias:"Yass.El",   role:"Carte \u00e0 compl\u00e9ter", suit:"\u2660", value:"?", color:"black"},
+  {id:"sarah",    name:"Sarah",   alias:"Sarouch",   role:"Carte \u00e0 compl\u00e9ter", suit:"\u2665", value:"?", color:"red"},
+  {id:"nour",     name:"Nour",    alias:"Nourette",  role:"Carte \u00e0 compl\u00e9ter", suit:"\u2663", value:"?", color:"black"},
+  {id:"aya",      name:"Aya",     alias:"Ayou",      role:"Carte \u00e0 compl\u00e9ter", suit:"\u2666", value:"?", color:"red"},
+];
+const SUITS = ["\u2665","\u2660","\u2666","\u2663"];
+
+function checkPassword(){
+  const input=document.getElementById("pw-input").value.trim();
+  const error=document.getElementById("pw-error");
+  if(input===PASSWORD_ADMIN){unlockSite(true);return;}
+  if(input===PASSWORD_REVEAL){unlockSite(false);activateCountdown();return;}
+  if(input===PASSWORD_USER){unlockSite(false);return;}
+  error.classList.add("show");
+  document.getElementById("pw-input").value="";
+  document.getElementById("pw-input").focus();
+  setTimeout(()=>error.classList.remove("show"),3000);
+}
+document.getElementById("pw-input").addEventListener("keydown",e=>{if(e.key==="Enter")checkPassword();});
+
+function unlockSite(admin){
+  const s=document.getElementById("password-screen");
+  s.classList.add("hidden");setTimeout(()=>s.remove(),900);
+  document.getElementById("main-nav").style.display="flex";
+  if(admin){document.getElementById("admin-fab").classList.add("show");buildMembersAdmin();buildValiseAdmin();}
+  createCardRain();launchConfetti();
+}
+
+function openDrawer(){document.getElementById("admin-drawer").classList.add("open");document.body.style.overflow="hidden";}
+function closeDrawer(){document.getElementById("admin-drawer").classList.remove("open");document.body.style.overflow="";}
+function switchTab(e,id){
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".dtab").forEach(t=>t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  e.target.classList.add("active");
+}
+
+function buildMembersAdmin(){
+  const c=document.getElementById("members-admin");c.innerHTML="";
+  MEMBERS.forEach(m=>{
+    const suitColor=m.color==="red"?"var(--red)":"var(--white-off)";
+    c.innerHTML+=`<div class="member-block">
+      <div class="member-block-header" onclick="toggleBlock('${m.id}')">
+        <span class="member-block-suit" style="color:${suitColor}">${m.suit}</span>
+        <span class="member-block-name" id="mblabel-${m.id}">${m.name} &mdash; <em style="font-weight:300;color:var(--gray-mid)">${m.alias}</em></span>
+        <span class="member-block-toggle" id="mtoggle-${m.id}">&#9654;</span>
+      </div>
+      <div class="member-fields" id="mfields-${m.id}">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Pr\u00e9nom</label><input type="text" class="form-input" id="mn-${m.id}" value="${m.name}"></div>
+          <div class="form-group"><label class="form-label">Alias</label><input type="text" class="form-input" id="ma-${m.id}" value="${m.alias}"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Valeur (A, K, Q, J, 7&#x2026;)</label><input type="text" class="form-input" id="mv-${m.id}" value="${m.value}" placeholder="ex: A, K, 7"></div>
+          <div class="form-group"><label class="form-label">Symbole</label>
+            <select class="form-select" id="ms-${m.id}">
+              ${SUITS.map(s=>`<option value="${s}"${s===m.suit?" selected":""}>${s}</option>`).join("")}
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">R\u00f4le / Description</label><input type="text" class="form-input" id="mr-${m.id}" value="${m.role}" placeholder="ex: La photographe \U0001f4f8"></div>
+      </div>
+    </div>`;
+  });
+}
+
+function toggleBlock(id){
+  const f=document.getElementById("mfields-"+id);
+  const t=document.getElementById("mtoggle-"+id);
+  const open=f.classList.toggle("open");
+  t.classList.toggle("open",open);
+}
+
+function applySquad(){
+  MEMBERS.forEach(m=>{
+    const name =document.getElementById("mn-"+m.id)?.value||m.name;
+    const alias=document.getElementById("ma-"+m.id)?.value||m.alias;
+    const val  =document.getElementById("mv-"+m.id)?.value||m.value;
+    const suit =document.getElementById("ms-"+m.id)?.value||m.suit;
+    const role =document.getElementById("mr-"+m.id)?.value||m.role;
+    const color=(suit==="\u2665"||suit==="\u2666")?"red":"black";
+    const cColor=color==="red"?"var(--red)":"var(--white-off)";
+    const cornerCls="card-corner tl"+(color==="black"?" black":"");
+    const cornerClsBr="card-corner br"+(color==="black"?" black":"");
+
+    const setT=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+    const setH=(id,v)=>{const el=document.getElementById(id);if(el)el.innerHTML=v;};
+    const setC=(id,c)=>{const el=document.getElementById(id);if(el)el.style.color=c;};
+    const setCls=(id,cls)=>{const el=document.getElementById(id);if(el)el.className=cls;};
+
+    setT(m.id+"-suit",suit); setC(m.id+"-suit",cColor);
+    setT(m.id+"-name",name); setT(m.id+"-alias",alias); setT(m.id+"-role",role);
+    setH(m.id+"-corner-tl",val+"<br>"+suit); setC(m.id+"-corner-tl",cColor); setCls(m.id+"-corner-tl",cornerCls);
+    setH(m.id+"-corner-br",val+"<br>"+suit); setC(m.id+"-corner-br",cColor); setCls(m.id+"-corner-br",cornerClsBr);
+
+    m.name=name;m.alias=alias;m.value=val;m.suit=suit;m.role=role;m.color=color;
+    const lbl=document.getElementById("mblabel-"+m.id);
+    if(lbl)lbl.innerHTML=name+' &mdash; <em style="font-weight:300;color:var(--gray-mid)">'+alias+"</em>";
+    const si=document.getElementById("mtoggle-"+m.id)?.previousElementSibling?.previousElementSibling;
+    if(si){si.textContent=suit;si.style.color=cColor;}
+  });
+  showToast("Cartes mises \u00e0 jour \u2756");
+}
+
+let kenzaItems=["Maillots de bain blancs (minimum 2)","Robes de plage blanches / cover-up","Tenue de soir\u00e9e blanche (LA robe)","Talons blancs ou dor\u00e9s","Accessoires blancs / dor\u00e9s","Lunettes de soleil glamour","Trousse de beaut\u00e9 compl\u00e8te","Votre plus beau sourire de future mari\u00e9e \U0001f48d"];
+let squadItems=[];
+
+function buildValiseAdmin(){renderKI();renderSI();}
+function renderKI(){
+  document.getElementById("kenza-items-admin").innerHTML=kenzaItems.map((it,i)=>
+    `<div class="valise-item-row"><input type="text" class="form-input" id="ki-${i}" value="${it}"><button class="valise-item-del" onclick="removeKI(${i})">\u2715</button></div>`).join("");
+}
+function renderSI(){
+  document.getElementById("squad-items-admin").innerHTML=squadItems.map((it,i)=>
+    `<div class="valise-item-row"><input type="text" class="form-input" id="si-${i}" value="${it}"><button class="valise-item-del" onclick="removeSI(${i})">\u2715</button></div>`).join("");
+}
+function addKenzaItem(){kenzaItems.push("");renderKI();setTimeout(()=>{const els=document.querySelectorAll("[id^=ki-]");if(els.length)els[els.length-1].focus();},50);}
+function removeKI(i){kenzaItems.splice(i,1);renderKI();}
+function addSquadItem(){squadItems.push("");renderSI();setTimeout(()=>{const els=document.querySelectorAll("[id^=si-]");if(els.length)els[els.length-1].focus();},50);}
+function removeSI(i){squadItems.splice(i,1);renderSI();}
+
+function applyValise(){
+  kenzaItems=kenzaItems.map((_,i)=>document.getElementById("ki-"+i)?.value||"").filter(v=>v.trim());
+  squadItems=squadItems.map((_,i)=>document.getElementById("si-"+i)?.value||"").filter(v=>v.trim());
+  document.getElementById("kenza-valise-list").innerHTML=kenzaItems.map(it=>"<li>"+it+"</li>").join("");
+  document.getElementById("squad-valise-subtitle").textContent=document.getElementById("squad-valise-sub").value;
+  const sc=document.getElementById("squad-valise-content");
+  sc.innerHTML=squadItems.length?`<ul class="valise-list">${squadItems.map(it=>"<li>"+it+"</li>").join("")}</ul>`:`<div class="valise-placeholder">\U0001f0cf Contenu \u00e0 venir\u2026<br><br><small>Ajoutez des items via le panneau admin.</small></div>`;
+  showToast("Valise mise \u00e0 jour \u2756");
+}
+
+function applyVideo(){
+  const type=document.getElementById("video-type").value;
+  const url=document.getElementById("video-url").value.trim();
+  if(!url){showToast("\u274c Colle un lien valide");return;}
+  let html="";
+  if(type==="youtube"){
+    let vid="";
+    const pats=[/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,/youtube\.com\/shorts\/([^&\n?#]+)/];
+    for(const p of pats){const m=url.match(p);if(m){vid=m[1];break;}}
+    if(!vid)vid=url;
+    html=`<div class="video-embed-container"><iframe src="https://www.youtube.com/embed/${vid}?rel=0" allowfullscreen></iframe></div>`;
+  } else if(type==="vimeo"){
+    const m=url.match(/vimeo\.com\/(\d+)/);const vid=m?m[1]:url;
+    html=`<div class="video-embed-container"><iframe src="https://player.vimeo.com/video/${vid}" allowfullscreen></iframe></div>`;
+  } else {
+    html=`<div class="video-embed-container"><video src="${url}" controls></video></div>`;
+  }
+  document.getElementById("video-area").innerHTML=html;
+  showToast("Vid\u00e9o int\u00e9gr\u00e9e \u2756");
+}
+
+function removeVideo(){
+  document.getElementById("video-area").innerHTML=`<div class="surprise-video-placeholder"><div class="surprise-play">\u25b6</div><div class="surprise-video-label">Aucune vid\u00e9o \u2014 ajoutes-en une via le panneau admin</div></div>`;
+  showToast("Vid\u00e9o supprim\u00e9e");
+}
+
+function toggleCountdownAdmin(){
+  if(document.getElementById("countdown-toggle").checked)activateCountdown();
+  else{document.getElementById("countdown-section").classList.remove("activated");countdownActive=false;if(countdownInterval){clearInterval(countdownInterval);countdownInterval=null;}}
+}
+function applyCountdown(){
+  const v=document.getElementById("evjf-date-input").value;
+  if(!v){showToast("\u274c S\u00e9lectionne une date");return;}
+  EVJF_DATE=new Date(v);if(countdownActive)runCountdown();showToast("Date mise \u00e0 jour \u2756");
+}
+function activateCountdown(){
+  document.getElementById("countdown-section").classList.add("activated");
+  countdownActive=true;
+  const t=document.getElementById("countdown-toggle");if(t)t.checked=true;
+  runCountdown();if(countdownInterval)clearInterval(countdownInterval);
+  countdownInterval=setInterval(runCountdown,1000);
+}
+function runCountdown(){
+  const diff=EVJF_DATE-new Date();
+  if(diff<=0){["cd-days","cd-hours","cd-mins","cd-secs"].forEach(id=>document.getElementById(id).textContent="00");return;}
+  document.getElementById("cd-days").textContent=String(Math.floor(diff/86400000)).padStart(2,"0");
+  document.getElementById("cd-hours").textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
+  document.getElementById("cd-mins").textContent=String(Math.floor(diff%3600000/60000)).padStart(2,"0");
+  document.getElementById("cd-secs").textContent=String(Math.floor(diff%60000/1000)).padStart(2,"0");
+}
+
+function applyAccueil(){
+  document.getElementById("hero-eyebrow").textContent=document.getElementById("edit-eyebrow").value;
+  document.getElementById("hero-subtitle").textContent=document.getElementById("edit-subtitle").value;
+  document.getElementById("hero-badge").textContent=document.getElementById("edit-badge").value;
+  showToast("Accueil mis \u00e0 jour \u2756");
+}
+
+function createCardRain(){
+  const c=document.getElementById("card-rain");
+  const cards=["\u2665","\u2660","\u2666","\u2663"];
+  const n=window.innerWidth<600?12:22;
+  for(let i=0;i<n;i++){
+    const el=document.createElement("div");el.className="falling-card";
+    const s=cards[Math.floor(Math.random()*4)];el.textContent=s;
+    el.style.color=(s==="\u2665"||s==="\u2666")?"rgba(200,16,46,.25)":"rgba(255,255,255,.1)";
+    el.style.left=Math.random()*100+"vw";el.style.fontSize=(1+Math.random()*1.5)+"rem";
+    el.style.animationDuration=(6+Math.random()*10)+"s";el.style.animationDelay=(Math.random()*8)+"s";
+    el.style.setProperty("--rot-start",(Math.random()*60-30)+"deg");
+    el.style.setProperty("--rot-end",(Math.random()*360)+"deg");
+    c.appendChild(el);
+  }
+}
+
+function launchConfetti(){
+  const colors=["#C8102E","#FAFAF8","#D4AF37","#8B0A1E","#F5D76E"];
+  const shapes=["\u2665","\u2660","\u2666","\u2663","\u2756","\u2605"];
+  for(let i=0;i<60;i++){
+    setTimeout(()=>{
+      const el=document.createElement("div");el.className="confetti-piece";
+      if(Math.random()>.5){el.textContent=shapes[Math.floor(Math.random()*shapes.length)];el.style.fontSize=(0.8+Math.random()*.8)+"rem";el.style.color=colors[Math.floor(Math.random()*colors.length)];el.style.background="transparent";el.style.width="auto";el.style.height="auto";}
+      else{el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.borderRadius=Math.random()>.5?"50%":"0";el.style.opacity=".8";}
+      el.style.left=Math.random()*100+"vw";el.style.top="-20px";
+      el.style.animationDuration=(2+Math.random()*3)+"s";el.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(el);setTimeout(()=>el.remove(),5500);
+    },i*50);
+  }
+}
+
+let toastTimer;
+function showToast(msg){
+  const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible");}),{threshold:.1,rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".reveal").forEach(el=>ro.observe(el));
+
+function toggleMobileMenu(){document.getElementById("mobile-menu").classList.toggle("open");}
+
+let lastScroll=0;
+window.addEventListener("scroll",()=>{
+  const nav=document.getElementById("main-nav");if(!nav||nav.style.display==="none")return;
+  const curr=window.scrollY;nav.style.opacity=curr>80&&curr>lastScroll?"0.7":"1";lastScroll=curr;
+});
+</script>
+</body>
+</html>
