@@ -584,13 +584,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <div class="jp-reveal" style="position:relative;border-radius:18px;padding:14px;background:linear-gradient(160deg,#1c0f0a,#0c0604);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 18px 44px rgba(0,0,0,.6);">
           <div style="position:absolute;top:8px;left:10px;font-size:22px;color:rgba(216,12,28,.5);">&spades;</div>
           <div style="position:absolute;bottom:8px;right:12px;font-size:22px;color:rgba(216,12,28,.5);">&hearts;</div>
-          <div onclick="alert('Ajoute ta vidéo surprise ici')" class="jp-btn" style="position:relative;border-radius:10px;aspect-ratio:16/10;background:radial-gradient(circle at 50% 45%, #3a1410, #120605);overflow:hidden;display:flex;align-items:center;justify-content:center;">
-            <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 60%, rgba(216,12,28,.35),transparent 40%),radial-gradient(circle at 72% 35%, rgba(232,198,106,.25),transparent 38%);"></div>
-            <div style="position:relative;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.5);"><div style="margin-left:4px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #6e0f17;"></div></div>
-            <div style="position:absolute;left:12px;right:12px;bottom:10px;height:4px;border-radius:3px;background:rgba(255,255,255,.25);"><div style="width:4%;height:100%;border-radius:3px;background:#d80c1c;"></div></div>
-            <div class="jp-body" style="position:absolute;left:14px;bottom:18px;font-size:11px;color:rgba(255,255,255,.6);">0:00 / 1:13</div>
-          </div>
+          <div id="video-frame" style="position:relative;border-radius:10px;aspect-ratio:16/10;background:radial-gradient(circle at 50% 45%, #3a1410, #120605);overflow:hidden;"></div>
         </div>
+        <button id="video-edit-btn" onclick="changeVideo()" style="display:none;margin-top:12px;width:100%;padding:9px;border:1px solid rgba(232,198,106,.5);border-radius:8px;background:rgba(232,198,106,.1);color:#e8c66a;font-family:'Playfair Display',serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">▶ Définir / changer la vidéo YouTube</button>
         <button id="video-confirm-btn" onclick="confirmVideo()" class="jp-btn jp-serif jp-reveal" style="margin-top:18px;padding:12px 24px;border:1px solid rgba(232,198,106,.5);border-radius:8px;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-weight:700;font-size:12px;letter-spacing:.1em;cursor:pointer;">✓ J'AI REGARDÉ LA VIDÉO</button>
         <p class="jp-serif jp-reveal" style="margin:22px 0 0;font-size:13px;letter-spacing:.1em;color:#c2a892;text-transform:uppercase;">9 filles. 1 future mariée. 0 indice sur la destination.</p>
         <p class="jp-script jp-reveal" style="margin:6px 0 0;font-size:clamp(26px,4vw,38px);color:#d80c1c;">1000 souvenirs à créer</p>
@@ -675,6 +671,28 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <!-- ALBUMS NOSTALGIE -->
 <div id="alb-overlay" style="display:none;position:fixed;inset:0;z-index:9500;background:radial-gradient(ellipse 70% 50% at 50% 0%, #1a0505 0%, #0a0202 55%, #060101 100%);overflow-y:auto;-webkit-overflow-scrolling:touch;">
   <div id="alb-inner" style="max-width:1080px;margin:0 auto;padding:clamp(22px,5vw,44px) clamp(16px,4vw,34px) 70px;"></div>
+</div>
+
+<!-- VISUALISEUR PHOTO (lightbox) -->
+<div id="lb-overlay" style="display:none;position:fixed;inset:0;z-index:9800;background:rgba(6,1,1,.96);-webkit-tap-highlight-color:transparent;touch-action:none;">
+  <div onclick="lbClose()" style="position:absolute;inset:0;cursor:zoom-out;"></div>
+  <!-- top bar -->
+  <div style="position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:max(14px,env(safe-area-inset-top)) 18px 14px;background:linear-gradient(to bottom,rgba(6,1,1,.85),transparent);pointer-events:none;">
+    <div id="lb-title" class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-shadow:0 1px 6px rgba(0,0,0,.7);"></div>
+    <button onclick="lbClose()" aria-label="Fermer" style="pointer-events:auto;flex-shrink:0;width:42px;height:42px;border-radius:50%;border:1px solid rgba(232,198,106,.45);background:rgba(18,4,4,.7);color:#e8c66a;font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+  </div>
+  <!-- stage -->
+  <div id="lb-stage" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:74px 12px 78px;pointer-events:none;">
+    <img id="lb-img" alt="" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 18px 60px rgba(0,0,0,.7);user-select:none;-webkit-user-drag:none;pointer-events:none;transition:opacity .18s ease;">
+  </div>
+  <!-- prev -->
+  <button id="lb-prev" onclick="lbStep(-1)" aria-label="Précédente" style="position:absolute;top:50%;left:max(8px,env(safe-area-inset-left));transform:translateY(-50%);z-index:2;width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,198,106,.4);background:rgba(18,4,4,.66);color:#e8c66a;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+  <!-- next -->
+  <button id="lb-next" onclick="lbStep(1)" aria-label="Suivante" style="position:absolute;top:50%;right:max(8px,env(safe-area-inset-right));transform:translateY(-50%);z-index:2;width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,198,106,.4);background:rgba(18,4,4,.66);color:#e8c66a;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+  <!-- bottom counter -->
+  <div style="position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;justify-content:center;padding:14px 18px max(16px,env(safe-area-inset-bottom));background:linear-gradient(to top,rgba(6,1,1,.85),transparent);pointer-events:none;">
+    <div id="lb-count" class="jp-serif" style="font-size:12px;letter-spacing:.16em;color:#e8c66a;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.7);"></div>
+  </div>
 </div>
 
 <script>
@@ -795,7 +813,7 @@ function unlockSite(){
     if(inner){ inner.style.position="relative"; inner.style.minHeight="100vh"; inner.style.overflow="visible"; }
   }
   document.body.style.overflow="";window.scrollTo(0,0);
-  if(ADMIN_MODE){ rerenderCards(); showAdminBanner(); var ve=document.getElementById("valise-edit"); if(ve)ve.style.display="flex"; }
+  if(ADMIN_MODE){ rerenderCards(); showAdminBanner(); var ve=document.getElementById("valise-edit"); if(ve)ve.style.display="flex"; var vb=document.getElementById("video-edit-btn"); if(vb)vb.style.display="block"; }
   cdTick(); syncVideoBtn();
   setTimeout(initReveal,60);
 }
@@ -932,6 +950,38 @@ function pickValisePhoto(){
   inp.onchange=function(){var f=inp.files&&inp.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){resizeImage(rd.result,function(durl){setValiseImg(durl);db.collection("state").doc("valise").set({data:durl}).catch(function(e){alert("Erreur : "+(e&&e.message||e));});});};rd.readAsDataURL(f);};
   inp.click();
 }
+
+/* ===== VIDÉO YOUTUBE (modifiable en admin + partagée via Firebase) ===== */
+var VIDEO_ID="";
+function ytId(u){
+  if(!u)return"";
+  u=String(u).trim();
+  if(/^[A-Za-z0-9_-]{11}$/.test(u))return u;
+  var m=u.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/);
+  return m?m[1]:"";
+}
+function renderVideo(){
+  var f=document.getElementById("video-frame");if(!f)return;
+  if(VIDEO_ID){
+    f.innerHTML='<iframe src="https://www.youtube.com/embed/'+VIDEO_ID+'?rel=0&playsinline=1" title="Vidéo surprise" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>';
+  }else{
+    f.innerHTML='<div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 60%, rgba(216,12,28,.35),transparent 40%),radial-gradient(circle at 72% 35%, rgba(232,198,106,.25),transparent 38%);"></div>'
+      +'<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:0 16px;">'
+      +'<div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.5);"><div style="margin-left:4px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #6e0f17;"></div></div>'
+      +'<div class="jp-body" style="font-size:12px;color:rgba(255,255,255,.65);font-style:italic;">'+(ADMIN_MODE?"Clique sur « Définir la vidéo » ci-dessous":"Vidéo bientôt disponible…")+'</div>'
+      +'</div>';
+  }
+}
+function changeVideo(){
+  if(!FB_OK){alert("Connexion à la base impossible. Réessaie.");return;}
+  var cur=VIDEO_ID?("https://youtu.be/"+VIDEO_ID):"";
+  var u=prompt("Colle le lien YouTube de la vidéo (ex : https://youtu.be/XXXXXXXXXXX).\nLaisse vide pour retirer la vidéo :", cur);
+  if(u===null)return;
+  if(u.trim()===""){ db.collection("state").doc("video").set({id:""}).catch(function(){}); return; }
+  var id=ytId(u);
+  if(!id){alert("Lien YouTube non reconnu. Vérifie le lien et réessaie.");return;}
+  db.collection("state").doc("video").set({id:id}).catch(function(e){alert("Erreur : "+(e&&e.message||e));});
+}
 (function(){var g=document.getElementById("jp-cards");if(g){var h="";for(var k=0;k<MEMBERS.length;k++)h+=cardHTML(MEMBERS[k],k);g.innerHTML=h;}renderTray();})();
 
 /* ===== ALBUMS NOSTALGIE (stockage Firebase) ===== */
@@ -942,6 +992,7 @@ function albArr(idx){return ALB_CACHE[idx]||[];}
 function openAlbums(){var o=document.getElementById("alb-overlay");if(!o)return;o.style.display="block";o.scrollTop=0;renderAlbumGrid();}
 function closeAlbums(){var o=document.getElementById("alb-overlay");if(o)o.style.display="none";ALB_VIEW={mode:'closed',idx:null};}
 function albRefreshView(){
+  if(LB.open)lbRender();
   var o=document.getElementById("alb-overlay");if(!o||o.style.display!=="block")return;
   if(ALB_VIEW.mode==='album'){openAlbum(ALB_VIEW.idx,true);}
   else{for(var j=0;j<ALBUMS.length;j++)updateCover(j);}
@@ -989,7 +1040,7 @@ function openAlbum(idx,keepScroll){
     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;">';
   for(var s=0;s<arr.length;s++){
     h+='<div class="alb-slot" style="position:relative;border-radius:12px;aspect-ratio:1;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.5);">'
-      +'<img src="'+arr[s].data+'" style="width:100%;height:100%;object-fit:cover;display:block;">'
+      +'<img src="'+arr[s].data+'" onclick="lbOpen('+idx+','+s+')" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">'
       +(ADMIN_MODE?'<button onclick="removeAlbumPhoto(\''+arr[s].id+'\')" title="Retirer" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:1px solid rgba(216,12,28,.85);background:rgba(18,4,4,.82);color:#ff8a98;font-size:12px;cursor:pointer;line-height:1;padding:0;">✕</button>':'')
       +'</div>';
   }
@@ -1026,6 +1077,62 @@ function removeAlbumPhoto(id){
   if(!FB_OK)return;
   db.collection("albumPhotos").doc(id).delete().catch(function(){});
 }
+/* ===== VISUALISEUR PHOTO (lightbox plein écran + défilement) ===== */
+var LB={idx:null,pos:0,open:false};
+function lbOpen(idx,pos){
+  var arr=albArr(idx);if(!arr.length)return;
+  LB.idx=idx;LB.pos=Math.max(0,Math.min(pos,arr.length-1));LB.open=true;
+  var o=document.getElementById("lb-overlay");if(!o)return;
+  o.style.display="block";
+  lbRender();
+}
+function lbRender(){
+  var arr=albArr(LB.idx);
+  if(!LB.open||!arr.length){lbClose();return;}
+  if(LB.pos>arr.length-1)LB.pos=arr.length-1;
+  if(LB.pos<0)LB.pos=0;
+  var img=document.getElementById("lb-img");
+  var cur=arr[LB.pos];
+  if(img&&cur){ img.style.opacity="0"; img.onload=function(){img.style.opacity="1";}; img.src=cur.data; }
+  var t=document.getElementById("lb-title");if(t)t.textContent=ALBUMS[LB.idx]||"";
+  var c=document.getElementById("lb-count");if(c)c.textContent=(LB.pos+1)+" / "+arr.length;
+  var multi=arr.length>1;
+  var p=document.getElementById("lb-prev"),n=document.getElementById("lb-next");
+  if(p)p.style.display=multi?"flex":"none";
+  if(n)n.style.display=multi?"flex":"none";
+}
+function lbStep(d){
+  var arr=albArr(LB.idx);if(!arr.length)return;
+  LB.pos=(LB.pos+d+arr.length)%arr.length;
+  lbRender();
+}
+function lbClose(){
+  LB.open=false;
+  var o=document.getElementById("lb-overlay");if(o)o.style.display="none";
+}
+/* clavier */
+document.addEventListener("keydown",function(e){
+  if(!LB.open)return;
+  if(e.key==="Escape")lbClose();
+  else if(e.key==="ArrowRight")lbStep(1);
+  else if(e.key==="ArrowLeft")lbStep(-1);
+});
+/* swipe tactile */
+(function(){
+  var sx=0,sy=0,t0=0,tracking=false;
+  var st=document.getElementById("lb-overlay");
+  if(!st)return;
+  st.addEventListener("touchstart",function(e){
+    if(!LB.open||e.touches.length!==1)return;
+    sx=e.touches[0].clientX;sy=e.touches[0].clientY;t0=Date.now();tracking=true;
+  },{passive:true});
+  st.addEventListener("touchend",function(e){
+    if(!tracking)return;tracking=false;
+    var t=e.changedTouches[0];var dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){ lbStep(dx<0?1:-1); }
+    else if(dy>70&&Math.abs(dy)>Math.abs(dx)){ lbClose(); }
+  },{passive:true});
+})();
 function cdBox(id,label){return '<div style="flex:1;max-width:100px;padding:13px 4px;border-radius:13px;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(232,198,106,.45),inset 0 1px 0 rgba(255,255,255,.05),0 12px 28px rgba(0,0,0,.5);">'
   +'<div class="cd-num" id="'+id+'" style="font-family:\'Playfair Display\',serif;font-size:clamp(26px,6vw,42px);">??</div>'
   +'<div style="font-family:\'Playfair Display\',serif;margin-top:5px;font-size:9px;letter-spacing:.16em;color:#c2a892;text-transform:uppercase;">'+label+'</div></div>';}
@@ -1099,8 +1206,13 @@ function initFirebaseSync(){
     try{localStorage.setItem("cd_revealed",CD_REVEALED?"1":"0");}catch(e){}
     cdTick(); syncVideoBtn();
   },function(e){console.warn("sync reveal",e);});
+  db.collection("state").doc("video").onSnapshot(function(doc){
+    VIDEO_ID=(doc.exists&&doc.data()&&doc.data().id)?doc.data().id:"";
+    renderVideo();
+  },function(e){console.warn("sync video",e);});
 }
 setValiseImg(VALISE_DEFAULT);
+renderVideo();
 initFirebaseSync();
 try{document.body.style.overflow="hidden";}catch(e){}
 </script>
