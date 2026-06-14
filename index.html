@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0D0010">
 <title>The Jackpot Squad 🃏</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Bebas+Neue&amp;family=Dancing+Script:wght@600;700&amp;family=Crimson+Pro:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Dancing+Script:wght@600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 /* ========== VARIABLES ========== */
 :root {
@@ -380,7 +380,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .add-item-btn:hover{border-color:var(--rose);color:var(--rose-light)}
 .valise-item-del:hover{color:var(--rose)}
 </style>
-<script type='text/javascript' nonce='vXchNZg0WmTrQPJMkqK/zA==' src='https://claude.ai/9nG3Lxy_WOuGHEJ12XXjiKC24-jbPVHbPJUIHynOPNK-D8WCdhigE66-Bzp1_BHbZ-0hpcQ-hDLkhyZ13lmoNI3gMF7xW0v0FrmxvwM1puTIxdcpoAPXzoTKLQQJ_jCIkFtMr5OGvR-eEF3ABNWjmX5HlfYhrJ8WGI3PsQu7C54QsbUXpWP1mSv3H6dmZ8W72YyIdIIjDmCNE-rxz6AQdfH25P9bcTSRZDCyVcJbv4e5i4Vd6_dpIAYHFHQvgFluFqF3yxkFeTxrvVDxPhCjiEepKmyMwCj9TzF8Gn-JNBfVwYFNLxAyw3MATDPUNPjUZgFOebnQ3nBPAh9Fttrrtr9ti0Io4px44_Km5omzXjs8ZIFNuSme5ZIjzge6JxgYOlEWrakBtMR7rvEfE95tVyjXamvRd5bxvMKUbW2xOvVzhixwjReYKv7H0pVlmTTvXDanI_25wqDTSijNl96EaYYCuiJfurC0Wl-Ph5xoetusSu3sX3MfpdbkHOzDdyESWciP_b2s0CsRsaXM-WhzgM_LQMNF7qYEFN50hRjMe4OzuUw'></script></head>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
 <body>
 
 <!-- PASSWORD -->
@@ -395,7 +397,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     #password-screen #pw-error{margin-top:14px;font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#ff6f86;opacity:0;transition:opacity .25s}
     #password-screen #pw-error.show{opacity:1}
   </style>
-  <div style="position:absolute;inset:0;overflow-y:auto;font-family:&#39;Cormorant Garamond&#39;,serif;background:radial-gradient(ellipse 80% 60% at 50% 32%, #1a0505 0%, #0d0202 38%, #060101 68%, #000000 100%);">
+  <div style="position:absolute;inset:0;overflow-y:auto;font-family:'Cormorant Garamond',serif;background:radial-gradient(ellipse 80% 60% at 50% 32%, #1a0505 0%, #0d0202 38%, #060101 68%, #000000 100%);">
 
     <!-- vignette -->
     <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 38% at 50% 30%, rgba(180,30,30,.10) 0%, transparent 62%);"></div>
@@ -409,25 +411,25 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
     <!-- scattered cards -->
     <div style="position:absolute;top:7%;left:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(-23deg);">
-      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">Q<br>♥</div>
+      <div style="position:absolute;top:5px;left:6px;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">Q<br>♥</div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#d80c1c;">♥</div>
     </div>
     <div style="position:absolute;top:8%;right:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(21deg);">
-      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#161616;text-align:center;">A<br>♠</div>
+      <div style="position:absolute;top:5px;left:6px;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;line-height:.9;color:#161616;text-align:center;">A<br>♠</div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:#161616;">♠</div>
     </div>
     <div style="position:absolute;bottom:9%;left:2%;width:66px;height:94px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#f0e6d2);box-shadow:0 12px 30px rgba(0,0,0,.65);transform:rotate(17deg);">
-      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">A<br>♥</div>
+      <div style="position:absolute;top:5px;left:6px;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;line-height:.9;color:#d80c1c;text-align:center;">A<br>♥</div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:32px;color:#d80c1c;">♥</div>
     </div>
     <div style="position:absolute;bottom:11%;right:3%;width:64px;height:90px;border-radius:7px;background:linear-gradient(135deg,#fffdf6,#ece2cd);box-shadow:0 12px 30px rgba(0,0,0,.62);transform:rotate(-17deg);">
-      <div style="position:absolute;top:5px;left:6px;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:12px;line-height:.9;color:#161616;text-align:center;">10<br>♠</div>
+      <div style="position:absolute;top:5px;left:6px;font-family:'Playfair Display',serif;font-weight:700;font-size:12px;line-height:.9;color:#161616;text-align:center;">10<br>♠</div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#161616;">♠</div>
     </div>
 
     <!-- poker chips -->
-    <div style="position:absolute;top:25%;left:5%;width:72px;height:72px;border-radius:50%;background:conic-gradient(#b01030 0 7.5%,#fbeede 7.5% 12.5%,#b01030 12.5% 20%,#fbeede 20% 25%,#b01030 25% 32.5%,#fbeede 32.5% 37.5%,#b01030 37.5% 45%,#fbeede 45% 50%,#b01030 50% 57.5%,#fbeede 57.5% 62.5%,#b01030 62.5% 70%,#fbeede 70% 75%,#b01030 75% 82.5%,#fbeede 82.5% 87.5%,#b01030 87.5% 95%,#fbeede 95% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(8deg);display:flex;align-items:center;justify-content:center;">
-      <div style="width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:17px;">♥</div>
+    <div style="position:absolute;top:25%;left:5%;width:46px;height:46px;border-radius:50%;background:conic-gradient(#b01030 0 7.5%,#fbeede 7.5% 12.5%,#b01030 12.5% 20%,#fbeede 20% 25%,#b01030 25% 32.5%,#fbeede 32.5% 37.5%,#b01030 37.5% 45%,#fbeede 45% 50%,#b01030 50% 57.5%,#fbeede 57.5% 62.5%,#b01030 62.5% 70%,#fbeede 70% 75%,#b01030 75% 82.5%,#fbeede 82.5% 87.5%,#b01030 87.5% 95%,#fbeede 95% 100%);box-shadow:0 6px 16px rgba(0,0,0,.6);transform:rotate(8deg);display:flex;align-items:center;justify-content:center;">
+      <div style="width:31px;height:31px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:12px;">♥</div>
     </div>
     <div style="position:absolute;bottom:24%;right:8%;width:66px;height:66px;border-radius:50%;background:conic-gradient(#b01030 0 8%,#fbeede 8% 12.5%,#b01030 12.5% 21%,#fbeede 21% 25%,#b01030 25% 33%,#fbeede 33% 37.5%,#b01030 37.5% 46%,#fbeede 46% 50%,#b01030 50% 58%,#fbeede 58% 62.5%,#b01030 62.5% 71%,#fbeede 71% 75%,#b01030 75% 83%,#fbeede 83% 87.5%,#b01030 87.5% 96%,#fbeede 96% 100%);box-shadow:0 8px 20px rgba(0,0,0,.6);transform:rotate(-6deg);display:flex;align-items:center;justify-content:center;">
       <div style="width:45px;height:45px;border-radius:50%;background:radial-gradient(circle at 38% 34%,#e0203f,#8b0017);border:2px dashed rgba(255,240,220,.5);display:flex;align-items:center;justify-content:center;color:#ffe9c2;font-size:15px;">♠</div>
@@ -446,25 +448,27 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
     <!-- logo -->
     <div style="position:absolute;top:18px;left:clamp(16px,4vw,46px);z-index:6;display:flex;flex-direction:column;line-height:1;">
-      <span style="font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:clamp(13px,1.7vw,17px);letter-spacing:.12em;color:#f4ecd8;">KENZA'S <span style="color:#d80c1c;">♥</span></span>
-      <span style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:clamp(9px,1.2vw,11px);letter-spacing:.34em;color:#c79a44;margin-top:3px;">LAUGH JACKPOT</span>
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(13px,1.7vw,17px);letter-spacing:.12em;color:#f4ecd8;">KENZA'S <span style="color:#d80c1c;">♥</span></span>
+      <span style="font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(9px,1.2vw,11px);letter-spacing:.34em;color:#c79a44;margin-top:3px;">LAUGH JACKPOT</span>
     </div>
 
     <!-- center content -->
     <div style="position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:100%;padding:clamp(86px,12vh,120px) 20px 76px;">
 
-      <div style="font-family:&#39;Dancing Script&#39;,cursive;font-size:clamp(60px,11vw,128px);line-height:.9;color:#d80c1c;text-shadow:0 0 32px rgba(216,12,28,.5),0 3px 6px rgba(0,0,0,.8);">Kenza</div>
+      <div style="font-family:'Dancing Script',cursive;font-size:clamp(60px,11vw,128px);line-height:.9;color:#d80c1c;text-shadow:0 0 32px rgba(216,12,28,.5),0 3px 6px rgba(0,0,0,.8);">Kenza</div>
 
-      <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:clamp(18px,3.1vw,34px);letter-spacing:.16em;color:#f2e8d4;margin-top:6px;">A DÉCROCHÉ LE</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(18px,3.1vw,34px);letter-spacing:.16em;color:#f2e8d4;margin-top:6px;">A DÉCROCHÉ LE</div>
 
-      <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:clamp(58px,13vw,150px);letter-spacing:.04em;line-height:1.04;padding-bottom:.1em;margin-top:4px;background:linear-gradient(180deg,#fff4cf 0%,#f4dd8e 30%,#d9ad48 60%,#a9802f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:jp-glow 3.4s ease-in-out infinite;">JACKPOT</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(58px,13vw,150px);letter-spacing:.04em;line-height:1.04;padding-bottom:.1em;margin-top:4px;background:linear-gradient(180deg,#fff4cf 0%,#f4dd8e 30%,#d9ad48 60%,#a9802f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:jp-glow 3.4s ease-in-out infinite;">JACKPOT</div>
 
       <!-- COMPTE A REBOURS (remplace le mot de passe après déverrouillage) -->
       <div id="pw-block" style="width:min(92vw,460px);margin-top:26px;">
-        <div style="font-family:&#39;Playfair Display&#39;,serif;font-weight:600;font-size:12px;letter-spacing:.36em;color:#c79a44;margin-bottom:13px;">— ENTRE LE MOT DE PASSE —</div>
+        <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:12px;letter-spacing:.36em;color:#c79a44;margin-bottom:13px;">— ENTRE LE MOT DE PASSE —</div>
         <div style="display:flex;align-items:stretch;gap:10px;">
-          <input class="jp-input" type="password" id="pw-input" placeholder="• • • • • •" autocomplete="off" style="flex:1;min-width:0;background:linear-gradient(180deg,#150b05,#0b0603);border:1.5px solid rgba(232,198,106,.55);border-radius:8px;color:#f4dd8e;font-family:&#39;Playfair Display&#39;,serif;font-size:18px;letter-spacing:.25em;text-align:center;padding:14px 12px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6);">
-          <button onclick="checkPassword()" style="flex-shrink:0;padding:0 24px;border:none;border-radius:8px;cursor:pointer;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;font-size:13px;letter-spacing:.14em;box-shadow:0 6px 18px rgba(216,12,28,.45),inset 0 1px 0 rgba(255,255,255,.25);">ENTRER</button>
+          <input class="jp-input" type="password" id="pw-input" placeholder="• • • • • •" autocomplete="off"
+            style="flex:1;min-width:0;background:linear-gradient(180deg,#150b05,#0b0603);border:1.5px solid rgba(232,198,106,.55);border-radius:8px;color:#f4dd8e;font-family:'Playfair Display',serif;font-size:18px;letter-spacing:.25em;text-align:center;padding:14px 12px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6);">
+          <button onclick="checkPassword()"
+            style="flex-shrink:0;padding:0 24px;border:none;border-radius:8px;cursor:pointer;background:linear-gradient(135deg,#7a000f,#d80c1c,#7a000f);color:#fff4e6;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;letter-spacing:.14em;box-shadow:0 6px 18px rgba(216,12,28,.45),inset 0 1px 0 rgba(255,255,255,.25);">ENTRER</button>
         </div>
         <div id="pw-error">Mauvaise pioche, chérie 🃏</div>
       </div>
@@ -475,15 +479,15 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
           <!-- reel K -->
           <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
             <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:0s;">
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#1c1c1c;">♠</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♦</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♥</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
             </div>
             <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
           </div>
@@ -491,13 +495,13 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
           <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
             <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:.12s;">
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">7</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">7</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#1c1c1c;">♠</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
             </div>
             <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
@@ -505,15 +509,15 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
           <!-- reel S -->
           <div style="position:relative;width:66px;height:82px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#fffdf6,#e9dec9);box-shadow:inset 0 -6px 10px rgba(0,0,0,.12),inset 0 4px 8px rgba(255,255,255,.7);">
             <div style="position:absolute;top:0;left:0;width:100%;animation:jp-reel 1.4s cubic-bezier(.15,.85,.25,1) infinite;animation-delay:.24s;">
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#d80c1c;">♥</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">A</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">K</div>
               <div style="height:82px;display:flex;align-items:center;justify-content:center;font-size:42px;color:#d80c1c;">♦</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:40px;color:#1c1c1c;">10</div>
-              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">Q</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">J</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:40px;color:#1c1c1c;">10</div>
+              <div style="height:82px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:#1c1c1c;">S</div>
             </div>
             <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 16px 16px -12px rgba(0,0,0,.45),inset 0 -16px 16px -12px rgba(0,0,0,.45);"></div>
           </div>
@@ -522,7 +526,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <div style="position:absolute;top:-30px;right:-36px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 36% 32%,#e0203f,#8b0017);box-shadow:0 5px 12px rgba(0,0,0,.55),inset 0 2px 4px rgba(255,255,255,.4);"></div>
       </div>
 
-      <div style="font-family:&#39;Playfair Display&#39;,serif;font-style:italic;font-size:clamp(14px,2vw,18px);letter-spacing:.18em;color:#9c8a7a;margin-top:30px;">Les paris sont ouverts…</div>
+      <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(14px,2vw,18px);letter-spacing:.18em;color:#9c8a7a;margin-top:30px;">Les paris sont ouverts…</div>
     </div>
   </div>
 </div>
@@ -553,14 +557,26 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   .jp-mrow .jp-body{line-height:1.35}
   @keyframes jpBounce{0%,100%{transform:translateY(0);opacity:.7}50%{transform:translateY(7px);opacity:1}}
   .cd-num{font-weight:700;font-size:clamp(34px,7vw,62px);line-height:1;background:linear-gradient(180deg,#fff4cf 0%,#f4dd8e 40%,#d9ad48 70%,#a9802f 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .jp-role{touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}
+  .jp-role:active{cursor:grabbing}
+  .jp-role:hover{border-color:rgba(232,198,106,.95)!important;transform:translateY(-2px)}
+  .jp-card{aspect-ratio:5/7}
+  .jp-droptarget{cursor:default}
+  .jp-card.drop-hover .jp-face{box-shadow:0 0 0 3px #e8c66a,0 14px 34px rgba(0,0,0,.55)!important}
+  .jp-card.drop-hover{transform:translateY(-3px) scale(1.02)}
+  .alb-cover{transition:transform .2s,box-shadow .2s;cursor:pointer}
+  .alb-cover:hover{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(232,198,106,.7),0 18px 40px rgba(0,0,0,.6)}
+  .alb-slot:hover .alb-add{border-color:rgba(232,198,106,.9);color:#e8c66a}
 </style>
 <div id="site" style="position:relative;background:#070202;min-height:100vh;overflow:hidden;animation:jpFade .9s ease both;">
   <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 55% 35% at 50% 0%, rgba(150,18,18,.18),transparent 62%),radial-gradient(ellipse 45% 30% at 12% 45%, rgba(140,16,16,.12),transparent 60%),radial-gradient(ellipse 45% 30% at 88% 75%, rgba(140,16,16,.12),transparent 60%);"></div>
   <div style="position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:clamp(48px,8vw,90px) clamp(18px,4vw,40px) 0;">
     <section style="text-align:center;">
       <div class="jp-reveal" style="display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px);flex-wrap:nowrap;"><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,transparent,#c79a44);"></span><h2 class="jp-serif" style="margin:0;font-weight:700;font-size:clamp(20px,2.9vw,34px);letter-spacing:.12em;color:#f2e8d4;text-transform:uppercase;text-align:center;">Les 9 cartes du Jackpot <span style="color:#d80c1c;">&hearts;</span></h2><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,#c79a44,transparent);"></span></div>
-      <p class="jp-body jp-reveal" style="margin:14px auto 0;max-width:420px;font-size:clamp(15px,2vw,17px);color:#c2a892;line-height:1.5;">Clique sur une carte pour découvrir<br>ton rôle dans cette aventure&nbsp;!</p>
-      <div id="jp-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:680px;margin:clamp(28px,5vw,46px) auto 0;"></div>
+      <p class="jp-body jp-reveal" style="margin:14px auto 0;max-width:470px;font-size:clamp(15px,2vw,17px);color:#c2a892;line-height:1.5;">Fais glisser le rôle correspondant à chacune des filles dans cette aventure&nbsp;!</p>
+      <div id="jp-roles-tray" class="jp-reveal" style="max-width:700px;margin:clamp(20px,3.5vw,30px) auto 0;"></div>
+      <div id="jp-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,26px);max-width:680px;margin:clamp(20px,4vw,34px) auto 0;"></div>
+      <button onclick="openAlbums()" class="jp-btn jp-serif jp-reveal" style="margin:clamp(30px,5vw,48px) auto 0;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border:1px solid rgba(232,198,106,.5);border-radius:30px;background:linear-gradient(135deg,#1c0f0a,#0c0604);color:#e8c66a;font-weight:700;font-size:clamp(12px,1.6vw,14px);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(216,12,28,.3),0 10px 28px rgba(0,0,0,.5);cursor:pointer;">📸 Découvre la nostalgie des jours heureux</button>
     </section>
     <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(30px,5vw,56px);margin-top:clamp(60px,9vw,110px);align-items:start;">
       <div style="text-align:center;">
@@ -568,7 +584,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <div class="jp-reveal" style="position:relative;border-radius:18px;padding:14px;background:linear-gradient(160deg,#1c0f0a,#0c0604);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 18px 44px rgba(0,0,0,.6);">
           <div style="position:absolute;top:8px;left:10px;font-size:22px;color:rgba(216,12,28,.5);">&spades;</div>
           <div style="position:absolute;bottom:8px;right:12px;font-size:22px;color:rgba(216,12,28,.5);">&hearts;</div>
-          <div onclick="alert(&#39;Ajoute ta vidéo surprise ici&#39;)" class="jp-btn" style="position:relative;border-radius:10px;aspect-ratio:16/10;background:radial-gradient(circle at 50% 45%, #3a1410, #120605);overflow:hidden;display:flex;align-items:center;justify-content:center;">
+          <div onclick="alert('Ajoute ta vidéo surprise ici')" class="jp-btn" style="position:relative;border-radius:10px;aspect-ratio:16/10;background:radial-gradient(circle at 50% 45%, #3a1410, #120605);overflow:hidden;display:flex;align-items:center;justify-content:center;">
             <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 30% 60%, rgba(216,12,28,.35),transparent 40%),radial-gradient(circle at 72% 35%, rgba(232,198,106,.25),transparent 38%);"></div>
             <div style="position:relative;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.5);"><div style="margin-left:4px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #6e0f17;"></div></div>
             <div style="position:absolute;left:12px;right:12px;bottom:10px;height:4px;border-radius:3px;background:rgba(255,255,255,.25);"><div style="width:4%;height:100%;border-radius:3px;background:#d80c1c;"></div></div>
@@ -589,7 +605,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <div id="jp-checklist" class="jp-body" style="display:none;margin-top:18px;text-align:left;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:18px 22px;background:rgba(120,8,8,.14);">
           <div class="jp-serif" style="font-weight:700;font-size:13px;letter-spacing:.1em;color:#e8c66a;text-transform:uppercase;margin-bottom:10px;">Dress code Kenza · blanc intégral</div>
           <ul style="margin:0;padding-left:20px;color:#cbb4a4;font-size:15px;line-height:1.9;">
-            <li>Maillots de bain blancs (minimum 2)</li><li>Robes de plage blanches / cover-up</li><li>Tenue de soirée blanche (LA robe)</li><li>Talons blancs ou dorés</li><li>Accessoires blancs / dorés</li><li>Lunettes de soleil glamour</li><li>Trousse de beauté complète</li><li>Ton plus beau sourire de future mariée 💍</li>
+            <li>Maillot de bain (minimum 2)</li><li>Robes de plage blanches / cover-up</li><li>Tenue de soirée blanche (LA robe)</li><li>Talons</li><li>Lunettes de soleil glamour</li><li>Trousse de beauté complète</li><li>Des tenues de plage (shorts, débardeur, sandales…)</li><li>Ton plus beau sourire de future mariée 💍</li>
           </ul>
         </div>
       </div>
@@ -610,23 +626,19 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <h3 class="jp-serif jp-reveal" style="margin:0;font-weight:700;font-size:clamp(18px,2.2vw,24px);letter-spacing:.08em;color:#f2e8d4;text-transform:uppercase;">Défis &amp; Missions</h3>
         <p class="jp-body jp-reveal" style="margin:6px 0 20px;font-size:14px;color:#b89a8a;">Des missions secrètes vous attendent…<br>Serez-vous prêtes à relever le défi&nbsp;?</p>
         <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">😄</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Faire rire Kenza</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">en moins de 30 secondes</div></div></div>
-          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">📸</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Refaire une photo</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">d'enfance</div></div></div>
-          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">❤️</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Obtenir une déclaration</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">d'amour pour SAAD</div></div></div>
-          <div id="jp-more-missions" style="display:none;flex-direction:column;gap:12px;">
-            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">🍸</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Inventer un cocktail</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">au nom de la mariée</div></div></div>
-            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">💃</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Lancer le dancefloor</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">avant minuit</div></div></div>
-            <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">🎤</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Karaoké imposé</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">la chanson de Kenza</div></div></div>
-          </div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">😂</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Faire rire Kenza</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">jusqu'au pipi&nbsp;!</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">📱</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Faire des TikToks</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">mémorables</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">💃</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Faire la choré</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">de l'EVJF</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(216,12,28,.45);border-radius:12px;background:rgba(120,8,8,.14);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(216,12,28,.55);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(216,12,28,.12);">📸</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#f2e8d4;text-transform:uppercase;">Recréer une photo</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">d'enfance</div></div></div>
+          <div class="jp-mrow jp-reveal" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px dashed rgba(232,198,106,.5);border-radius:12px;background:rgba(232,198,106,.06);transition:border-color .25s,background .25s;"><div style="flex-shrink:0;width:40px;height:40px;border-radius:10px;border:1px solid rgba(232,198,106,.6);display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(232,198,106,.1);">🤫</div><div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.05em;color:#e8c66a;text-transform:uppercase;">Et bien d'autres surprises…</div><div class="jp-body" style="font-style:italic;font-size:14px;color:#b89a8a;margin-top:2px;">qu'on garde encore secrètes</div></div></div>
         </div>
-        <button onclick="toggleMissions()" class="jp-btn jp-serif jp-reveal" style="margin-top:16px;width:100%;padding:11px;border:1px solid rgba(232,198,106,.4);border-radius:8px;background:rgba(216,12,28,.12);color:#e8c66a;font-weight:700;font-size:12px;letter-spacing:.12em;">TOUTES LES MISSIONS ▾</button>
       </div>
       <div>
         <div class="jp-reveal" style="display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,22px);flex-wrap:nowrap;"><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,transparent,#c79a44);"></span><h2 class="jp-serif" style="margin:0;font-weight:700;font-size:clamp(20px,2.9vw,34px);letter-spacing:.12em;color:#f2e8d4;text-transform:uppercase;text-align:center;">Infos pratiques <span style="color:#d80c1c;">&hearts;</span></h2><span style="height:1px;width:clamp(30px,6vw,70px);background:linear-gradient(90deg,#c79a44,transparent);"></span></div>
         <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
-          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><rect x="7" y="13" width="3" height="3" fill="#e8c66a" stroke="none"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Dates</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Bientôt<br>dévoilées…</div></div>
-          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Destination</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">La destination<br>reste secrète…</div></div>
-          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewbox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L19 18l1 .5V21a1 1 0 0 1-1 1A16 16 0 0 1 3 6a1 1 0 0 1 1-1z"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Contact</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Une question&nbsp;?<br>Contactez l'organisatrice</div></div>
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><rect x="7" y="13" width="3" height="3" fill="#e8c66a" stroke="none"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Dates</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Bientôt<br>dévoilées…</div></div>
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Destination</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">La destination<br>reste secrète…</div></div>
+          <div class="jp-reveal" style="flex:1;min-width:150px;border:1px solid rgba(216,12,28,.35);border-radius:14px;padding:22px 16px;text-align:center;background:rgba(120,8,8,.14);"><div style="display:flex;justify-content:center;margin-bottom:12px;"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e8c66a" stroke-width="1.4"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L19 18l1 .5V21a1 1 0 0 1-1 1A16 16 0 0 1 3 6a1 1 0 0 1 1-1z"/></svg></div><div class="jp-serif" style="font-weight:700;font-size:14px;letter-spacing:.14em;color:#f2e8d4;text-transform:uppercase;">Contact</div><div class="jp-body" style="font-size:14px;color:#b89a8a;margin-top:8px;line-height:1.5;">Une question&nbsp;?<br>Contactez l'organisatrice</div></div>
         </div>
         <div class="jp-reveal" style="margin-top:18px;border:1px solid rgba(216,12,28,.4);border-radius:14px;padding:22px;text-align:center;background:rgba(120,8,8,.16);">
           <p class="jp-serif" style="margin:0;font-size:clamp(15px,2vw,18px);color:#f2e8d4;line-height:1.6;">Prépare-toi pour le plus beau<br>week-end de ta vie&nbsp;!</p>
@@ -645,24 +657,118 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
       <div style="flex:1;min-width:240px;text-align:center;">
         <p class="jp-serif" style="margin:0;font-style:italic;font-size:clamp(13px,1.6vw,15px);color:#3a2a22;line-height:1.6;">"Après des années de jeu, de paris, de fous rires et d'amour…<br>Kenza a décroché le plus beau Jackpot&nbsp;: <span style="color:#d80c1c;font-weight:700;font-style:normal;">SAAD &hearts;</span>"</p>
         <div style="display:flex;justify-content:center;gap:22px;margin-top:14px;">
-          <a href="#" class="jp-soc" aria-label="Instagram" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" class="jp-soc" aria-label="WhatsApp" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4.6A8 8 0 1 1 8 20.4L3 21z"/></svg></a>
-          <a href="#" class="jp-soc" aria-label="TikTok" style="color:#5a3a2a;"><svg width="20" height="20" viewbox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.5 3.5 3.8V9c-1.4 0-2.7-.4-3.8-1.1v6.4A5.3 5.3 0 1 1 11 9v2.4a3 3 0 1 0 2.4 2.9V3H16z"/></svg></a>
+          <a href="#" class="jp-soc" aria-label="Instagram" style="color:#5a3a2a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="jp-soc" aria-label="WhatsApp" style="color:#5a3a2a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4.6A8 8 0 1 1 8 20.4L3 21z"/></svg></a>
+          <a href="#" class="jp-soc" aria-label="TikTok" style="color:#5a3a2a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.5 3.5 3.8V9c-1.4 0-2.7-.4-3.8-1.1v6.4A5.3 5.3 0 1 1 11 9v2.4a3 3 0 1 0 2.4 2.9V3H16z"/></svg></a>
         </div>
       </div>
       <div style="display:flex;gap:4px;">
-        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(-8deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
-        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(2deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#d80c1c;font-size:13px;">A&hearts;</div>
-        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(11deg);display:flex;align-items:center;justify-content:center;font-family:&#39;Playfair Display&#39;,serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(-8deg);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(2deg);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#d80c1c;font-size:13px;">A&hearts;</div>
+        <div style="width:34px;height:48px;border-radius:5px;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2);transform:rotate(11deg);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#161616;font-size:13px;">A&spades;</div>
       </div>
     </div>
   </footer>
 </div>
+
+<!-- ALBUMS NOSTALGIE -->
+<div id="alb-overlay" style="display:none;position:fixed;inset:0;z-index:9500;background:radial-gradient(ellipse 70% 50% at 50% 0%, #1a0505 0%, #0a0202 55%, #060101 100%);overflow-y:auto;-webkit-overflow-scrolling:touch;">
+  <div id="alb-inner" style="max-width:1080px;margin:0 auto;padding:clamp(22px,5vw,44px) clamp(16px,4vw,34px) 70px;"></div>
+</div>
+
 <script>
 var PWS=["jackpotSK26","admin26","revealrebours"];
 var ADMIN_MODE=false;
+
+/* ===== FIREBASE (partage temps réel sur tous les téléphones) ===== */
+var firebaseConfig={
+  apiKey:"AIzaSyDU8zI4nwYMI9zqolSf1exu5aG1aahalvA",
+  authDomain:"evjf-kenza.firebaseapp.com",
+  projectId:"evjf-kenza",
+  storageBucket:"evjf-kenza.firebasestorage.app",
+  messagingSenderId:"890482090762",
+  appId:"1:890482090762:web:86009112a2c2e56acb50f3"
+};
+var FB_OK=false, db=null;
+try{ if(window.firebase){ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB_OK=true; } }catch(e){ FB_OK=false; console.warn("Firebase init échouée",e); }
 var CARD_PHOTOS={};
 try{ CARD_PHOTOS=JSON.parse(localStorage.getItem("card_photos")||"{}"); }catch(e){ CARD_PHOTOS={}; }
+
+/* ===== RÔLES (drag & drop) ===== */
+var ROLES=[
+ {id:'temoin',label:'La Témoin',icon:'👑'},
+ {id:'orga',label:"L'Organisatrice",icon:'📋'},
+ {id:'dj',label:'La DJ',icon:'🎧'},
+ {id:'photo',label:'La Photographe',icon:'📷'},
+ {id:'boute',label:'La Boute-en-train',icon:'🤪'},
+ {id:'maman',label:'La Maman du groupe',icon:'🐥'},
+ {id:'reine',label:'La Reine du dancefloor',icon:'💃'},
+ {id:'treso',label:'La Trésorière',icon:'💸'}
+];
+var CARD_ROLES={};
+try{ CARD_ROLES=JSON.parse(localStorage.getItem("card_roles")||"{}"); }catch(e){ CARD_ROLES={}; }
+function roleById(id){for(var i=0;i<ROLES.length;i++){if(ROLES[i].id===id)return ROLES[i];}return null;}
+function saveRoles(){try{localStorage.setItem("card_roles",JSON.stringify(CARD_ROLES));}catch(e){}}
+function assignedRoleIds(){var u={};for(var k in CARD_ROLES){if(CARD_ROLES[k])u[CARD_ROLES[k]]=1;}return u;}
+function renderTray(){
+  var t=document.getElementById("jp-roles-tray");if(!t)return;
+  var used=assignedRoleIds();var pills="";var rem=0;
+  for(var i=0;i<ROLES.length;i++){var r=ROLES[i];if(used[r.id])continue;rem++;
+    pills+='<div class="jp-role" data-role="'+r.id+'" style="display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1px solid rgba(232,198,106,.55);border-radius:24px;background:linear-gradient(135deg,#1c0f0a,#0c0604);color:#f2e8d4;font-family:\'Playfair Display\',serif;font-weight:700;font-size:13px;letter-spacing:.02em;box-shadow:0 6px 16px rgba(0,0,0,.45);transition:transform .15s,border-color .2s;"><span style="font-size:15px;">'+r.icon+'</span>'+r.label+'</div>';
+  }
+  if(rem===0){
+    t.innerHTML='<div class="jp-serif" style="display:inline-block;padding:11px 22px;border:1px solid rgba(232,198,106,.5);border-radius:24px;background:rgba(232,198,106,.08);color:#e8c66a;font-weight:700;font-size:13px;letter-spacing:.05em;">🎉 Tous les rôles sont distribués&nbsp;! Touche ↺ sur une carte pour changer.</div>';
+  }else{
+    t.innerHTML='<div class="jp-body" style="font-size:13px;color:#9c8a7a;margin-bottom:12px;font-style:italic;">Glisse chaque rôle sur une carte ↓</div><div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">'+pills+'</div>';
+  }
+}
+function doAssign(idx,roleId){
+  for(var k in CARD_ROLES){if(CARD_ROLES[k]===roleId)delete CARD_ROLES[k];}
+  CARD_ROLES[idx]=roleId;rerenderCards();renderTray();persistRoles();
+}
+function resetCardRole(ev,idx){ev.stopPropagation();delete CARD_ROLES[idx];rerenderCards();renderTray();persistRoles();}
+function persistRoles(){
+  if(FB_OK){ db.collection("state").doc("roles").set({map:CARD_ROLES}).catch(function(){}); return; }
+  saveRoles();
+}
+
+/* pointer-based drag (fonctionne au tactile) */
+var jpDrag=null;
+function jpMoveGhost(x,y){if(jpDrag&&jpDrag.ghost){jpDrag.ghost.style.left=x+'px';jpDrag.ghost.style.top=y+'px';}}
+function jpCardAt(x,y){var el=document.elementFromPoint(x,y);if(!el||!el.closest)return null;return el.closest('.jp-acceptdrop');}
+function jpHighlight(x,y){
+  var c=jpCardAt(x,y);
+  if(jpDrag.hover&&jpDrag.hover!==c)jpDrag.hover.classList.remove('drop-hover');
+  if(c){c.classList.add('drop-hover');jpDrag.hover=c;}else{jpDrag.hover=null;}
+}
+document.addEventListener('pointerdown',function(e){
+  var pill=e.target.closest?e.target.closest('.jp-role'):null;
+  if(!pill)return;
+  e.preventDefault();
+  var roleId=pill.getAttribute('data-role');var r=roleById(roleId);if(!r)return;
+  var g=document.createElement('div');
+  g.style.cssText='position:fixed;z-index:99999;pointer-events:none;padding:9px 15px;border-radius:24px;background:linear-gradient(135deg,#7a000f,#d80c1c);color:#fff4e6;font-family:\'Playfair Display\',serif;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 12px 30px rgba(0,0,0,.6);transform:translate(-50%,-50%) scale(1.06);';
+  g.innerHTML=r.icon+'&nbsp;'+r.label;
+  document.body.appendChild(g);
+  pill.style.opacity='.3';
+  jpDrag={roleId:roleId,ghost:g,pill:pill,hover:null};
+  jpMoveGhost(e.clientX,e.clientY);
+},{passive:false});
+document.addEventListener('pointermove',function(e){
+  if(!jpDrag)return;
+  e.preventDefault();
+  jpMoveGhost(e.clientX,e.clientY);
+  jpHighlight(e.clientX,e.clientY);
+},{passive:false});
+document.addEventListener('pointerup',function(e){
+  if(!jpDrag)return;
+  var c=jpCardAt(e.clientX,e.clientY);
+  if(c){var idx=parseInt(c.getAttribute('data-idx'),10);if(!isNaN(idx)&&MEMBERS[idx]&&!MEMBERS[idx].bride){doAssign(idx,jpDrag.roleId);}}
+  if(jpDrag.hover)jpDrag.hover.classList.remove('drop-hover');
+  if(jpDrag.ghost&&jpDrag.ghost.parentNode)jpDrag.ghost.parentNode.removeChild(jpDrag.ghost);
+  if(jpDrag.pill)jpDrag.pill.style.opacity='';
+  jpDrag=null;
+});
 function checkPassword(){
   var v=document.getElementById("pw-input").value.trim();
   var e=document.getElementById("pw-error");
@@ -702,48 +808,65 @@ var MEMBERS=[
 ];
 function cardHTML(m,i){
   var sc=m.red?"#d80c1c":"#161616";
+  var assignedId=CARD_ROLES[i];
+  var roleLabel=m.bride?"La Mariée":((assignedId&&roleById(assignedId))?roleById(assignedId).label:"");
+  var isAssigned=m.bride||!!assignedId;
   var corner='<div class="jp-serif" style="font-weight:700;font-size:12px;line-height:.8;color:'+sc+';">'+m.v+'<br>'+m.s+'</div>';
   var badge=m.bride?'<div class="jp-serif" style="position:absolute;top:7px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#7a000f,#d80c1c);color:#fff4e6;font-size:8px;font-weight:700;letter-spacing:.12em;padding:3px 9px;border-radius:20px;white-space:nowrap;z-index:2;">LA MARIEE</div>':"";
-  var back='<div class="jp-face jp-back" style="background:linear-gradient(135deg,#f5ecd6,#e6d6b6);padding:6px;display:flex;">'
-    +'<div style="flex:1;border-radius:8px;background:#5c0a11;background-image:repeating-linear-gradient(45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px),repeating-linear-gradient(-45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px);box-shadow:inset 0 0 0 2px rgba(232,198,106,.55),inset 0 0 0 5px rgba(92,10,17,.7);display:flex;align-items:center;justify-content:center;">'
-    +'<div class="jp-serif" style="width:48%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(232,198,106,.7);background:radial-gradient(circle,#6e0f17,#480810);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:clamp(15px,3.4vw,25px);color:#e8c66a;letter-spacing:.02em;">KS</div>'
-    +'</div></div>';
   var photo=CARD_PHOTOS[i];
+  var roleChip=roleLabel?'<div class="jp-serif" style="margin-top:6px;display:inline-block;font-size:9px;letter-spacing:.05em;color:#1c0c08;background:linear-gradient(135deg,#f4dd8e,#d9ad48);padding:3px 11px;border-radius:20px;text-transform:uppercase;font-weight:700;">'+roleLabel+'</div>':'';
+
+  if(!isAssigned){
+    var back='<div class="jp-face jp-back" style="opacity:1;transform:none;background:linear-gradient(135deg,#f5ecd6,#e6d6b6);padding:6px;display:flex;">'
+      +'<div style="flex:1;border-radius:8px;background:#5c0a11;background-image:repeating-linear-gradient(45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px),repeating-linear-gradient(-45deg,rgba(232,198,106,.13) 0 2px,transparent 2px 13px);box-shadow:inset 0 0 0 2px rgba(232,198,106,.55),inset 0 0 0 5px rgba(92,10,17,.7);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">'
+      +'<div class="jp-serif" style="width:44%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(232,198,106,.7);background:radial-gradient(circle,#6e0f17,#480810);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:clamp(14px,3vw,22px);color:#e8c66a;">KS</div>'
+      +'<div class="jp-serif" style="margin-top:8px;font-size:8.5px;letter-spacing:.1em;color:#e8c66a;text-transform:uppercase;opacity:.9;">Dépose un rôle</div>'
+      +'<div class="jp-serif" style="font-size:9px;color:#f0d8a0;margin-top:3px;opacity:.7;">'+m.a+'</div>'
+      +'</div></div>';
+    return '<div class="jp-card jp-droptarget jp-acceptdrop jp-reveal" data-idx="'+i+'" style="transition-delay:'+(i*0.05).toFixed(2)+'s;"><div class="jp-inner">'+back+'</div></div>';
+  }
+
   var front;
   if(photo){
-    front='<div class="jp-face jp-front" style="background:#120605;padding:0;overflow:hidden;color:#fff4e6;'+(m.bride?'box-shadow:inset 0 0 0 2px rgba(232,198,106,.7),0 14px 34px rgba(0,0,0,.55);':'')+'">'
+    front='<div class="jp-face jp-front" style="opacity:1;transform:none;background:#120605;padding:0;overflow:hidden;color:#fff4e6;'+(m.bride?'box-shadow:inset 0 0 0 2px rgba(232,198,106,.7),0 14px 34px rgba(0,0,0,.55);':'')+'">'
       +'<img src="'+photo+'" alt="'+m.n+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">'
-      +'<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(18,4,4,.92) 0%,rgba(18,4,4,.25) 44%,rgba(18,4,4,.05) 66%,transparent 100%);"></div>'
+      +'<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(18,4,4,.94) 0%,rgba(18,4,4,.3) 46%,rgba(18,4,4,.05) 70%,transparent 100%);"></div>'
       +badge
       +'<div class="jp-serif" style="position:absolute;top:7px;left:9px;font-weight:700;font-size:12px;line-height:.8;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.85);">'+m.v+'<br>'+m.s+'</div>'
-      +'<div style="position:absolute;left:0;right:0;bottom:0;padding:10px 8px;text-align:center;">'
+      +'<div style="position:absolute;left:0;right:0;bottom:0;padding:11px 8px;text-align:center;">'
       +'<div class="jp-serif" style="font-weight:700;font-size:clamp(13px,1.7vw,17px);color:#fff4e6;text-shadow:0 1px 4px rgba(0,0,0,.7);">'+m.n+'</div>'
-      +'<div class="jp-body" style="font-style:italic;font-size:12px;color:#e8c66a;">'+m.a+'</div>'
+      +'<div class="jp-body" style="font-style:italic;font-size:12px;color:#f0d8a0;">'+m.a+'</div>'
+      +roleChip
       +'</div>'
       +'</div>';
   }else{
-    front='<div class="jp-face jp-front" style="background:linear-gradient(160deg,#fffdf7,#efe6d4);padding:9px;display:flex;flex-direction:column;color:#1c1c1c;'+(m.bride?'box-shadow:inset 0 0 0 2px rgba(232,198,106,.7),0 14px 34px rgba(0,0,0,.55);':'')+'">'
+    front='<div class="jp-face jp-front" style="opacity:1;transform:none;background:linear-gradient(160deg,#fffdf7,#efe6d4);padding:9px;display:flex;flex-direction:column;color:#1c1c1c;'+(m.bride?'box-shadow:inset 0 0 0 2px rgba(232,198,106,.7),0 14px 34px rgba(0,0,0,.55);':'')+'">'
       +badge
       +'<div style="text-align:left;">'+corner+'</div>'
       +'<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">'
-      +'<div style="font-size:clamp(22px,5vw,34px);color:'+sc+';line-height:1;">'+m.s+'</div>'
-      +'<div class="jp-serif" style="font-weight:700;font-size:clamp(13px,1.7vw,17px);margin-top:5px;">'+m.n+'</div>'
+      +'<div style="font-size:clamp(20px,4.5vw,30px);color:'+sc+';line-height:1;">'+m.s+'</div>'
+      +'<div class="jp-serif" style="font-weight:700;font-size:clamp(13px,1.7vw,17px);margin-top:4px;">'+m.n+'</div>'
       +'<div class="jp-body" style="font-style:italic;font-size:12px;color:#7a5a2a;">'+m.a+'</div>'
-      +'<div class="jp-serif" style="font-size:8.5px;letter-spacing:.1em;color:#b8902f;margin-top:4px;text-transform:uppercase;">'+m.r+'</div>'
+      +roleChip
       +'</div>'
       +'<div style="text-align:right;transform:rotate(180deg);">'+corner+'</div>'
       +'</div>';
   }
+  var controls='';
+  if(!m.bride){
+    controls+='<button onclick="resetCardRole(event,'+i+')" title="Changer le rôle" style="position:absolute;top:5px;'+(ADMIN_MODE?'left:5px':'right:5px')+';z-index:6;width:26px;height:26px;border-radius:50%;border:1px solid rgba(232,198,106,.7);background:rgba(18,4,4,.78);color:#e8c66a;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">↺</button>';
+  }
   var admin='';
   if(ADMIN_MODE){
-    admin='<button onclick="pickPhoto(event,'+i+')" title="Ajouter / changer la photo" style="position:absolute;top:5px;right:5px;z-index:6;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,198,106,.85);background:rgba(18,4,4,.8);color:#e8c66a;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">\uD83D\uDCF7</button>';
-    if(photo){ admin+='<button onclick="removePhoto(event,'+i+')" title="Retirer la photo" style="position:absolute;top:5px;left:5px;z-index:6;width:26px;height:26px;border-radius:50%;border:1px solid rgba(216,12,28,.85);background:rgba(18,4,4,.8);color:#ff8a98;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">\u2715</button>'; }
+    admin='<button onclick="pickPhoto(event,'+i+')" title="Ajouter / changer la photo" style="position:absolute;top:5px;right:5px;z-index:6;width:30px;height:30px;border-radius:50%;border:1px solid rgba(232,198,106,.85);background:rgba(18,4,4,.8);color:#e8c66a;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">📷</button>';
   }
-  return '<div class="jp-card jp-reveal" data-flip="0" onclick="flipCard(this)" style="transition-delay:'+(i*0.05).toFixed(2)+'s;"><div class="jp-inner">'+back+front+admin+'</div></div>';
+  var cls=m.bride?"jp-card jp-reveal":"jp-card jp-acceptdrop jp-reveal";
+  return '<div class="'+cls+'" data-idx="'+i+'" style="transition-delay:'+(i*0.05).toFixed(2)+'s;"><div class="jp-inner">'+front+controls+admin+'</div></div>';
 }
 function rerenderCards(){
   var g=document.getElementById("jp-cards");
   if(g){var h="";for(var k=0;k<MEMBERS.length;k++)h+=cardHTML(MEMBERS[k],k);g.innerHTML=h;setTimeout(initReveal,30);}
+  renderTray();
 }
 function showAdminBanner(){
   if(document.getElementById("admin-banner"))return;
@@ -773,18 +896,111 @@ function resizeImage(src,cb){
   img.src=src;
 }
 function savePhoto(i,durl){
-  CARD_PHOTOS[i]=durl;
+  CARD_PHOTOS[i]=durl;rerenderCards();
+  if(FB_OK){ db.collection("cardPhotos").doc(String(i)).set({data:durl}).catch(function(e){alert("Erreur d'enregistrement : "+(e&&e.message||e));}); return; }
   try{localStorage.setItem("card_photos",JSON.stringify(CARD_PHOTOS));}
-  catch(e){delete CARD_PHOTOS[i];alert("Photo trop lourde pour \u00eatre enregistr\u00e9e. Essaie une image plus l\u00e9g\u00e8re.");return;}
-  rerenderCards();
+  catch(e){delete CARD_PHOTOS[i];alert("Photo trop lourde pour \u00eatre enregistr\u00e9e. Essaie une image plus l\u00e9g\u00e8re.");rerenderCards();}
 }
 function removePhoto(ev,i){
   ev.stopPropagation();
-  delete CARD_PHOTOS[i];
+  delete CARD_PHOTOS[i];rerenderCards();
+  if(FB_OK){ db.collection("cardPhotos").doc(String(i)).delete(); return; }
   try{localStorage.setItem("card_photos",JSON.stringify(CARD_PHOTOS));}catch(e){}
-  rerenderCards();
 }
-(function(){var g=document.getElementById("jp-cards");if(g){var h="";for(var k=0;k<MEMBERS.length;k++)h+=cardHTML(MEMBERS[k],k);g.innerHTML=h;}})();
+(function(){var g=document.getElementById("jp-cards");if(g){var h="";for(var k=0;k<MEMBERS.length;k++)h+=cardHTML(MEMBERS[k],k);g.innerHTML=h;}renderTray();})();
+
+/* ===== ALBUMS NOSTALGIE (stockage Firebase) ===== */
+var ALBUMS=["Ghits","Yass Couz","Yass.A","Yass.El","Zizi","Ayou","Sarouch","Nourette","Kenzo"];
+var ALB_CACHE={};                 // idx -> [{id,data,ts}]
+var ALB_VIEW={mode:'closed',idx:null};
+function albArr(idx){return ALB_CACHE[idx]||[];}
+function openAlbums(){var o=document.getElementById("alb-overlay");if(!o)return;o.style.display="block";o.scrollTop=0;renderAlbumGrid();}
+function closeAlbums(){var o=document.getElementById("alb-overlay");if(o)o.style.display="none";ALB_VIEW={mode:'closed',idx:null};}
+function albRefreshView(){
+  var o=document.getElementById("alb-overlay");if(!o||o.style.display!=="block")return;
+  if(ALB_VIEW.mode==='album'){openAlbum(ALB_VIEW.idx,true);}
+  else{for(var j=0;j<ALBUMS.length;j++)updateCover(j);}
+}
+function albCloseBtn(){return '<button onclick="closeAlbums()" class="jp-serif" style="flex-shrink:0;padding:9px 16px;border:1px solid rgba(232,198,106,.5);border-radius:22px;background:rgba(18,4,4,.6);color:#e8c66a;font-weight:700;font-size:12px;letter-spacing:.08em;cursor:pointer;">✕ FERMER</button>';}
+function renderAlbumGrid(){
+  ALB_VIEW={mode:'grid',idx:null};
+  var inner=document.getElementById("alb-inner");if(!inner)return;
+  var h='<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">'
+    +'<div style="display:flex;flex-direction:column;line-height:1.05;"><span class="jp-script" style="font-size:clamp(32px,6.5vw,52px);line-height:1.18;padding-bottom:.1em;color:#d80c1c;">La nostalgie</span><span class="jp-serif" style="font-size:clamp(10px,1.6vw,13px);letter-spacing:.24em;color:#c79a44;text-transform:uppercase;">des jours heureux</span></div>'
+    +albCloseBtn()+'</div>'
+    +'<p class="jp-body" style="font-size:clamp(14px,2vw,16px);color:#c2a892;margin-top:clamp(18px,3vw,24px);max-width:520px;">Choisis un album. 10 photos maximum chacun &mdash; souvenirs anciens et récents avec la mariée&nbsp;💍</p>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:clamp(12px,2vw,20px);margin-top:clamp(22px,4vw,34px);">';
+  for(var i=0;i<ALBUMS.length;i++){
+    h+='<div class="alb-cover" id="alb-cover-'+i+'" onclick="openAlbum('+i+')" style="position:relative;border-radius:14px;aspect-ratio:4/5;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 12px 30px rgba(0,0,0,.55);overflow:hidden;display:flex;align-items:flex-end;">'
+      +'<div class="alb-thumb" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;opacity:.45;background-size:cover;background-position:center;">📷</div>'
+      +'<div style="position:relative;width:100%;padding:14px 12px;background:linear-gradient(to top,rgba(8,2,2,.94),rgba(8,2,2,.2),transparent);text-align:center;">'
+      +'<div class="jp-serif" style="font-weight:700;font-size:15px;color:#f2e8d4;">'+ALBUMS[i]+'</div>'
+      +'<div class="jp-body alb-count" style="font-size:12px;color:#e8c66a;margin-top:2px;">0 / 10</div>'
+      +'</div></div>';
+  }
+  h+='</div>';
+  inner.innerHTML=h;
+  var o=document.getElementById("alb-overlay");if(o)o.scrollTop=0;
+  for(var j=0;j<ALBUMS.length;j++){ updateCover(j); }
+}
+function updateCover(idx){
+  var node=document.getElementById("alb-cover-"+idx);if(!node)return;
+  var arr=albArr(idx);
+  var cnt=node.querySelector(".alb-count");if(cnt)cnt.textContent=arr.length+" / 10";
+  var th=node.querySelector(".alb-thumb");if(!th)return;
+  if(arr.length){th.style.backgroundImage="url('"+arr[arr.length-1].data+"')";th.style.opacity="1";th.innerHTML="";}
+  else{th.style.backgroundImage="";th.style.opacity=".45";th.innerHTML="\uD83D\uDCF7";}
+}
+function openAlbum(idx,keepScroll){
+  var inner=document.getElementById("alb-inner");if(!inner)return;
+  ALB_VIEW={mode:'album',idx:idx};
+  var ov=document.getElementById("alb-overlay");var prev=ov?ov.scrollTop:0;
+  var arr=albArr(idx);
+  var h='<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">'
+    +'<button onclick="renderAlbumGrid()" class="jp-serif" style="padding:9px 16px;border:1px solid rgba(232,198,106,.5);border-radius:22px;background:rgba(18,4,4,.6);color:#e8c66a;font-weight:700;font-size:12px;letter-spacing:.08em;cursor:pointer;">← ALBUMS</button>'
+    +albCloseBtn()+'</div>'
+    +'<div style="text-align:center;margin:14px 0 2px;"><span class="jp-script" style="font-size:clamp(32px,6.5vw,48px);line-height:1.18;padding-bottom:.06em;display:inline-block;color:#d80c1c;">'+ALBUMS[idx]+'</span></div>'
+    +'<p class="jp-body" style="text-align:center;font-size:13px;color:#9c8a7a;margin-bottom:22px;">'+arr.length+' / 10 photos · souvenirs avec la mariée</p>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;">';
+  for(var s=0;s<arr.length;s++){
+    h+='<div class="alb-slot" style="position:relative;border-radius:12px;aspect-ratio:1;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.5);">'
+      +'<img src="'+arr[s].data+'" style="width:100%;height:100%;object-fit:cover;display:block;">'
+      +(ADMIN_MODE?'<button onclick="removeAlbumPhoto(\''+arr[s].id+'\')" title="Retirer" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:1px solid rgba(216,12,28,.85);background:rgba(18,4,4,.82);color:#ff8a98;font-size:12px;cursor:pointer;line-height:1;padding:0;">✕</button>':'')
+      +'</div>';
+  }
+  if(ADMIN_MODE&&arr.length<10){
+    h+='<div class="alb-slot" onclick="addAlbumPhoto('+idx+')" style="cursor:pointer;border-radius:12px;aspect-ratio:1;border:2px dashed rgba(232,198,106,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#e8c66a;background:rgba(232,198,106,.04);">'
+      +'<div class="alb-add" style="font-size:30px;line-height:1;transition:color .2s;">＋</div><div class="jp-serif" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Ajouter</div></div>';
+  }
+  if(arr.length===0&&!ADMIN_MODE){
+    h+='<div class="jp-body" style="grid-column:1/-1;text-align:center;padding:46px 20px;color:#9c8a7a;font-style:italic;">Aucune photo pour le moment…</div>';
+  }
+  h+='</div>';
+  if(!ADMIN_MODE){
+    h+='<p class="jp-body" style="text-align:center;font-size:12px;color:#6e5a4a;margin-top:22px;font-style:italic;">Connexion organisatrice requise pour ajouter des photos.</p>';
+  }
+  inner.innerHTML=h;
+  if(ov)ov.scrollTop=keepScroll?prev:0;
+}
+function addAlbumPhoto(idx){
+  if(!FB_OK){alert("Connexion à la base impossible. Vérifie ta connexion internet et réessaie.");return;}
+  var room=10-albArr(idx).length;if(room<=0)return;
+  var inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.multiple=true;
+  inp.onchange=function(){
+    var files=inp.files;if(!files||!files.length)return;
+    var list=Array.prototype.slice.call(files,0,room);
+    list.forEach(function(f){
+      var rd=new FileReader();
+      rd.onload=function(){resizeImage(rd.result,function(durl){db.collection("albumPhotos").add({album:idx,ts:Date.now(),data:durl}).catch(function(e){alert("Erreur d'envoi : "+(e&&e.message||e));});});};
+      rd.readAsDataURL(f);
+    });
+  };
+  inp.click();
+}
+function removeAlbumPhoto(id){
+  if(!FB_OK)return;
+  db.collection("albumPhotos").doc(id).delete().catch(function(){});
+}
 function cdBox(id,label){return '<div style="flex:1;max-width:100px;padding:13px 4px;border-radius:13px;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(232,198,106,.45),inset 0 1px 0 rgba(255,255,255,.05),0 12px 28px rgba(0,0,0,.5);">'
   +'<div class="cd-num" id="'+id+'" style="font-family:\'Playfair Display\',serif;font-size:clamp(26px,6vw,42px);">??</div>'
   +'<div style="font-family:\'Playfair Display\',serif;margin-top:5px;font-size:9px;letter-spacing:.16em;color:#c2a892;text-transform:uppercase;">'+label+'</div></div>';}
@@ -825,6 +1041,26 @@ function initReveal(){
   // reveal everything reliably (IntersectionObserver is unreliable in embedded/background frames)
   for(var i=0;i<els.length;i++){ els[i].classList.add("in"); }
 }
+/* ===== SYNCHRO TEMPS RÉEL FIREBASE ===== */
+function initFirebaseSync(){
+  if(!FB_OK)return;
+  db.collection("cardPhotos").onSnapshot(function(snap){
+    var c={};snap.forEach(function(doc){c[doc.id]=doc.data().data;});
+    CARD_PHOTOS=c;try{localStorage.setItem("card_photos",JSON.stringify(c));}catch(e){}
+    rerenderCards();
+  },function(e){console.warn("sync cardPhotos",e);});
+  db.collection("state").doc("roles").onSnapshot(function(doc){
+    var m=(doc.exists&&doc.data()&&doc.data().map)?doc.data().map:{};
+    CARD_ROLES=m;try{localStorage.setItem("card_roles",JSON.stringify(m));}catch(e){}
+    rerenderCards();renderTray();
+  },function(e){console.warn("sync roles",e);});
+  db.collection("albumPhotos").onSnapshot(function(snap){
+    var c={};snap.forEach(function(doc){var d=doc.data();var a=d.album;if(!c[a])c[a]=[];c[a].push({id:doc.id,data:d.data,ts:d.ts||0});});
+    for(var k in c){c[k].sort(function(x,y){return (x.ts||0)-(y.ts||0);});}
+    ALB_CACHE=c;albRefreshView();
+  },function(e){console.warn("sync albums",e);});
+}
+initFirebaseSync();
 try{document.body.style.overflow="hidden";}catch(e){}
 </script>
 </body>
