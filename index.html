@@ -775,7 +775,7 @@ function checkPassword(){
   var v=document.getElementById("pw-input").value.trim();
   var e=document.getElementById("pw-error");
   if(PWS.indexOf(v)>-1){
-    if(v==="admin26"){ADMIN_MODE=true;REVEAL_ALL=true;}
+    if(v==="admin26"){ADMIN_MODE=true;}
     if(v==="lespiresv2"||v==="revealrebours"){REVEAL_ALL=true;}
     unlockSite();return;
   }
@@ -796,7 +796,7 @@ function unlockSite(){
   }
   document.body.style.overflow="";window.scrollTo(0,0);
   if(ADMIN_MODE){ rerenderCards(); showAdminBanner(); var ve=document.getElementById("valise-edit"); if(ve)ve.style.display="flex"; }
-  if(REVEAL_ALL){ confirmVideo(); }
+  cdTick(); syncVideoBtn();
   setTimeout(initReveal,60);
 }
 function flipCard(c){c.setAttribute("data-flip",c.getAttribute("data-flip")==="1"?"0":"1");}
@@ -884,13 +884,12 @@ function showAdminBanner(){
   document.body.appendChild(b);
 }
 function resetTeaser(){
-  if(!confirm("Remettre le compte à rebours et la date en mode surprise (cachés) ? Les invitées devront regarder la vidéo pour les révéler."))return;
+  if(!confirm("Cacher le compte à rebours et la date pour TOUTES les invitées (mode surprise) ?"))return;
   CD_REVEALED=false;
-  try{ localStorage.removeItem("cd_revealed"); }catch(e){}
-  cdTick();
-  var b=document.getElementById("video-confirm-btn");
-  if(b){ b.innerHTML="✓ J'AI REGARDÉ LA VIDÉO"; b.style.background="linear-gradient(135deg,#7a000f,#d80c1c,#7a000f)"; b.style.cursor="pointer"; b.onclick=confirmVideo; }
-  alert("C'est réinitialisé ✓ Le compte à rebours est de nouveau caché.");
+  try{ localStorage.setItem("cd_revealed","0"); }catch(e){}
+  if(FB_OK){ db.collection("state").doc("reveal").set({shown:false}).catch(function(e){alert("Erreur : "+(e&&e.message||e));}); }
+  cdTick(); syncVideoBtn();
+  alert("C'est caché ✓ pour toutes les invitées (code jackpotSK26).");
 }
 function pickPhoto(ev,i){
   ev.stopPropagation();
@@ -1040,6 +1039,7 @@ try{ CD_REVEALED=localStorage.getItem("cd_revealed")==="1"; }catch(e){}
 function confirmVideo(){
   CD_REVEALED=true;
   try{ localStorage.setItem("cd_revealed","1"); }catch(e){}
+  if(FB_OK){ db.collection("state").doc("reveal").set({shown:true}).catch(function(){}); }
   cdTick();
   var b=document.getElementById("video-confirm-btn");
   if(b){ b.innerHTML="\u2713 Vid\u00e9o regard\u00e9e \u2014 d\u00e9part r\u00e9v\u00e9l\u00e9 !"; b.style.background="linear-gradient(135deg,#1f6b3a,#2e9d56)"; b.style.cursor="default"; b.onclick=null; }
@@ -1048,7 +1048,7 @@ function cdPad(n){return (n<10?"0":"")+n;}
 function cdTick(){
   var dEl=document.getElementById("cd-days"),hEl=document.getElementById("cd-hours"),mEl=document.getElementById("cd-mins"),sEl=document.getElementById("cd-secs");
   var dateEl=document.getElementById("cd-date"),hintEl=document.getElementById("cd-hint");
-  if(!CD_REVEALED){
+  if(!CD_REVEALED && !REVEAL_ALL){
     if(dEl)dEl.textContent="??";if(hEl)hEl.textContent="??";if(mEl)mEl.textContent="??";if(sEl)sEl.textContent="??";
     if(dateEl)dateEl.textContent="?? ?????? ????";
     if(hintEl)hintEl.style.display="";
@@ -1060,8 +1060,13 @@ function cdTick(){
   if(dateEl)dateEl.textContent="24 juillet 2026";
   if(hintEl)hintEl.style.display="none";
 }
+function syncVideoBtn(){
+  var b=document.getElementById("video-confirm-btn");if(!b)return;
+  if(CD_REVEALED){ b.innerHTML="✓ Vidéo regardée — départ révélé !"; b.style.background="linear-gradient(135deg,#1f6b3a,#2e9d56)"; b.style.cursor="default"; b.onclick=null; }
+  else { b.innerHTML="✓ J'AI REGARDÉ LA VIDÉO"; b.style.background="linear-gradient(135deg,#7a000f,#d80c1c,#7a000f)"; b.style.cursor="pointer"; b.onclick=confirmVideo; }
+}
 setInterval(cdTick,1000);
-if(CD_REVEALED){confirmVideo();}
+setTimeout(syncVideoBtn,60);
 function initReveal(){
   var els=document.querySelectorAll(".jp-reveal");
   // reveal everything reliably (IntersectionObserver is unreliable in embedded/background frames)
@@ -1089,6 +1094,11 @@ function initFirebaseSync(){
     var d=(doc.exists&&doc.data()&&doc.data().data)?doc.data().data:null;
     setValiseImg(d||VALISE_DEFAULT);
   },function(e){console.warn("sync valise",e);});
+  db.collection("state").doc("reveal").onSnapshot(function(doc){
+    CD_REVEALED=(doc.exists&&doc.data()&&doc.data().shown===true);
+    try{localStorage.setItem("cd_revealed",CD_REVEALED?"1":"0");}catch(e){}
+    cdTick(); syncVideoBtn();
+  },function(e){console.warn("sync reveal",e);});
 }
 setValiseImg(VALISE_DEFAULT);
 initFirebaseSync();
