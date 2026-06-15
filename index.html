@@ -382,6 +382,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 </head>
 <body>
 
@@ -684,6 +685,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   <!-- stage -->
   <div id="lb-stage" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:74px 12px 78px;pointer-events:none;">
     <img id="lb-img" alt="" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 18px 60px rgba(0,0,0,.7);user-select:none;-webkit-user-drag:none;pointer-events:none;transition:opacity .18s ease;">
+    <video id="lb-vid" controls playsinline style="display:none;max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;box-shadow:0 18px 60px rgba(0,0,0,.7);pointer-events:auto;background:#000;"></video>
   </div>
   <!-- prev -->
   <button id="lb-prev" onclick="lbStep(-1)" aria-label="Précédente" style="position:absolute;top:50%;left:max(8px,env(safe-area-inset-left));transform:translateY(-50%);z-index:2;width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,198,106,.4);background:rgba(18,4,4,.66);color:#e8c66a;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
@@ -709,8 +711,8 @@ var firebaseConfig={
   messagingSenderId:"890482090762",
   appId:"1:890482090762:web:86009112a2c2e56acb50f3"
 };
-var FB_OK=false, db=null;
-try{ if(window.firebase){ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB_OK=true; } }catch(e){ FB_OK=false; console.warn("Firebase init échouée",e); }
+var FB_OK=false, db=null, storage=null;
+try{ if(window.firebase){ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB_OK=true; try{ storage=firebase.storage(); }catch(se){ storage=null; } } }catch(e){ FB_OK=false; console.warn("Firebase init échouée",e); }
 var CARD_PHOTOS={};
 try{ CARD_PHOTOS=JSON.parse(localStorage.getItem("card_photos")||"{}"); }catch(e){ CARD_PHOTOS={}; }
 
@@ -1010,14 +1012,14 @@ function renderAlbumGrid(){
   var h='<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">'
     +'<div style="display:flex;flex-direction:column;line-height:1.05;"><span class="jp-script" style="font-size:clamp(32px,6.5vw,52px);line-height:1.18;padding-bottom:.1em;color:#d80c1c;">La nostalgie</span><span class="jp-serif" style="font-size:clamp(10px,1.6vw,13px);letter-spacing:.24em;color:#c79a44;text-transform:uppercase;">des jours heureux</span></div>'
     +albCloseBtn()+'</div>'
-    +'<p class="jp-body" style="font-size:clamp(14px,2vw,16px);color:#c2a892;margin-top:clamp(18px,3vw,24px);max-width:520px;">Choisis un album. 10 photos maximum chacun &mdash; souvenirs anciens et récents avec la mariée&nbsp;💍</p>'
+    +'<p class="jp-body" style="font-size:clamp(14px,2vw,16px);color:#c2a892;margin-top:clamp(18px,3vw,24px);max-width:520px;">Choisis un album. Photos et vidéos &mdash; souvenirs anciens et récents avec la mariée&nbsp;💍</p>'
     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:clamp(12px,2vw,20px);margin-top:clamp(22px,4vw,34px);">';
   for(var i=0;i<ALBUMS.length;i++){
     h+='<div class="alb-cover" id="alb-cover-'+i+'" onclick="openAlbum('+i+')" style="position:relative;border-radius:14px;aspect-ratio:4/5;background:linear-gradient(160deg,#2a0f0c,#120605);box-shadow:0 0 0 1px rgba(216,12,28,.4),0 12px 30px rgba(0,0,0,.55);overflow:hidden;display:flex;align-items:flex-end;">'
       +'<div class="alb-thumb" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;opacity:.45;background-size:cover;background-position:center;">📷</div>'
       +'<div style="position:relative;width:100%;padding:14px 12px;background:linear-gradient(to top,rgba(8,2,2,.94),rgba(8,2,2,.2),transparent);text-align:center;">'
       +'<div class="jp-serif" style="font-weight:700;font-size:15px;color:#f2e8d4;">'+ALBUMS[i]+'</div>'
-      +'<div class="jp-body alb-count" style="font-size:12px;color:#e8c66a;margin-top:2px;">0 / 10</div>'
+      +'<div class="jp-body alb-count" style="font-size:12px;color:#e8c66a;margin-top:2px;">0 photo</div>'
       +'</div></div>';
   }
   h+='</div>';
@@ -1028,9 +1030,13 @@ function renderAlbumGrid(){
 function updateCover(idx){
   var node=document.getElementById("alb-cover-"+idx);if(!node)return;
   var arr=albArr(idx);
-  var cnt=node.querySelector(".alb-count");if(cnt)cnt.textContent=arr.length+" / 10";
+  var cnt=node.querySelector(".alb-count");if(cnt)cnt.textContent=arr.length+(arr.length>1?" souvenirs":" souvenir");
   var th=node.querySelector(".alb-thumb");if(!th)return;
-  if(arr.length){th.style.backgroundImage="url('"+arr[arr.length-1].data+"')";th.style.opacity="1";th.innerHTML="";}
+  if(arr.length){
+    var last=arr[arr.length-1];
+    if(last.kind==='video'){ th.style.backgroundImage=""; th.style.opacity="1"; th.innerHTML='<div style="position:absolute;inset:0;background:linear-gradient(160deg,#3a1410,#120605);display:flex;align-items:center;justify-content:center;font-size:30px;color:#e8c66a;">▶</div>'; }
+    else{ th.style.backgroundImage="url('"+last.data+"')"; th.style.opacity="1"; th.innerHTML=""; }
+  }
   else{th.style.backgroundImage="";th.style.opacity=".45";th.innerHTML="\uD83D\uDCF7";}
 }
 function openAlbum(idx,keepScroll){
@@ -1042,17 +1048,19 @@ function openAlbum(idx,keepScroll){
     +'<button onclick="renderAlbumGrid()" class="jp-serif" style="padding:9px 16px;border:1px solid rgba(232,198,106,.5);border-radius:22px;background:rgba(18,4,4,.6);color:#e8c66a;font-weight:700;font-size:12px;letter-spacing:.08em;cursor:pointer;">← ALBUMS</button>'
     +albCloseBtn()+'</div>'
     +'<div style="text-align:center;margin:14px 0 2px;"><span class="jp-script" style="font-size:clamp(32px,6.5vw,48px);line-height:1.18;padding-bottom:.06em;display:inline-block;color:#d80c1c;">'+ALBUMS[idx]+'</span></div>'
-    +'<p class="jp-body" style="text-align:center;font-size:13px;color:#9c8a7a;margin-bottom:22px;">'+arr.length+' / 10 photos · souvenirs avec la mariée</p>'
+    +'<p class="jp-body" style="text-align:center;font-size:13px;color:#9c8a7a;margin-bottom:22px;">'+arr.length+(arr.length>1?' souvenirs':' souvenir')+' · avec la mariée</p>'
     +'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;">';
   for(var s=0;s<arr.length;s++){
     h+='<div class="alb-slot" style="position:relative;border-radius:12px;aspect-ratio:1;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.5);">'
-      +'<img src="'+arr[s].data+'" onclick="lbOpen('+idx+','+s+')" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">'
+      +(arr[s].kind==='video'
+        ? '<div onclick="lbOpen('+idx+','+s+')" style="position:absolute;inset:0;cursor:zoom-in;background:#0c0303;"><video src="'+arr[s].url+'#t=0.1" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;"><div style="width:46px;height:46px;border-radius:50%;background:rgba(18,4,4,.62);border:1.5px solid rgba(232,198,106,.7);display:flex;align-items:center;justify-content:center;color:#f2e8d4;font-size:17px;padding-left:3px;">▶</div></div></div>'
+        : '<img src="'+arr[s].data+'" onclick="lbOpen('+idx+','+s+')" style="width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;">')
       +(ADMIN_MODE?'<button onclick="removeAlbumPhoto(\''+arr[s].id+'\')" title="Retirer" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:1px solid rgba(216,12,28,.85);background:rgba(18,4,4,.82);color:#ff8a98;font-size:12px;cursor:pointer;line-height:1;padding:0;">✕</button>':'')
       +'</div>';
   }
-  if(ADMIN_MODE&&arr.length<10){
+  if(ADMIN_MODE){
     h+='<div class="alb-slot" onclick="addAlbumPhoto('+idx+')" style="cursor:pointer;border-radius:12px;aspect-ratio:1;border:2px dashed rgba(232,198,106,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#e8c66a;background:rgba(232,198,106,.04);">'
-      +'<div class="alb-add" style="font-size:30px;line-height:1;transition:color .2s;">＋</div><div class="jp-serif" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Ajouter</div></div>';
+      +'<div class="alb-add" style="font-size:30px;line-height:1;transition:color .2s;">＋</div><div class="jp-serif" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;">Photo / vidéo</div></div>';
   }
   if(arr.length===0&&!ADMIN_MODE){
     h+='<div class="jp-body" style="grid-column:1/-1;text-align:center;padding:46px 20px;color:#9c8a7a;font-style:italic;">Aucune photo pour le moment…</div>';
@@ -1066,21 +1074,56 @@ function openAlbum(idx,keepScroll){
 }
 function addAlbumPhoto(idx){
   if(!FB_OK){alert("Connexion à la base impossible. Vérifie ta connexion internet et réessaie.");return;}
-  var room=10-albArr(idx).length;if(room<=0)return;
-  var inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.multiple=true;
+  var inp=document.createElement("input");inp.type="file";inp.accept="image/*,video/*";inp.multiple=true;
   inp.onchange=function(){
     var files=inp.files;if(!files||!files.length)return;
-    var list=Array.prototype.slice.call(files,0,room);
-    list.forEach(function(f){
-      var rd=new FileReader();
-      rd.onload=function(){resizeImage(rd.result,function(durl){db.collection("albumPhotos").add({album:idx,ts:Date.now(),data:durl}).catch(function(e){alert("Erreur d'envoi : "+(e&&e.message||e));});});};
-      rd.readAsDataURL(f);
+    Array.prototype.slice.call(files).forEach(function(f){
+      if(f.type&&f.type.indexOf("video")===0){ uploadAlbumVideo(idx,f); }
+      else{
+        var rd=new FileReader();
+        rd.onload=function(){resizeImage(rd.result,function(durl){db.collection("albumPhotos").add({album:idx,ts:Date.now(),kind:'photo',data:durl}).catch(function(e){alert("Erreur d'envoi : "+(e&&e.message||e));});});};
+        rd.readAsDataURL(f);
+      }
     });
   };
   inp.click();
 }
+function uploadAlbumVideo(idx,file){
+  if(!storage){alert("Le stockage vidéo n'est pas disponible. Réessaie dans un instant.");return;}
+  if(file.size>200*1024*1024){alert("Vidéo trop lourde (max 200 Mo). Essaie une vidéo plus courte.");return;}
+  var name="album"+idx+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,7)+"_"+(file.name||"video").replace(/[^\w.\-]/g,"_");
+  var ref=storage.ref().child("albumVideos/"+name);
+  var task=ref.put(file,{contentType:file.type||"video/mp4"});
+  showUploadToast(0);
+  task.on("state_changed",function(snap){
+    var pct=snap.totalBytes?Math.round(snap.bytesTransferred/snap.totalBytes*100):0;
+    showUploadToast(pct);
+  },function(err){
+    hideUploadToast();
+    alert("Échec de l'envoi de la vidéo : "+(err&&err.message||err)+"\n\nVérifie que les règles de stockage Firebase autorisent l'écriture.");
+  },function(){
+    ref.getDownloadURL().then(function(url){
+      hideUploadToast();
+      db.collection("albumPhotos").add({album:idx,ts:Date.now(),kind:'video',url:url,path:"albumVideos/"+name}).catch(function(e){alert("Erreur d'enregistrement : "+(e&&e.message||e));});
+    });
+  });
+}
+var _upToast=null;
+function showUploadToast(pct){
+  if(!_upToast){
+    _upToast=document.createElement("div");
+    _upToast.className="jp-serif";
+    _upToast.style.cssText="position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:9999;background:rgba(18,4,4,.95);border:1px solid rgba(232,198,106,.55);color:#f2e8d4;padding:12px 20px;border-radius:30px;font-size:13px;letter-spacing:.04em;box-shadow:0 10px 30px rgba(0,0,0,.6);display:flex;align-items:center;gap:12px;";
+    document.body.appendChild(_upToast);
+  }
+  _upToast.innerHTML='<span>📤 Envoi de la vidéo… '+pct+'%</span><span style="display:inline-block;width:90px;height:6px;border-radius:6px;background:rgba(232,198,106,.2);overflow:hidden;"><span style="display:block;height:100%;width:'+pct+'%;background:linear-gradient(90deg,#d80c1c,#e8c66a);transition:width .2s;"></span></span>';
+}
+function hideUploadToast(){ if(_upToast){_upToast.remove();_upToast=null;} }
 function removeAlbumPhoto(id){
   if(!FB_OK)return;
+  var item=null;
+  for(var k in ALB_CACHE){ var a=ALB_CACHE[k]||[]; for(var j=0;j<a.length;j++){ if(a[j].id===id){item=a[j];break;} } if(item)break; }
+  if(item&&item.kind==='video'&&item.path&&storage){ storage.ref().child(item.path).delete().catch(function(){}); }
   db.collection("albumPhotos").doc(id).delete().catch(function(){});
 }
 /* ===== VISUALISEUR PHOTO (lightbox plein écran + défilement) ===== */
@@ -1098,8 +1141,16 @@ function lbRender(){
   if(LB.pos>arr.length-1)LB.pos=arr.length-1;
   if(LB.pos<0)LB.pos=0;
   var img=document.getElementById("lb-img");
+  var vid=document.getElementById("lb-vid");
   var cur=arr[LB.pos];
-  if(img&&cur){ img.style.opacity="0"; img.onload=function(){img.style.opacity="1";}; img.src=cur.data; }
+  if(vid){ try{vid.pause();}catch(e){} }
+  if(cur&&cur.kind==='video'){
+    if(img)img.style.display="none";
+    if(vid){ vid.style.display="block"; if(vid.src!==cur.url){ vid.src=cur.url; } vid.currentTime=0; }
+  }else{
+    if(vid){ vid.style.display="none"; vid.removeAttribute("src"); vid.load&&vid.load(); }
+    if(img&&cur){ img.style.display="block"; img.style.opacity="0"; img.onload=function(){img.style.opacity="1";}; img.src=cur.data; }
+  }
   var t=document.getElementById("lb-title");if(t)t.textContent=ALBUMS[LB.idx]||"";
   var c=document.getElementById("lb-count");if(c)c.textContent=(LB.pos+1)+" / "+arr.length;
   var multi=arr.length>1;
@@ -1114,6 +1165,7 @@ function lbStep(d){
 }
 function lbClose(){
   LB.open=false;
+  var vid=document.getElementById("lb-vid");if(vid){try{vid.pause();}catch(e){} }
   var o=document.getElementById("lb-overlay");if(o)o.style.display="none";
 }
 /* clavier */
